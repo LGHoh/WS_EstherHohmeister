@@ -1,72 +1,342 @@
-/* ...existing code... */
+/* -------------------------------------------- */
+/* Font & Base Reset                            */
+/* -------------------------------------------- */
+
 @font-face {
-    font-family: "poppins";
-    src: url(https://use.typekit.net/our8lqw.css);
+  font-family: "poppins";
+  src: url(https://use.typekit.net/our8lqw.css);
 }
 
-/* Reset body margin so header touches top and spans full width */
-html, body {
-  margin: 0;
-  padding: 0;
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-/* Full-width header pinned to top */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Basis: 1rem = 16px (Standard) */
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: "poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #f8f8f8;
+  color: #111111;
+}
+
+/* -------------------------------------------- */
+/* Design Tokens (Variablen)                    */
+/* -------------------------------------------- */
+
+:root {
+  /* Typografie */
+  --font-family-main: "poppins", system-ui, sans-serif;
+
+  --h1-size: 2.5rem;        
+  --h2-size: 2.1rem;    
+  --h3-size: 1.9rem;      
+  --h4-size: 1.4rem;      
+  --h5-size: 1rem;     
+  --h6-size: 0.8rem;    
+
+  --line-height-tight: 1.1;
+  --line-height-normal: 1.4;
+  --line-height-relaxed: 1.6;
+
+  /* Farben */
+  --color-bg: #f8f8f8;
+  --color-surface: #ffffff;
+  --color-surface-soft: #f3f3f3;
+  --color-text: #111111;
+  --color-text-muted: #555555;
+  --color-border: #dddddd;
+  --color-header-bg: #a4a4a4;
+  --color-accent: #111111;      /* Schwarz als Akzent */
+  --color-accent-soft: #d3d3d3;
+
+  /* Abstände */
+  --space-xs: 0.5rem;   /* 8px */
+  --space-s: 0.75rem;   /* 12px */
+  --space-m: 1rem;      /* 16px */
+  --space-l: 1.5rem;    /* 24px */
+  --space-xl: 2rem;     /* 32px */
+  --space-xxl: 3rem;    /* 48px */
+
+  /* Radius & Schatten */
+  --radius-s: 4px;
+  --radius-m: 8px;
+  --radius-l: 999px;    /* für Pills / runde Elemente */
+
+  --shadow-soft: 0 2px 6px rgba(0,0,0,0.06);
+  --shadow-header: 0 1px 0 rgba(0,0,0,0.05);
+}
+
+/* Responsive Typografie-Anpassung */
+@media (max-width: 768px) {
+  :root {
+    --h1-size: 2.8rem;
+    --h2-size: 2.1rem;
+    --h3-size: 1.7rem;
+  }
+}
+
+/* -------------------------------------------- */
+/* Headline-Defaults                            */
+/* -------------------------------------------- */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-main);
+  font-weight: 400;
+  margin: 0;
+  color: var(--color-text);
+}
+
+h1 { font-size: var(--h1-size); line-height: var(--line-height-tight); }
+h2 { font-size: var(--h2-size); line-height: var(--line-height-tight); }
+h3 { font-size: var(--h3-size); line-height: var(--line-height-normal); }
+h4 { font-size: var(--h4-size); line-height: var(--line-height-normal); }
+h5 { font-size: var(--h5-size); line-height: var(--line-height-normal); }
+h6 { font-size: var(--h6-size); line-height: var(--line-height-normal); }
+
+p {
+  margin: 0 0 var(--space-s) 0;
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text);
+}
+
+/* -------------------------------------------- */
+/* Layout-Utilities                             */
+/* -------------------------------------------- */
+
+/* Seite zentrieren */
+.layout-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-m);
+}
+
+/* Allgemeine Sektion */
+.section {
+  padding: var(--space-xxl) var(--space-m);
+}
+
+.section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Zwei-Spalten-Layout */
+.two-column-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-l);
+}
+
+.column {
+  flex: 1 1 300px;
+}
+
+/* Text-Helpers */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+/* Zentrierung mit Flex */
+.align-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* -------------------------------------------- */
+/* Buttons (global wiederverwendbar)           */
+/* -------------------------------------------- */
+
+.button,
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--color-accent);
+  background: transparent;
+  color: var(--color-accent);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.button-primary,
+.btn-primary {
+  background: var(--color-accent);
+  color: #ffffff;
+}
+
+.button-primary:hover,
+.btn-primary:hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+.button-secondary,
+.btn-secondary {
+  background: transparent;
+}
+
+.button-secondary:hover,
+.btn-secondary:hover {
+  background: var(--color-accent-soft);
+}
+
+/* -------------------------------------------- */
+/* Karten / Container                            */
+/* -------------------------------------------- */
+
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-soft);
+  padding: var(--space-m);
+
+}
+
+/* -------------------------------------------- */
+/* Globaler Header (dein vorhandener Code)      */
+/* -------------------------------------------- */
+
 .site-header {
   width: 100%;
   position: sticky;
   top: 0;
   left: 0;
   z-index: 999;
-  background: #A4A4A4;
+  background: var(--color-header-bg);
   padding: 18px 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+  gap: 20px;
+  box-shadow: var(--shadow-header);
 }
 
-/* Keep logo centered and responsive; handle space in filename */
+/* Logo */
 .site-header img {
-  max-width: 260px;
+  max-width: 220px;
   width: 100%;
   height: auto;
   display: block;
   object-fit: contain;
+  padding-bottom: 1%;
 }
 
-/* Navigation centered, stretched only visually (items centered) */
+/* Nav */
 .site-nav {
   width: 100%;
 }
+
 .site-nav ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
-  gap: 28px;
+  gap: 60px;
   align-items: center;
   justify-content: center;
 }
 
-/* Links */
 .site-nav a {
   color: #000;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 500;
   padding: 6px 4px;
 }
+
 .site-nav a:hover {
   text-decoration: underline;
 }
 
-/* Responsive: stack nav items on narrow screens */
+/* Linie zwischen Logo und Navigation */
+.site-nav::before {
+  content: "";
+  display: block;
+  width: 30%;
+  border-top: 1px solid #000;
+  margin: 4px auto 12px;
+
+}
+/* -------------------------------------------- */
+/* Globaler Footer                              */
+/* -------------------------------------------- */
+
+.site-footer {
+  background: var(--color-header-bg);
+  padding: var(--space-l) 0;
+  margin-top: var(--space-xl);
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-m);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-xl);
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-heading {
+  font-weight: 700;
+  margin: 0 0 var(--space-xs) 0;
+  color: #000;
+}
+
+.footer-link {
+  color: #000;
+  font-weight: 500;
+  text-decoration: none;
+  margin-bottom: var(--space-xs);
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+
+.footer-text {
+  margin: 0 0 var(--space-xs) 0;
+  color: #000;
+  font-size: 0.9rem;
+}
+
+
+
+/* Responsive Header-Nav */
 @media (max-width: 480px) {
   .site-nav ul {
     flex-direction: column;
     gap: 8px;
   }
-}
 
-/* ...existing code... */
+  
+}
+/* ---------------------------------- */

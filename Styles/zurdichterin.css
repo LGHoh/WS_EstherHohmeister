@@ -1,0 +1,144 @@
+/* ---------------------------------- */
+/* Zur Dichterin – spezifische Styles */
+/* ---------------------------------- */
+
+/* Sektion 1: Autorin-Portrait + Text */
+
+.section-author {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+}
+
+.author-column-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Portrait-Kreis, wie auf der Startseite */
+.portrait-wrapper,
+.author-portrait-wrapper {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.portrait-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Name unter dem Portrait */
+.author-name {
+  margin-top: 0.75rem;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* Text rechts */
+.author-column-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.author-text {
+  font-size: 1rem;
+  line-height: var(--line-height-relaxed);
+  margin-bottom: 0.75rem;
+}
+
+/* Sektion 2: Kontakt (CSS kann identisch zur Startseite sein) */
+
+.section-contact {
+  background-color: #f5f5f5;
+}
+
+.contact-text-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;   /* oder center, falls mittig gewünscht */
+}
+
+.heading-contact {
+  margin: 0;
+}
+
+.contact-info-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+  justify-content: center;
+}
+
+.contact-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-m);
+  padding: var(--space-m);
+  box-shadow: var(--shadow-soft);
+}
+
+.text-contact {
+  margin: 0;
+  font-size: 0.98rem;
+}
+
+/* E-Mail Container */
+.contact-card-mail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mailto-link {
+  text-decoration: none;
+}
+
+.contact-explanation {
+  margin-top: var(--space-m);
+  font-size: 1rem;
+  line-height: var(--line-height-relaxed);
+  max-width: 460px;  /* angenehm schmal, wie deine Textspalten */
+}
+
+.mailto-arrow {
+  font-size: 1.4rem;
+  display: inline-block;
+  transform: translateY(2px);
+}
+
+/* ---------------------------------- */
+/* Responsive                         */
+/* ---------------------------------- */
+
+@media (max-width: 768px) {
+  .section-author {
+    min-height: auto;
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
+  }
+
+  .two-column-layout {
+    flex-direction: column;
+  }
+
+  .author-column-left {
+    margin-bottom: var(--space-l);
+  }
+
+  .portrait-wrapper,
+  .author-portrait-wrapper {
+    width: 200px;
+    height: 200px;
+  }
+   .contact-explanation {
+    font-size: 0.95rem;
+  }
+}
