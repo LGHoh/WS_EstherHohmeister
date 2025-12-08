@@ -24,12 +24,22 @@
   gap: var(--space-l);
   margin-top: var(--space-l);
 }
-.book-grid h1 {
+
+.placeholder-title {
     font-weight: 300;
-    font-size: 3rem;
+    font-size: 2.6rem;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin: 0;
+    max-width: 12ch;      /* macht die Zeilen bewusst kürzer → poetischer */
 }
 
-
+.book-card--placeholder .book-card__placeholder-inner {
+    padding: 2.2rem 1.5rem;
+    display: flex;
+    align-items: center;                /* sanft vertikal ausrichten */
+    height: 100%;
+}
 
 /* Book-Card Basis */
 .book-card {

@@ -214,15 +214,13 @@ function createPlaceholderCard() {
   inner.className = "book-card__placeholder-inner";
 
 
-  inner.innerHTML = `
-    <h1>Stöbern,<br> finden,<br> sich verbinden</h1> 
-    <p> <p class="text-muted" style="max-width: 460px; margin-top: 0.75rem;">
-          Entdecken Sie alle Gedichtbände, in denen Esther Hohmeister  – vom Golfplatz
-          bis in den Alltag, von zugerufenen Stichworten bis zu heiteren
-          Beobachtungen aus dem Leben.
-        </p>
-    
-  `;
+inner.innerHTML = `
+  <h1 class="placeholder-title">
+    Stöbern,<br>
+    finden,<br>
+    sich verbinden
+  </h1>
+`;
 
   article.appendChild(inner);
   return article;
