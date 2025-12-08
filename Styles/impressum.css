@@ -1,0 +1,66 @@
+/* Gemeinsames Layout für Impressum & Datenschutz */
+
+.section-impressum .section-inner,
+.section-impressum .legal-wrapper {
+  max-width: 760px;        /* enger als die anderen Sektionen → wirkt ruhiger */
+  margin: 0 auto;
+}
+
+/* Abstand unter dem Titel */
+.section-impressum .page-title {
+  margin-bottom: var(--space-l);
+}
+
+/* Kartenartige Blöcke */
+.impressum-block,
+.legal-section {
+  background: #f7f7f7;
+  border-radius: 12px;
+  padding: 1.5rem 1.75rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  margin-bottom: 1.5rem;
+}
+
+/* Überschriften in den Blöcken */
+.legal-heading {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+/* Fliesstext */
+.impressum-text,
+.legal-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+
+/* Listen im Datenschutz */
+.legal-section ul.legal-text {
+  padding-left: 0.5rem;
+  margin: 0.25rem 0 0.75rem;
+}
+
+.legal-section ul.legal-text li {
+  margin-bottom: 0.25rem;
+}
+
+/* Mobile-Anpassung */
+@media (max-width: 640px) {
+  .impressum-block,
+  .legal-section {
+    padding: 1.25rem 1.1rem;
+    border-radius: 10px;
+  }
+
+  .legal-heading {
+    font-size: 1.15rem;
+  }
+
+  .impressum-text,
+  .legal-text {
+    font-size: 0.95rem;
+  }
+}
