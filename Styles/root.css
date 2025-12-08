@@ -330,13 +330,36 @@ p {
 
 
 
-/* Responsive Header-Nav */
-@media (max-width: 480px) {
-  .site-nav ul {
-    flex-direction: column;
-    gap: 8px;
+/* Mobile-Optimierung Header */
+@media (max-width: 640px) {
+  .site-header {
+    padding: 8px 8px;        /* weniger Höhe */
+    gap: 8px;                /* weniger Abstand zwischen Logo & Nav */
   }
 
-  
+  .site-header img {
+    max-width: 140px;        /* Logo kleiner */
+    padding-bottom: 0;
+  }
+
+  .site-nav::before {
+    width: 40%;              /* Linie etwas kürzer und kompakter */
+    margin: 2px auto 6px;
+  }
+
+  .site-nav ul {
+    flex-wrap: wrap;         /* erlaubt mehrere Zeilen */
+    justify-content: center;
+    gap: 4px 12px;           /* vertikal / horizontal */
+  }
+
+  .site-nav li {
+    flex: 1 1 45%;           /* ungefähr 2 Elemente pro Reihe */
+    text-align: center;
+  }
+
+  .site-nav a {
+    font-size: 0.9rem;       /* etwas kleinere Schrift */
+    padding: 4px 0;
+  }
 }
-/* ---------------------------------- */

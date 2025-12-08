@@ -24,6 +24,10 @@
   gap: var(--space-l);
   margin-top: var(--space-l);
 }
+.book-grid h1 {
+    font-weight: 300;
+    font-size: 3rem;
+}
 
 /* Mobile: alles untereinander */
 @media (max-width: 768px) {
@@ -117,4 +121,18 @@
 .book-card--placeholder p {
   margin: 0;
   font-size: 0.95rem;
+}
+
+/* Tablet: 2 Spalten (2x3) */
+@media (max-width: 1024px) {
+  .book-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Mobile: 1 Spalte (6x1) */
+@media (max-width: 640px) {
+  .book-grid {
+    grid-template-columns: 1fr;
+  }
 }
