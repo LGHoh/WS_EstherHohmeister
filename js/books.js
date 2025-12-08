@@ -54,12 +54,71 @@ const BOOKS = [
   }
 ];
 
-// 2) Hilfsfunktion: erstellt eine Book-Card für Home oder Shop
+//  Bestell-E-Mail-Adresse über Botten o.ä. verwenden//
+const ORDER_EMAIL = "esther@hohmeister.ch";
+
+function formatDateCH(date) {
+  const d = date.getDate().toString().padStart(2, "0");
+  const m = (date.getMonth() + 1).toString().padStart(2, "0");
+  const y = date.getFullYear();
+  return `${d}.${m}.${y}`;
+}
+
+// Lightbox für vergrößerte Coveransicht
+let lightboxEl = null;
+let lightboxImg = null;
+
+function ensureLightbox() {
+  if (lightboxEl) return;
+
+  lightboxEl = document.createElement("div");
+  lightboxEl.className = "image-lightbox";
+
+  const img = document.createElement("img");
+  img.className = "image-lightbox__img";
+  lightboxEl.appendChild(img);
+  lightboxImg = img;
+
+    // ✨ Schließen-Button hinzufügen
+  const closeBtn = document.createElement("button");
+  closeBtn.className = "image-lightbox__close-btn";
+  closeBtn.textContent = "×";
+
+  closeBtn.addEventListener("click", (e) => {
+    e.stopPropagation(); // verhindert, dass der Click auch das Overlay triggert
+    lightboxEl.classList.remove("image-lightbox--visible");
+  });
+
+  lightboxEl.appendChild(closeBtn);
+
+  document.body.appendChild(lightboxEl);
+
+  // Klick irgendwo schließt das Overlay
+  lightboxEl.addEventListener("click", () => {
+    lightboxEl.classList.remove("image-lightbox--visible");
+  });
+
+  
+}
+
+function openLightbox(src, alt) {
+  ensureLightbox();
+  lightboxImg.src = src;
+  lightboxImg.alt = alt || "";
+  lightboxEl.classList.add("image-lightbox--visible");
+}
+
+
+//Book Cards klickbar machen//
+
+
+
 function createBookCard(book, context) {
   const article = document.createElement("article");
   article.className = "book-card";
+  article.id = book.id; // optional, falls du mal direkt verlinken willst
 
-  // Bildbereich
+ // Bildbereich
   const imageWrapper = document.createElement("div");
   imageWrapper.className = "book-card__image-wrapper";
 
@@ -67,8 +126,14 @@ function createBookCard(book, context) {
   img.src = book.cover;
   img.alt = book.alt;
   img.className = "book-card__image";
-
+// Bild zum Wrapper hinzufügen
   imageWrapper.appendChild(img);
+  
+// Bild klickbar machen: vergrößerte Ansicht im Overlay
+  img.style.cursor = "zoom-in";
+  img.addEventListener("click", () => {
+    openLightbox(book.cover, book.alt);
+  });
 
   // Titel + Meta
   const title = document.createElement("h3");
@@ -78,34 +143,60 @@ function createBookCard(book, context) {
     <span class="book-card__meta">${book.meta}</span>
   `;
 
-  // Beschreibung – je nach Kontext unterschiedliche Texte möglich
+  // Beschreibung – je nach Kontext unterschiedliche Texte
   const desc = document.createElement("p");
   desc.className = "book-card__description";
-  desc.textContent = context === "home"
-    ? book.descriptionHome
-    : book.descriptionShop;
+  desc.textContent =
+    context === "home" ? book.descriptionHome : book.descriptionShop;
 
   // Actions (Button + optional Preis)
   const actions = document.createElement("div");
   actions.className = "book-card__actions";
 
-  const button = document.createElement("button");
-  button.className = "button " + (context === "shop" ? "button-primary" : "button-secondary") + " book-card__button";
-  button.textContent = context === "shop" ? "Bestellen" : "Mehr erfahren";
+  // 👉 Button / Link unterschiedlich für home vs. shop
+  let actionElement;
 
-  // Hier könntest du später noch z. B. ein onclick für ein Modal o.ä. setzen
-
-  actions.appendChild(button);
-
-  // Preis nur im Shop sichtbar
   if (context === "shop") {
-    const price = document.createElement("span");
-    price.className = "book-card__price";
-    price.textContent = book.price;
-    actions.appendChild(price);
-  }
+    // Mailto-Link mit Buchtitel + Meta + HEUTIGEM Datum im Betreff
+    const today = new Date();
+    const dateStr = formatDateCH(today);
+    const subject = `Bestellung: ${book.title} (${book.meta}), ${dateStr}`;
 
-  // Card zusammenbauen
+    actionElement = document.createElement("a");
+    actionElement.className = "button button-primary book-card__button";
+    actionElement.href =
+      `mailto:${ORDER_EMAIL}?subject=${encodeURIComponent(subject)}`;
+    actionElement.textContent = "Bestellen";
+  } else {
+    // Startseite: normaler Button, z.B. später Link zur Shop-Seite
+    actionElement = document.createElement("button");
+    actionElement.className = "button button-secondary book-card__button";
+    actionElement.textContent = "Zum Buch";
+    // Optional: z.B. scroll zum Shop
+    // actionElement.onclick = () => window.location.href = "shop.html#" + book.id;
+  }
+  actions.appendChild(actionElement);
+// Preis + Versandhinweis nur im Shop anzeigen
+if (context === "shop") {
+  const priceWrap = document.createElement("div");
+  priceWrap.className = "book-card__price-wrap";
+
+  const price = document.createElement("span");
+  price.className = "book-card__price";
+  price.textContent = book.price;
+
+  const shipping = document.createElement("span");
+  shipping.className = "book-card__shipping-note";
+  shipping.textContent = "exkl. Versand";
+
+  priceWrap.appendChild(price);
+  priceWrap.appendChild(shipping);
+
+  actions.appendChild(priceWrap);
+}
+
+
+// Card zusammenbauen
   article.appendChild(imageWrapper);
   article.appendChild(title);
   article.appendChild(desc);
@@ -121,6 +212,7 @@ function createPlaceholderCard() {
 
   const inner = document.createElement("div");
   inner.className = "book-card__placeholder-inner";
+
 
   inner.innerHTML = `
     <h1>Stöbern,<br> finden,<br> sich verbinden</h1> 
@@ -144,11 +236,13 @@ function renderBooks(targetId, context) {
   // alle Bände rendern
 if (context === "shop") {
   const placeholder = createPlaceholderCard();
+  placeholder.style.setProperty("--i", 0);
   container.appendChild(placeholder);
 }
 
-BOOKS.forEach((book) => {
+BOOKS.forEach((book, index) => {
   const card = createBookCard(book, context);
+  card.style.setProperty("--i", index + 1);
   container.appendChild(card);
 });
 
@@ -156,6 +250,7 @@ BOOKS.forEach((book) => {
 
 // 5) Beim Laden der Seite: Home & Shop befüllen (falls Container vorhanden)
 document.addEventListener("DOMContentLoaded", () => {
+  ensureLightbox();
   renderBooks("home-book-carousel", "home");
   renderBooks("shop-book-grid", "shop");
 });

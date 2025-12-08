@@ -29,16 +29,7 @@
     font-size: 3rem;
 }
 
-/* Mobile: alles untereinander */
-@media (max-width: 768px) {
-  .book-grid {
-    grid-template-columns: 1fr;
-  }
 
-  .book-carousel .book-card {
-    flex: 0 0 220px;
-  }
-}
 
 /* Book-Card Basis */
 .book-card {
@@ -95,9 +86,21 @@
   gap: var(--space-s);
 }
 
+.book-card__price-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
 .book-card__price {
   font-size: 0.95rem;
   font-weight: 600;
+}
+
+.book-card__shipping-note {
+  font-size: 0.8rem;
+  color: #666; /* oder var(--color-text-muted) falls vorhanden */
 }
 
 /* Placeholder-Kachel im Shop */
@@ -123,6 +126,50 @@
   font-size: 0.95rem;
 }
 
+/*––––––––––Effekte––––––––––*/
+@keyframes book-card-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.book-list--shop .book-card {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: book-card-fade-up 0.45s ease-out forwards;
+  animation-delay: calc(var(--i) * 0.07s);
+}
+
+.book-list--shop .book-card:nth-child(2) {
+  animation-delay: 0.05s;
+}
+
+.book-list--shop .book-card:nth-child(3) {
+  animation-delay: 0.10s;
+}
+
+.book-list--shop .book-card:nth-child(4) {
+  animation-delay: 0.15s;
+}
+
+.book-list--shop .book-card:nth-child(5) {
+  animation-delay: 0.20s;
+}
+
+.book-list--shop .book-card:nth-child(6) {
+  animation-delay: 0.25s;
+}
+
+
+
+
+
+
 /* Tablet: 2 Spalten (2x3) */
 @media (max-width: 1024px) {
   .book-grid {
@@ -130,9 +177,18 @@
   }
 }
 
-/* Mobile: 1 Spalte (6x1) */
-@media (max-width: 640px) {
+
+
+/* Mobile: alles untereinander */
+@media (max-width: 768px) {
   .book-grid {
     grid-template-columns: 1fr;
   }
+
+  .book-carousel .book-card {
+    flex: 0 0 220px;
+  }
 }
+
+
+

@@ -164,7 +164,6 @@ p {
 /* -------------------------------------------- */
 /* Buttons (global wiederverwendbar)           */
 /* -------------------------------------------- */
-
 .button,
 .btn {
   display: inline-flex;
@@ -179,9 +178,10 @@ p {
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
+/* Primary-Button (z.B. im Shop „Bestellen“) */
 .button-primary,
 .btn-primary {
   background: var(--color-accent);
@@ -192,8 +192,12 @@ p {
 .btn-primary:hover {
   background: #000000;
   color: #ffffff;
+  border-color: #000000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
 }
 
+/* Secondary-Button (z.B. Startseite „Zum Buch“) */
 .button-secondary,
 .btn-secondary {
   background: transparent;
@@ -201,8 +205,13 @@ p {
 
 .button-secondary:hover,
 .btn-secondary:hover {
-  background: var(--color-accent-soft);
+  background: #000000;
+  color: #ffffff;
+  border-color: #000000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
 }
+
 
 /* -------------------------------------------- */
 /* Karten / Container                            */
@@ -327,6 +336,71 @@ p {
   color: #000;
   font-size: 0.9rem;
 }
+
+.image-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 2000;
+}
+
+.image-lightbox--visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.image-lightbox__img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+
+/*Pill button für Bildansicht schließen*/
+.image-lightbox__close-btn {
+  position: absolute;
+  bottom: 20%;             /* Untere Mitte des Bildschirms */
+  left: 50%;
+  transform: translateX(-50%);
+  
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(4px);
+  color: #000;
+  
+  font-size: 2rem;
+  line-height: 1;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 999px;     /* macht die „Pill-Form“ */
+
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+/* Hover-Effekt für Desktop */
+@media (hover: hover) {
+  .image-lightbox__close-btn:hover {
+    background: rgba(255,255,255,1);
+    transform: translateX(-50%) scale(1.02);
+  }
+}
+
+
+
+@media (hover: hover) {
+  .book-card__image-wrapper:hover .book-card__image {
+    transform: scale(1.08);
+    transition: transform 0.4s ease;
+  }
+}
+
 
 
 
