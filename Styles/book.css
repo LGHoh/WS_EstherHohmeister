@@ -3,7 +3,10 @@
   /* Platzhalterklasse, falls später JS gebraucht wird */
 }
 
+/* ---------------------------------- */
 /* Startseite: horizontales Karussell */
+/* ---------------------------------- */
+
 .book-carousel {
   display: flex;
   gap: var(--space-m);
@@ -13,11 +16,14 @@
 }
 
 .book-carousel .book-card {
-  flex: 0 0 260px;            /* Kartenbreite im Karussell */
+  flex: 0 0 260px;            /* Kartenbreite im Karussell (Desktop) */
   scroll-snap-align: start;
 }
 
-/* Shop: Grid-Layout */
+/* ---------------------------------- */
+/* Shop: Grid-Layout                  */
+/* ---------------------------------- */
+
 .book-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -25,23 +31,27 @@
   margin-top: var(--space-l);
 }
 
+/* Placeholder-Titel im Shop */
 .placeholder-title {
-    font-weight: 300;
-    font-size: 2.6rem;
-    line-height: 1.2;
-    letter-spacing: -0.01em;
-    margin: 0;
-    max-width: 12ch;      /* macht die Zeilen bewusst kürzer → poetischer */
+  font-weight: 300;
+  font-size: 2.6rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0;
+  max-width: 12ch;
 }
 
 .book-card--placeholder .book-card__placeholder-inner {
-    padding: 2.2rem 1.5rem;
-    display: flex;
-    align-items: center;                /* sanft vertikal ausrichten */
-    height: 100%;
+  padding: 2.2rem 1.5rem;
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
-/* Book-Card Basis */
+/* ---------------------------------- */
+/* Book-Card Basis                    */
+/* ---------------------------------- */
+
 .book-card {
   background: var(--color-surface);
   border-radius: var(--radius-m);
@@ -51,7 +61,7 @@
   flex-direction: column;
 }
 
-/* Bildbereich – einheitliche Bildgröße in px */
+/* Bildbereich – Standardgröße (Shop) */
 .book-card__image-wrapper {
   width: 240px;          /* feste Breite */
   height: 320px;         /* 3:4 Format, wie ein Buch */
@@ -65,8 +75,6 @@
   height: 100%;
   object-fit: cover;
 }
-
-/* Hinweis: Auf Desktop sind die Covers also ca. 240 x 320 px */
 
 /* Titel / Meta */
 .book-card__title {
@@ -136,7 +144,158 @@
   font-size: 0.95rem;
 }
 
-/*––––––––––Effekte––––––––––*/
+/* ---------------------------------- */
+/* Spezielle Anpassungen: Startseite  */
+/* (Karussell: .book-list--home)      */
+/* ---------------------------------- */
+
+.book-list--home .book-card {
+  padding: 0.85rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06); /* leichter als im Shop */
+}
+
+/* Kleineres Cover im Karussell */
+.book-list--home .book-card__image-wrapper {
+  width: 200px;
+  height: 260px;
+  margin-bottom: var(--space-s);
+}
+
+/* Titel/Meta im Karussell etwas kleiner */
+.book-list--home .book-card__title {
+  font-size: 1rem;
+}
+
+.book-list--home .book-card__meta {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+/* Beschreibung im Karussell dezenter */
+.book-list--home .book-card__description {
+  font-size: 0.85rem;
+  margin-bottom: var(--space-s);
+}
+
+/* Actions im Karussell: Button unten links */
+.book-list--home .book-card__actions {
+  justify-content: flex-start;
+}
+
+/* Auf der Startseite explizit KEIN Zoom */
+@media (hover: hover) {
+  .book-list--home .book-card__image-wrapper:hover .book-card__image {
+    transform: none;
+  }
+}
+
+/* ------------------------------------------ */
+/* Carousel Navigation (Startseite)           */
+/* ------------------------------------------ */
+
+.carousel-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; /* Kinder dürfen volle Breite einnehmen */
+  gap: var(--space-s);
+}
+
+/* Pfeile explizit nach rechts schieben */
+.carousel-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-xs);
+}
+
+.carousel-wrapper .book-carousel {
+  width: 100%;
+}
+
+/* Pfeile als perfekte Kreis-Pills */
+.carousel-arrow {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid #999;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
+  color: #000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  font-size: 1.4rem;
+  line-height: 1;
+
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.carousel-arrow:hover {
+  background: #fff;
+  transform: translateY(-2px);
+}
+
+.carousel-arrow:active {
+  transform: translateY(0);
+}
+
+/* Mobile kleiner */
+@media (max-width: 640px) {
+  .carousel-arrow {
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+  }
+}
+
+/* ---------------------------------- */
+/* Lightbox (Cover-Vergrößerung)      */
+/* ---------------------------------- */
+
+.image-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.image-lightbox--visible {
+  display: flex;
+}
+
+.image-lightbox__img {
+  max-width: 90vw;
+  max-height: 80vh;
+  border-radius: var(--radius-m);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+/* Schließen-Button unten mittig */
+.image-lightbox__close-btn {
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  border: 1px solid #fff;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  padding: 0.3rem 0.9rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+/* ---------------------------------- */
+/* Effekte (Shop-Kaskade)             */
+/* ---------------------------------- */
+
 @keyframes book-card-fade-up {
   from {
     opacity: 0;
@@ -175,10 +334,17 @@
   animation-delay: 0.25s;
 }
 
+/* Hover-Zoom nur im Shop */
+@media (hover: hover) {
+  .book-list--shop .book-card__image-wrapper:hover .book-card__image {
+    transform: scale(1.04);
+    transition: transform 0.35s ease;
+  }
+}
 
-
-
-
+/* ---------------------------------- */
+/* Responsive                         */
+/* ---------------------------------- */
 
 /* Tablet: 2 Spalten (2x3) */
 @media (max-width: 1024px) {
@@ -186,8 +352,6 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
-
-
 
 /* Mobile: alles untereinander */
 @media (max-width: 768px) {
@@ -200,5 +364,8 @@
   }
 }
 
-
-
+/* Sicherheit: Sektion clippt horizontales Overflow,
+   Karussell darf intern trotzdem scrollen */
+.section-poetry {
+  overflow-x: hidden;
+}

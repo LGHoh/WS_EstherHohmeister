@@ -1,24 +1,19 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8"/>
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Startseite</title>
-
-  <link rel="stylesheet" href="Styles/root.css">
-  <link rel="stylesheet" href="Styles/startseite.css">
-  <link rel="stylesheet" href="Styles/book.css">
-  <
-
-
+  <title>Start</title>
+  <link rel="stylesheet" href="Styles/root.css"/>
+  <link rel="stylesheet" href="https://use.typekit.net/our8lqw.css">
 </head>
 <body>
   <header class="site-header">
-    <img src="logo/Platzhalter_Logo_EH.svg" alt="Platzhalter Logo" />
+    <img src="logo/Platzhalter_Logo_Eh.svg" alt="Platzhalter Logo" />
     <nav class="site-nav" aria-label="Hauptnavigation">
       <ul>
-        <li><a href="index.html">Startseite</a></li>
-        <li><a href="zurdichterin.html">Zur Dichterin</a></li>
+        <li><a href="startseite.html">Startseite</a></li>
+        <li><a href="zur-dichterin.html">Zur Dichterin</a></li>
         <li><a href="blaettern.html">Blättern</a></li>
         <li><a href="shop.html">Shop</a></li>
       </ul>
@@ -34,7 +29,8 @@
         <!-- Linke Hälfte: H1-Text -->
         <div class="column column-left hero-text-block">
           <h1 class="heading-main">
-                        Gedichte aus dem Alltag
+            Esther Hohmeister<br>
+            Gedichte aus dem Alltag
           </h1>
         </div>
 
@@ -42,7 +38,7 @@
         <div class="column column-right hero-portrait-block">
           <div class="portrait-wrapper">
             <img
-              src="images/Portrait_Esther_Hohmeister.png"
+              src="images/esther-portrait.jpg"
               alt="Portrait von Esther Hohmeister"
               class="portrait-image"
             >
@@ -52,25 +48,49 @@
       </div>
     </section>
 
-      <!-- 2. Sektion: Gedichte & Gedichtbände mit Karussell -->
+    <!-- 2. Sektion: Gedichte & Gedichtbände mit „Karussell“ -->
     <section class="section section-poetry">
       <div class="section-inner">
 
         <h2 class="heading-section">Gedichte und Gedichtbände</h2>
 
-        <div class="carousel-wrapper">
-          <!-- Hier rendert JS automatisch die Buchkarten -->
-          <div id="home-book-carousel" class="book-carousel book-list book-list--home"></div>
+        <!-- Karussell-Wrapper (kann später mit JS zum echten Slider werden) -->
+        <div class="book-carousel">
 
-          <!-- Pfeile zur Navigation -->
-          <div class="carousel-controls">
-            <button class="carousel-arrow arrow-left" type="button">‹</button>
-            <button class="carousel-arrow arrow-right" type="button">›</button>
-          </div>
+          <!-- Ein einzelner Band -->
+          <article class="book-card">
+            <h3 class="book-title">Band 1 – Der Golfplatz ist eine Welt</h3>
+            <p class="book-description">
+              Kurze Beschreibung des ersten Gedichtbands. Humorvolle
+              Einblicke in das Leben auf dem Golfplatz und darüber hinaus.
+            </p>
+            <button class="button-primary">Zum Buch</button>
+          </article>
+
+          <article class="book-card">
+            <h3 class="book-title">Band 2 – Noch mehr Fairway-Geschichten</h3>
+            <p class="book-description">
+              Der zweite Teil widmet sich den Marotten, Ausreden und
+              Herzensmomenten von Golferinnen und Golfern.
+            </p>
+            <button class="button-primary">Zum Buch</button>
+          </article>
+
+          <article class="book-card">
+            <h3 class="book-title">Band 3 – Alltag in Versform</h3>
+            <p class="book-description">
+              Gedichte aus dem täglichen Leben – heiter, berührend
+              und mit einer Prise Ironie.
+            </p>
+            <button class="button-primary">Zum Buch</button>
+          </article>
+
+          <!-- Weitere .book-card-Elemente nach Bedarf -->
+
         </div>
-
       </div>
     </section>
+
     <!-- 3. Sektion: Kontakt / Stichwort teilen -->
     <section class="section section-contact">
       <div class="section-inner two-column-layout">
@@ -88,7 +108,6 @@
 
           <!-- Adresse -->
           <div class="contact-card">
-            <h5>Briefadresse</h5>
             <p class="text-contact">
               Esther Hohmeister<br>
               Grossfeldstrasse 10<br>
@@ -99,7 +118,7 @@
           <!-- Mailto -->
           <div class="contact-card contact-card-mail">
             <p class="text-contact">E-Mail schreiben</p>
-            <a href="mailto:esther&#64;hohmeister&#46;ch?subject=Website:Stichwort%20für%20ein%20Gedicht" class="mailto-link">
+            <a href="mailto:esther@hohmeister.ch" class="mailto-link">
               <!-- Pfeil kann so sein, oder später als SVG/Icon -->
               <span class="mailto-arrow">➜</span>
             </a>
@@ -110,24 +129,6 @@
       </div>
     </section>
 
-  <!-- Footer aus root.css-Styles -->
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-column footer-column-left">
-        <p class="footer-heading">Kontakt</p>
-        <a href="mailto:esther&#64;hohmeister&#46;ch" class="footer-link">
-          E-Mail an Esther Hohmeister
-        </a>
-      </div>
-      <div class="footer-column footer-column-right">
-        <p class="footer-text">© Esther Hohmeister</p>
-        <a href="impressum.html" class="footer-link">Impressum</a>
-      </div>
-    </div>
-  </footer>
 
-<!-- JavaScript: rendert die Bookcards für Startseite & Shop -->
-  <script src="js/root.js" defer></script>
-  <script src="js/books.js" defer></script>
 </body>
 </html>

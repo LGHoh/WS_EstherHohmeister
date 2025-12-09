@@ -12,6 +12,9 @@
 html, body {
   margin: 0;
   padding: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* Basis: 1rem = 16px (Standard) */
@@ -238,6 +241,7 @@ p {
   align-items: center;
   gap: 20px;
   box-shadow: var(--shadow-header);
+  box-sizing: border-box;
 }
 
 /* Logo */
@@ -380,22 +384,6 @@ p {
   transition: background 0.2s ease, transform 0.2s ease;
 }
 
-/* Hover-Effekt für Desktop */
-@media (hover: hover) {
-  .image-lightbox__close-btn:hover {
-    background: rgba(255,255,255,1);
-    transform: translateX(-50%) scale(1.02);
-  }
-}
-
-
-
-@media (hover: hover) {
-  .book-card__image-wrapper:hover .book-card__image {
-    transform: scale(1.08);
-    transition: transform 0.4s ease;
-  }
-}
 
 
 
