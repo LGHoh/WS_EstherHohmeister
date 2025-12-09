@@ -226,7 +226,8 @@ function createPlaceholderCard() {
     <h1 class="placeholder-title">
       Stöbern,<br>
       finden,<br>
-      sich verbinden
+      verbinden!
+      <p class="placeholder-subtitle">Entedecken Sie die Werke von Esther Hohmeister – für sich.</p>
     </h1>
   `;
 

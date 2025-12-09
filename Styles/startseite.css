@@ -6,7 +6,7 @@
 
 .section-hero {
   /* etwas Luft nach dem Sticky-Header */
-  padding-top: var(--space-xxl);
+  padding-top: var(--space-x);
 }
 .section {
   min-height: 60vh; /* Jede Sektion nimmt Bildschirmhöhe ein */

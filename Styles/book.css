@@ -16,7 +16,7 @@
 }
 
 .book-carousel .book-card {
-  flex: 0 0 260px;            /* Kartenbreite im Karussell (Desktop) */
+  flex: 0 0 240px;
   scroll-snap-align: start;
 }
 
@@ -41,11 +41,22 @@
   max-width: 12ch;
 }
 
+.placeholder-subtitle {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  margin-top: 0.75rem;
+  max-width: 24ch;               /* angenehme Zeilenlänge */
+}
+
+
+
 .book-card--placeholder .book-card__placeholder-inner {
   padding: 2.2rem 1.5rem;
   display: flex;
   align-items: center;
   height: 100%;
+  
 }
 
 /* ---------------------------------- */
@@ -63,12 +74,14 @@
 
 /* Bildbereich – Standardgröße (Shop) */
 .book-card__image-wrapper {
-  width: 240px;          /* feste Breite */
-  height: 320px;         /* 3:4 Format, wie ein Buch */
+  width: 100%;
+  max-width: 240px;         /* Shop / Desktop */
+  aspect-ratio: 4 / 5;      /* 4:5-Format */
   margin: 0 auto var(--space-m) auto;
   overflow: hidden;
   border-radius: var(--radius-s);
 }
+
 
 .book-card__image {
   width: 100%;
@@ -156,11 +169,9 @@
 
 /* Kleineres Cover im Karussell */
 .book-list--home .book-card__image-wrapper {
-  width: 200px;
-  height: 260px;
+  max-width: 220px;   /* leicht kleiner als im Shop */
   margin-bottom: var(--space-s);
 }
-
 /* Titel/Meta im Karussell etwas kleiner */
 .book-list--home .book-card__title {
   font-size: 1rem;
@@ -292,6 +303,12 @@
   font-size: 1.2rem;
 }
 
+
+
+
+
+
+
 /* ---------------------------------- */
 /* Effekte (Shop-Kaskade)             */
 /* ---------------------------------- */
@@ -332,7 +349,29 @@
 
 .book-list--shop .book-card:nth-child(6) {
   animation-delay: 0.25s;
+
 }
+
+@keyframes placeholder-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.placeholder-title {
+  animation: placeholder-fade-up 0.5s ease-out forwards;
+}
+
+.placeholder-subtitle {
+  animation: placeholder-fade-up 0.8s ease-out forwards;
+  animation-delay: 0.10s; /* leicht versetzt nach dem Titel */
+}
+
+
 
 /* Hover-Zoom nur im Shop */
 @media (hover: hover) {
@@ -347,25 +386,82 @@
 /* ---------------------------------- */
 
 /* Tablet: 2 Spalten (2x3) */
+/* Tablet: 2 Spalten (2x3) */
+/* ---------------------------------- */
+/* Responsive: Shop-Grid & Karussell  */
+/* ---------------------------------- */
+
+/* Tablet: 2 Spalten (2x3) */
 @media (max-width: 1024px) {
   .book-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 }
 
-/* Mobile: alles untereinander */
+/* Mobile: alles untereinander (1x6) */
 @media (max-width: 768px) {
   .book-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
   }
 
-  .book-carousel .book-card {
-    flex: 0 0 220px;
-  }
+  /* Titel in der grauen Kachel: kleiner als auf der Startseite */
+.book-card--placeholder .placeholder-title {
+  font-size: 1.8rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0;
+  max-width: 10ch;                   /* kurze, „poetische“ Zeilen */
 }
 
-/* Sicherheit: Sektion clippt horizontales Overflow,
-   Karussell darf intern trotzdem scrollen */
-.section-poetry {
-  overflow-x: hidden;
+/* Shop-spezifische Tweaks: kleinere, kompaktere Karten */
+.book-list--shop .book-card {
+  padding: 0.9rem 1rem;              /* etwas weniger Innenabstand */
 }
+
+/* Bild im Shop leicht verkleinern */
+.book-list--shop .book-card__image-wrapper {
+  max-width: 200px;                  /* statt 240px */
+  margin-bottom: var(--space-s);
+}
+
+/* Beschreibung im Shop kompakter */
+.book-list--shop .book-card__description {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin-bottom: var(--space-s);
+}
+
+/* Aktionen näher am Text – weniger „Stretch“ nach unten */
+.book-list--shop .book-card__actions {
+  margin-top: var(--space-s);
+}
+
+/* Placeholder-Kachel im Shop dezenter und besser integriert */
+.book-card--placeholder {
+  background: var();               /* etwas heller als das bisherige Grau */
+  align-items: flex-start;           /* Inhalt nach oben, nicht mittig */
+  padding: 1.4rem 1.2rem;
+}
+
+  /* Platzhalter-Kachel: Text auf Mobil zentrieren */
+  .book-card--placeholder {
+    text-align: left;
+  }
+
+  .book-card--placeholder .placeholder-title {
+    max-width: 12ch;          /* kurze, poetische Zeilen */
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .book-card--placeholder .placeholder-subtitle {
+    max-width: 26ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+}
+
+
+
