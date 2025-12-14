@@ -16,30 +16,12 @@
   align-items: center;
 }
 
-/* Portrait-Kreis, wie auf der Startseite */
-.portrait-wrapper,
-.author-portrait-wrapper {
-  width: 260px;
-  height: 260px;
-  border-radius: 50%;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 
 .portrait-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-/* Name unter dem Portrait */
-.author-name {
-  margin-top: 0.75rem;
-  font-weight: 600;
-  font-size: 1rem;
-  text-align: center;
 }
 
 /* Text rechts */
@@ -133,11 +115,6 @@
     margin-bottom: var(--space-l);
   }
 
-  .portrait-wrapper,
-  .author-portrait-wrapper {
-    width: 200px;
-    height: 200px;
-  }
    .contact-explanation {
     font-size: 0.95rem;
   }

@@ -205,11 +205,92 @@
 
   .section {
     min-height: 65vh;
+  }
 
+
+
+/* ---------------------Wortslide Startseite---------------------- */
+
+/* Screenreader-only */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
 }
 
+/* Quote-Look */
+.quote {
+  position: relative;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  max-width: 18ch;             /* wirkt wie typografisches Zitat */
+}
 
+/* Zitatzeichen als Akzent */
+.quote-mark {
+  color: var(--color-accent);
+  font-weight: 700;
+  opacity: 0.9;
+}
 
+.quote-mark--end {
+  margin-left: 0.1em;
+}
 
-/* ---------------------Farbtests----------------------- */
+/* Optional: feine Zitatlinie links */
+.quote::before {
+  content: "";
+  position: absolute;
+  left: -0.6rem;
+  top: 0.25em;
+  bottom: 0.25em;
+  width: 3px;
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--color-accent) 55%, transparent);
+  opacity: 0.7;
+}
 
+/* ---------- Rollband-Rotator ---------- */
+.word-rotator {
+  display: inline-flex;
+  align-items: baseline;
+  margin-left: 0.25em;
+  margin-right: 0.1em;
+  height: 1.05em;              /* „Zeilenhöhe“ des Rollbands */
+}
+
+/* viewport schneidet ab */
+.word-rotator__viewport {
+  display: inline-block;
+  height: 1.3em;              /* „Zeilenhöhe“ des Rollbands */
+  overflow: hidden;
+  vertical-align: baseline;
+}
+
+/* Track wird nach oben verschoben */
+.word-rotator__track {
+  display: block;
+  will-change: transform;
+  transform: translateY(0);
+  transition: transform 620ms ease;
+}
+
+/* jedes Wort ist eine „Zeile“ im Track */
+.word-rotator__item {
+  display: block;
+  height: 1.3em;
+  line-height: 1.25em;
+  font-weight: 500;
+  color: var(--color-accent);
+}
+
+/* Motion reduce: keine Animation */
+@media (prefers-reduced-motion: reduce) {
+  .word-rotator__track {
+    transition: none;
+  }
+}

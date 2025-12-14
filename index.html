@@ -32,22 +32,40 @@
 
         <!-- Linke Hälfte: H1-Text -->
         <div class="column column-left hero-text-block">
-          <h1 class="heading-main">
-              Zwischen Alltag und Augenblick finde ich meine Worte.
-          </h1>
+     <h1 class="heading-main quote">
+
+  Zwischen Alltag und Augenblick finde ich meine
+  <span class="word-rotator" aria-hidden="true">
+    <span class="word-rotator__viewport">
+      <span class="word-rotator__track">
+        <span class="word-rotator__item">Worte</span>
+      </span>
+    </span>
+  </span>
+  <span class="sr-only">Zwischen Alltag und Augenblick finde ich meine Worte</span>
+</h1>
+
+
         </div>
 
-        <!-- Rechte Hälfte: Portrait-Kreis -->
-        <div class="column column-right hero-portrait-block">
-          <div class="portrait-wrapper">
-            <img
-              src="images/Portrait_Esther_Hohmeister.png"
-              alt="Portrait von Esther Hohmeister"
-              class="portrait-image">
-            </div>
+        <!-- Rechte Hälfte: Portrait -->
+        <div class="column hero-portrait-block">
+          <div class="portrait portrait--hero">
+            <div class="portrait-wrapper">
+              <img
+                src="images/Portrait_Esther_Hohmeister.png"
+                alt="Portrait von Esther Hohmeister"
+                class="portrait-image"
+              >
+       </div>
+            <p class="author-name">Esther Hohmeister</p>
+          </div>
         </div>
+      </div>
+
 
       </div>
+      
     </section>
 
       <!-- 2. Sektion: Gedichte & Gedichtbände mit Karussell -->
@@ -124,8 +142,9 @@
     </div>
   </footer>
 
-<!-- JavaScript: rendert die Bookcards für Startseite & Shop -->
+<!-- JavaScript: rendert die Bookcards, html und rotator -->
   <script src="js/root.js" defer></script>
+  <script src="js/rotator.js" defer></script>
   <script src="js/books.js" defer></script>
 </body>
 </html>
