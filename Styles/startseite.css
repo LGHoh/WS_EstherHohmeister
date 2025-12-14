@@ -30,8 +30,6 @@
   margin-right: auto;
 }
 
-
-
 /* H1 bekommt seine Größe aus root.css (h1 / --h1-size) */
 .heading-main {
   margin: 0;
@@ -74,36 +72,33 @@
 }
 
 /* Horizontal scrollbares „Karussell“ */
+/* Startseite: Karussell */
 .book-carousel {
   display: flex;
   gap: var(--space-m);
   overflow-x: auto;
-  padding-bottom: var(--space-s);
+
+  /* wichtig: damit man bis ganz rechts scrollen kann */
+  padding: 0 var(--space-l) var(--space-s); /* links+rechts End-Padding */
+
   scroll-snap-type: x mandatory;
+  scroll-padding-left: var(--space-l);
+  scroll-padding-right: var(--space-l);
+
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+
+
+  overflow-x: auto;
+  touch-action: pan-x;
 }
 
-/* Einzelne Buch-Karte */
-.book-card {
-  flex: 0 0 280px;
-  background: var(--color-surface);
-  border-radius: var(--radius-m);
-  padding: var(--space-m);
-  box-shadow: var(--shadow-soft);
+/* Cards im Karussell */
+.book-carousel .book-card {
+  flex: 0 0 var(--book-card-width);
   scroll-snap-align: start;
 }
 
-.book-title {
-  font-size: 1.25rem;
-  margin: 0 0 var(--space-xs) 0;
-}
-
-.book-description {
-  font-size: 0.95rem;
-  margin: 0 0 var(--space-m) 0;
-}
-
-/* Button-Styles kommen aus root.css (.button-primary),
-   hier könntest du bei Bedarf nur z.B. margin ergänzen */
 
 /* ---------------------------------- */
 /* 3. Sektion: Kontakt                */
