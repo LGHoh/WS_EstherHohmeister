@@ -92,11 +92,27 @@
   gap: var(--space-s);
 }
 
+.book-card__toggle {
+  display: none;
+  margin-top: 0.4rem;
+  font-size: 0.9rem;
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--color-accent);
+  cursor: pointer;
+  text-align: left;
+}
+
+
 .book-card__price-wrap {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 2px;
+}
+.book-card__toggle { 
+  margin-bottom: var(--space-s);
 }
 
 .book-card__price {
@@ -132,19 +148,26 @@
   font-size: 0.95rem;
 }
 
-/* ---------------------------------- */
-/* Spezielle Anpassungen: Startseite  */
-/* (Karussell: .book-list--home)      */
-/* ---------------------------------- */
 
-
-
-/* Auf der Startseite explizit KEIN Zoom */
-@media (hover: hover) {
-  .book-list--home .book-card__image-wrapper:hover .book-card__image {
-    transform: none;
-  }
+/* Cover-Wrapper (wichtig!) – GLOBAL, nicht nur im Mobile-Block */
+.book-card__image-wrapper {
+  width: 100%;
+  max-width: 240px;              /* Bildbreite in den Cards */
+  aspect-ratio: 4 / 5;           /* Buchformat */
+  margin: 0 auto var(--space-m) auto; /* Abstand zum Titel */
+  overflow: hidden;              /* damit Abrundung wirklich schneidet */
+  border-radius: 10px;           /* sichtbar rund */
+  background: #fff;
 }
+
+.book-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;                /* verhindert „Klebekante“ */
+  border-radius: 10px;           /* Backup (falls Wrapper mal überschrieben wird) */
+}
+
 
 /* ------------------------------------------ */
 /* Carousel Navigation (Startseite)           */
@@ -167,7 +190,7 @@
 
 
 
-/* Pfeile als perfekte Kreis-Pills */
+/* Pfeile als  Kreis-Pills */
 .carousel-arrow {
   width: 38px;
   height: 38px;
@@ -197,14 +220,6 @@
   transform: translateY(0);
 }
 
-/* Mobile kleiner */
-@media (max-width: 640px) {
-  .carousel-arrow {
-    width: 32px;
-    height: 32px;
-    font-size: 1.2rem;
-  }
-}
 
 /* ---------------------------------- */
 /* Lightbox (Cover-Vergrößerung)      */
@@ -318,6 +333,13 @@
   }
 }
 
+/* Auf der Startseite explizit KEIN Zoom */
+@media (hover: hover) {
+  .book-list--home .book-card__image-wrapper:hover .book-card__image {
+    transform: none;
+  }
+}
+
 /* ---------------------------------- */
 /* Responsive                         */
 /* ---------------------------------- */
@@ -333,7 +355,47 @@
   .book-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
+
+
+  .book-card__description {
+    max-height: 5.4em;
+    overflow: hidden;
+    position: relative;
+  }
+  /* Fade am unteren Rand */
+  .book-card__description::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2.5em; /* Stärke des Fades */
+    pointer-events: none;
+    
+    /* Verlauf: transparent → Kartenhintergrund */
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0),
+      var(--color-surface)
+    );
+  }
+
+  /* Wenn aufgeklappt: kein Fade */
+  .book-card.is-expanded .book-card__description {
+    max-height: none;
+  }
+
+  .book-card.is-expanded .book-card__description::after {
+    display: none;
+  }
+
+  .book-card__toggle {
+    display: inline-block;
+  }
 }
+
+/* ---------------------------------- */
+
 
 /* Mobile: alles untereinander (1x6) */
 @media (max-width: 768px) {
@@ -360,6 +422,23 @@
 .book-list--shop .book-card__image-wrapper {
   max-width: 200px;                  /* statt 240px */
   margin-bottom: var(--space-s);
+}
+
+.book-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* Actions */
+.book-card__actions {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-s);
 }
 
 /* Beschreibung im Shop kompakter */
@@ -397,7 +476,12 @@
     margin-left: auto;
     margin-right: auto;
   }
-
+  .carousel-arrow {
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+    display: none;
+  }
 
 }
 

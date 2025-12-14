@@ -159,6 +159,20 @@ function createBookCard(book, context) {
     ? book.descriptionHome
     : book.descriptionShop;
 
+    
+// "Mehr lesen"/"Weniger lesen" Button hinzufügen
+const toggleBtn = document.createElement("button");
+toggleBtn.className = "book-card__toggle";
+toggleBtn.textContent = "Mehr lesen";
+
+toggleBtn.addEventListener("click", () => {
+  article.classList.toggle("is-expanded");
+  toggleBtn.textContent = article.classList.contains("is-expanded")
+    ? "Weniger lesen"
+    : "Mehr lesen";
+});
+
+    
   // Actions (Button + optional Preis/Versand)
   const actions = document.createElement("div");
   actions.className = "book-card__actions";
@@ -183,6 +197,7 @@ function createBookCard(book, context) {
     actionElement.href = `blaettern.html#${book.id}`;
   }
 
+
   actions.appendChild(actionElement);
 
   // Preis + Versandhinweis nur im Shop
@@ -204,12 +219,13 @@ function createBookCard(book, context) {
   }
 
   // Card zusammenbauen
-  article.appendChild(imageWrapper);
-  article.appendChild(title);
-  article.appendChild(desc);
-  article.appendChild(actions);
+article.appendChild(imageWrapper);
+article.appendChild(title);
+article.appendChild(desc);
+article.appendChild(toggleBtn);
+article.appendChild(actions);
 
-  return article;
+return article;
 }
 
 // --------------------------------------

@@ -17,7 +17,7 @@ html, body {
 /* Basis: 1rem = 16px (Standard) */
   font-size: 16px;
   
-  overflow-x: visible;
+  overflow-x: clip;
 
 }
 

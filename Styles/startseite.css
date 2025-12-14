@@ -6,7 +6,7 @@
 
 .section-hero {
   /* etwas Luft nach dem Sticky-Header */
-  padding-top: var(--space-x);
+  padding-top: var(--space-xl);
 }
 .section {
   min-height: 60vh; /* Jede Sektion nimmt Bildschirmhöhe ein */
@@ -88,10 +88,9 @@
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
 
-
-  overflow-x: auto;
   touch-action: pan-x;
 }
+
 
 /* Cards im Karussell */
 .book-carousel .book-card {
@@ -196,6 +195,7 @@
     margin-top: var(--space-s); /* kleiner Abstand statt großem Default */
   }
 }
+
   .section {
     min-height: 65vh;
 
