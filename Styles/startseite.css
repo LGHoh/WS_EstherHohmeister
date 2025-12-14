@@ -89,8 +89,15 @@
   overscroll-behavior-x: contain;
 
   touch-action: pan-x;
-}
 
+  /*Scrollbar ausblenden für Webkit-Browser (Safari, Chrome) */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+ /*Scrollbar ausblenden für Webkit-Browser */
+.book-carousel::-webkit-scrollbar {
+  display: none; /* Webkit-Browser */
+}
 
 /* Cards im Karussell */
 .book-carousel .book-card {
@@ -200,3 +207,9 @@
     min-height: 65vh;
 
 }
+
+
+
+
+/* ---------------------Farbtests----------------------- */
+

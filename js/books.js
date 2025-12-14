@@ -166,11 +166,74 @@ toggleBtn.className = "book-card__toggle";
 toggleBtn.textContent = "Mehr lesen";
 
 toggleBtn.addEventListener("click", () => {
-  article.classList.toggle("is-expanded");
-  toggleBtn.textContent = article.classList.contains("is-expanded")
-    ? "Weniger lesen"
-    : "Mehr lesen";
+  const container = article.closest(".book-list") || article.parentElement;
+
+  const collapsedHeight =
+    5.4 * parseFloat(getComputedStyle(desc).fontSize); // muss zu CSS height: 5.4em passen
+
+  const collapseCard = (cardEl) => {
+    const d = cardEl.querySelector(".book-card__description");
+    const t = cardEl.querySelector(".book-card__toggle");
+    if (!d || !t) return;
+
+    // Nur wenn wirklich offen
+    if (!cardEl.classList.contains("is-expanded")) return;
+
+    // Von aktueller Höhe smooth zurück zur collapsed Höhe
+    const startH = d.getBoundingClientRect().height;
+    d.style.height = `${startH}px`;
+    d.offsetHeight; // reflow
+    d.style.height = `${collapsedHeight}px`;
+
+    cardEl.classList.remove("is-expanded");
+    t.textContent = "Mehr lesen";
+  };
+
+  const expandCard = (cardEl) => {
+    const d = cardEl.querySelector(".book-card__description");
+    const t = cardEl.querySelector(".book-card__toggle");
+    if (!d || !t) return;
+
+    const startH = d.getBoundingClientRect().height;
+
+    cardEl.classList.add("is-expanded");
+
+    // Zielhöhe messen
+    d.style.height = "auto";
+    const targetH = d.scrollHeight;
+
+    // zurück auf Start, dann animieren
+    d.style.height = `${startH}px`;
+    d.offsetHeight; // reflow
+    d.style.height = `${targetH}px`;
+
+    t.textContent = "Weniger lesen";
+
+    const onEnd = () => {
+      d.removeEventListener("transitionend", onEnd);
+      // nach dem Expand: auto, damit responsive
+      if (cardEl.classList.contains("is-expanded")) {
+        d.style.height = "auto";
+      }
+    };
+    d.addEventListener("transitionend", onEnd);
+  };
+
+  const isOpening = !article.classList.contains("is-expanded");
+
+  // 1) Wenn wir öffnen: alle anderen schließen (Akkordeon)
+  if (isOpening && container) {
+    container.querySelectorAll(".book-card.is-expanded").forEach((openCard) => {
+      if (openCard !== article) collapseCard(openCard);
+    });
+    expandCard(article);
+  } else {
+    // 2) Wenn wir schließen: nur diese Karte schließen
+    collapseCard(article);
+  }
 });
+
+
 
     
   // Actions (Button + optional Preis/Versand)

@@ -7,3 +7,15 @@ document.addEventListener("DOMContentLoaded", () => {
     el.innerHTML = `<a href="mailto:${email}">${email}</a>`;
   });
 });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.body.classList.add("is-ready");
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  setTimeout(() => {
+    document.body.classList.add("is-ready");
+  }, 180); // 80–150ms sind meist angenehm
+});

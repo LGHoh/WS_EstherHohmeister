@@ -340,6 +340,40 @@
   }
 }
 
+/* Touch-Geräte (iPhone/iPad, auch Querformat): clamp + Toggle */
+@media (hover: none) and (pointer: coarse) {
+  .book-card__description {
+    height: 8.2em;              /* iPad: gerne etwas mehr */
+    overflow: hidden;
+    position: relative;
+    transition: height 260ms ease;
+  }
+
+  .book-card__toggle {
+    display: inline-block;
+  }
+
+  /* Fade */
+  .book-card__description::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 2.4em;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      rgba(255,255,255,0),
+      var(--color-surface)
+    );
+    transition: opacity 200ms ease;
+  }
+
+  .book-card.is-expanded .book-card__description::after {
+    opacity: 0;
+  }
+}
+
+
 /* ---------------------------------- */
 /* Responsive                         */
 /* ---------------------------------- */
@@ -356,42 +390,6 @@
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 
-
-  .book-card__description {
-    max-height: 5.4em;
-    overflow: hidden;
-    position: relative;
-  }
-  /* Fade am unteren Rand */
-  .book-card__description::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 2.5em; /* Stärke des Fades */
-    pointer-events: none;
-    
-    /* Verlauf: transparent → Kartenhintergrund */
-    background: linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0),
-      var(--color-surface)
-    );
-  }
-
-  /* Wenn aufgeklappt: kein Fade */
-  .book-card.is-expanded .book-card__description {
-    max-height: none;
-  }
-
-  .book-card.is-expanded .book-card__description::after {
-    display: none;
-  }
-
-  .book-card__toggle {
-    display: inline-block;
-  }
 }
 
 /* ---------------------------------- */
@@ -486,4 +484,8 @@
 }
 
 
-
+@media (max-width: 640px) and (hover: none) and (pointer: coarse) {
+  .book-card__description {
+    height: 5.4em; /* Handy: kürzer */
+  }
+}

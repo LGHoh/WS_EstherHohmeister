@@ -61,6 +61,7 @@ body {
   --color-header-bg: #a4a4a4;
   --color-accent: #111111;      /* Schwarz als Akzent */
   --color-accent-soft: #d3d3d3;
+  --color-accented: #7a3a3a; /* Dunkles Rotbraun */
 
   /* Abstände */
   --space-xs: 0.5rem;   /* 8px */
@@ -121,6 +122,40 @@ p {
   line-height: var(--line-height-relaxed);
   color: var(--color-text);
 }
+/* -------------------------------------------- */
+/* Ladeanimation Main-Bereich                                       */
+/* -------------------------------------------- */
+
+/* Main startet leicht versetzt und transparent */
+.page-main {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 320ms ease, transform 320ms ease;
+}
+
+/* Wenn ready → Main sichtbar */
+body.is-ready .page-main {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Falls JS nicht läuft, trotzdem sichtbar nach kurzer Zeit */
+@media (prefers-reduced-motion: reduce) {
+  .page-main {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+/* -------------------------------------------- */
+/* Fertig                                      */
+/* -------------------------------------------- */
+
+
+
+
 
 /* -------------------------------------------- */
 /* Layout-Utilities                             */
@@ -301,8 +336,8 @@ p {
   width: 30%;
   border-top: 1px solid #000;
   margin: 4px auto 12px;
-
 }
+
 /* -------------------------------------------- */
 /* Globaler Footer                              */
 /* -------------------------------------------- */
