@@ -153,6 +153,45 @@ body.is-ready .page-main {
 /* Fertig                                      */
 /* -------------------------------------------- */
 
+/* -------------------------------------------- */
+/* Mail Arrow                                      */
+/* -------------------------------------------- */
+
+
+/* Mailto-Link als Einheit */
+.mailto-link--with-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: inherit;
+  font-weight: 500;
+}
+
+/* Text */
+.mailto-text {
+  font-size: 1rem;
+}
+
+/* SVG Icon */
+.mailto-icon {
+  width: 1.4em;          /* skaliert mit Text */
+  height: 1.4em;
+  fill: currentColor;   /* übernimmt Textfarbe */
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+/* Hover / Fokus */
+.mailto-link--with-icon:hover .mailto-icon,
+.mailto-link--with-icon:focus-visible .mailto-icon {
+  transform: translateX(4px);
+}
+
+/* Optional: Akzentfarbe */
+.mailto-link--with-icon:hover {
+  color: var(--color-accent);
+}
+
 
 /* ------------------------------ */
 /* Portrait – Basis               */
@@ -505,4 +544,5 @@ body.is-ready .page-main {
     font-size: 0.9rem;       /* etwas kleinere Schrift */
     padding: 4px 0;
   }
+
 }

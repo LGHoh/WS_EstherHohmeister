@@ -104,7 +104,7 @@
 
           <!-- Adresse -->
           <div class="contact-card">
-            <h5>Briefadresse</h5>
+            <h5 style="font-weight: 500;">Briefadresse</h5>
             <p class="text-contact">
               Esther Hohmeister<br>
               Grossfeldstrasse 10<br>
@@ -113,13 +113,24 @@
           </div>
 
           <!-- Mailto -->
-          <div class="contact-card contact-card-mail">
-            <p class="text-contact">E-Mail schreiben</p>
-            <a href="mailto:esther&#64;hohmeister&#46;ch?subject=Website:Stichwort%20für%20ein%20Gedicht" class="mailto-link">
-              <!-- Pfeil kann so sein, oder später als SVG/Icon -->
-              <span class="mailto-arrow">➜</span>
-            </a>
-          </div>
+        <div class="contact-card contact-card-mail">
+          <a
+            href="mailto:esther&#64;hohmeister&#46;ch?subject=Website:Stichwort%20für%20ein%20Gedicht"
+            class="mailto-link mailto-link--with-icon"
+          >
+            <span class="mailto-text">E-Mail schreiben</span>
+
+            <!-- SVG Pfeil -->
+            <svg
+              class="mailto-icon"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <use href="svgs/arrow-right.svg#icon"></use>
+            </svg>
+          </a>
+        </div>
+
 
         </div>
 
@@ -136,7 +147,7 @@
         </a>
       </div>
       <div class="footer-column footer-column-right">
-        <p class="footer-text">© Esther Hohmeister</p>
+        <p class="footer-text">©Esther Hohmeister</p>
         <a href="impressum.html" class="footer-link">Impressum</a>
       </div>
     </div>
