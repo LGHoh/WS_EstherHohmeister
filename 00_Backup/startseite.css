@@ -89,17 +89,10 @@
   overscroll-behavior-x: contain;
 
   touch-action: pan-x;
-  scroll-behavior: smooth;
 
   /*Scrollbar ausblenden für Webkit-Browser (Safari, Chrome) */
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE 10+ */
-}
-
-/* Klone für Infinite Loop (ohne Animation, damit kein Flicker) */
-.book-carousel .book-card.is-clone {
-  animation: none;
-  opacity: 1;
 }
  /*Scrollbar ausblenden für Webkit-Browser */
 .book-carousel::-webkit-scrollbar {
@@ -110,38 +103,6 @@
 .book-carousel .book-card {
   flex: 0 0 var(--book-card-width);
   scroll-snap-align: start;
-  scroll-snap-stop: always;
-}
-
-/* Fade-In Animation für Karussell-Karten */
-@keyframes carousel-card-fade-in {
-  from {
-    opacity: 0;
-    transform: translateX(20px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-  }
-}
-
-.book-carousel .book-card {
-  animation: carousel-card-fade-in 0.6s ease-out forwards;
-  animation-delay: calc(var(--i) * 0.1s);
-  opacity: 0;
-}
-
-/* Hover-Effekt für Karussell-Karten */
-@media (hover: hover) {
-  .book-carousel .book-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .book-carousel .book-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 12px 24px rgba(0,0,0,0.15);
-    z-index: 10;
-  }
 }
 
 

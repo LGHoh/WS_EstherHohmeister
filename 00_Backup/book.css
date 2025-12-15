@@ -186,43 +186,38 @@
   display: flex;
   justify-content: flex-end;
   gap: var(--space-xs);
-  margin-bottom: var(--space-s);
 }
 
-/* Pfeile als Kreis-Buttons */
+
+
+/* Pfeile als  Kreis-Pills */
 .carousel-arrow {
-  width: 44px;
-  height: 44px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  border: 2px solid var(--color-accent);
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(8px);
-  color: var(--color-accent);
+  border: 1px solid #999;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
+  color: #000;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   cursor: pointer;
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: 1.4rem;
   line-height: 1;
 
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .carousel-arrow:hover {
-  background: var(--color-accent);
-  color: #fff;
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-  border-color: var(--color-accent);
+  background: #fff;
+  transform: translateY(-2px);
 }
 
 .carousel-arrow:active {
-  transform: translateY(-1px) scale(1.02);
-  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+  transform: translateY(0);
 }
 
 
@@ -479,16 +474,11 @@
     margin-left: auto;
     margin-right: auto;
   }
-  /* Karussell-Pfeile auf Mobile sichtbar aber kleiner */
   .carousel-arrow {
-    width: 36px;
-    height: 36px;
-    font-size: 1.3rem;
-  }
-
-  /* Karussell-Karten auf Mobile schmaler */
-  .book-carousel .book-card {
-    flex: 0 0 var(--book-card-width);
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+    display: none;
   }
 
 }

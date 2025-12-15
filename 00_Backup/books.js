@@ -328,33 +328,12 @@ function renderBooks(targetId, context) {
     container.appendChild(placeholder);
   }
 
-  // Für Karussell: Infinite Loop mit Klonen
-  if (context === "home") {
-    // Klone der letzten 2 Karten am Anfang
-    for (let i = BOOKS.length - 2; i < BOOKS.length; i++) {
-      const card = createBookCard(BOOKS[i], context);
-      card.classList.add("is-clone");
-      card.style.setProperty("--i", i - BOOKS.length + 2);
-      container.appendChild(card);
-    }
-  }
-
   // alle Bände rendern
   BOOKS.forEach((book, index) => {
     const card = createBookCard(book, context);
     card.style.setProperty("--i", index + 1);
     container.appendChild(card);
   });
-
-  // Für Karussell: Klone der ersten 2 Karten am Ende
-  if (context === "home") {
-    for (let i = 0; i < 2; i++) {
-      const card = createBookCard(BOOKS[i], context);
-      card.classList.add("is-clone");
-      card.style.setProperty("--i", BOOKS.length + i + 1);
-      container.appendChild(card);
-    }
-  }
 }
 
 // --------------------------------------
@@ -375,103 +354,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const right = document.querySelector(".arrow-right");
 
   if (carousel && left && right) {
-    // Korrekte Scroll-Breite: --book-card-width + gap
-    const getScrollAmount = () => {
-      const style = getComputedStyle(document.documentElement);
-      const cardWidth = parseInt(style.getPropertyValue('--book-card-width'));
-      const gap = 16; // var(--space-m) = 1rem = 16px
-      return cardWidth + gap;
-    };
+    const scrollAmount = 260 + 16; // ≈ Kartenbreite + Abstand
 
-    const totalCards = BOOKS.length;
-    let autoScrollInterval = null;
-    let isScrolling = false;
-
-    // Setze initiale Position ohne smooth scroll
-    // Starte bei der ersten echten Karte (Index 0 der echten Karten = nach 2 Klonen)
-    const scrollAmount = getScrollAmount();
-    carousel.style.scrollBehavior = 'auto';
-    carousel.scrollLeft = scrollAmount * 2;
-    
-    // Nach kurzem Delay smooth scroll aktivieren
-    setTimeout(() => {
-      carousel.style.scrollBehavior = 'smooth';
-    }, 50);
-
-    // Infinite Loop Check
-    const checkInfiniteLoop = () => {
-      if (isScrolling) return;
-
-      const scrollAmount = getScrollAmount();
-      const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-      const currentScroll = carousel.scrollLeft;
-
-      // Am Ende: Wenn wir am physischen Ende sind
-      if (currentScroll >= maxScroll - 5) {
-        isScrolling = true;
-        carousel.style.scrollBehavior = 'auto';
-        // Springe zurück zur ersten echten Karte (nach 2 Klonen)
-        carousel.scrollLeft = scrollAmount * 2;
-        setTimeout(() => {
-          carousel.style.scrollBehavior = 'smooth';
-          isScrolling = false;
-        }, 50);
-      }
-      // Am Anfang: bei den ersten beiden Klonen
-      else if (currentScroll <= 5) {
-        isScrolling = true;
-        carousel.style.scrollBehavior = 'auto';
-        // Springe zur letzten echten Karte
-        carousel.scrollLeft = scrollAmount * (totalCards + 1);
-        setTimeout(() => {
-          carousel.style.scrollBehavior = 'smooth';
-          isScrolling = false;
-        }, 50);
-      }
-    };
-
-    // Auto-Scroll nach 4 Sekunden
-    const startAutoScroll = () => {
-      stopAutoScroll();
-      autoScrollInterval = setInterval(() => {
-        const scrollAmount = getScrollAmount();
-        carousel.scrollBy({ left: scrollAmount, behavior: "smooth" });
-      }, 5000); // nach 4s scrollen
-    };
-
-    const stopAutoScroll = () => {
-      if (autoScrollInterval) {
-        clearInterval(autoScrollInterval);
-        autoScrollInterval = null;
-      }
-    };
-
-    // Überwache Scroll-Position für Infinite Loop
-    carousel.addEventListener("scroll", checkInfiniteLoop);
-
-    // Pfeile-Navigation
     left.addEventListener("click", () => {
-      const scrollAmount = getScrollAmount();
       carousel.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-      stopAutoScroll();
-      setTimeout(startAutoScroll, 5000); // nach 2s wieder starten
     });
 
     right.addEventListener("click", () => {
-      const scrollAmount = getScrollAmount();
       carousel.scrollBy({ left: scrollAmount, behavior: "smooth" });
-      stopAutoScroll();
-      setTimeout(startAutoScroll, 5000); // nach 2s wieder starten
     });
-
-    // Auto-Scroll pausieren bei Hover/Touch
-    carousel.addEventListener("mouseenter", stopAutoScroll);
-    carousel.addEventListener("mouseleave", startAutoScroll);
-    carousel.addEventListener("touchstart", stopAutoScroll);
-
-    // Auto-Scroll starten nach kurzem Delay (damit initiale Position korrekt ist)
-    setTimeout(() => {
-      startAutoScroll();
-    }, 500);
   }
 });
