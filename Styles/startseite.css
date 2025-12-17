@@ -58,6 +58,17 @@
   object-fit: cover;
 }
 
+.background-image-decorative{ 
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 50%;
+  object-fit: none;
+  z-index: -1; /* hinter den Inhalt */
+  opacity: 0.45; /* sehr dezent */
+}
+
 /* ---------------------------------- */
 /* 2. Sektion: Gedichte & Gedichtbände */
 /* ---------------------------------- */

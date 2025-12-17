@@ -7,7 +7,7 @@ const BOOKS = [
     title: "Gedichte",
     meta: "Gedichtband · 2020-2023",
     descriptionHome:
-      "Gedichte aus den Jahren 2020 bis 2023 – über Zeit, Wandel und das Zusammenleben. Von Achtsamkeit und Zweifel, Umarmungen und Abschieden, Alltagsszenen, Naturbeobachtungen und leisen Fragen an die Gegenwart. Ein Band voller Nähe, Nachdenklichkeit und stiller Zuversicht.",
+      "In ihrem neuesten Gedichband lädt Esther Hohmeister mit einer Mischung aus Witz, Wortspiel und feiner Ironie zu einer heiteren Reise durch den Alltag ein. Belgeitet werden die Gedichte durch ebenso lebhaften Illustrationen der Grafikerin Rebkka Good.",
     descriptionShop:
       "In ihrem neuesten Gedichband lädt Esther Hohmeister mit einer Mischung aus Witz, Wortspiel und feiner Ironie zu einer heiteren Reise durch den Alltag ein.",
     price: "CHF 24.–",
