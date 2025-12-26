@@ -11,9 +11,19 @@
 
 </head>
 <body>
-  <header class="site-header">
-    <img src="logo/Platzhalter_Logo_EH.svg" alt="Platzhalter Logo" />
-    <nav class="site-nav" aria-label="Hauptnavigation">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-logo" href="index.html">
+      <img src="logo/Platzhalter_Logo_EH.svg" alt="Platzhalter Logo">
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Menü öffnen">
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+
+    <nav class="site-nav" id="primary-nav" aria-label="Hauptnavigation">
       <ul>
         <li><a href="index.html">Startseite</a></li>
         <li><a href="zurdichterin.html">Zur Dichterin</a></li>
@@ -21,7 +31,12 @@
         <li><a href="shop.html">Shop</a></li>
       </ul>
     </nav>
-  </header>
+  </div>
+</header>
+
+
+
+
 
 
   <main class="page-main">
@@ -138,21 +153,27 @@
       </div>
     </section>
   </main>
+
+
   <!-- Footer aus root.css-Styles -->
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-column footer-column-left">
-        <p class="footer-heading">Kontakt</p>
-        <a href="mailto:esther&#64;hohmeister&#46;ch" class="footer-link">
-          E-Mail an Esther Hohmeister
-        </a>
-      </div>
-      <div class="footer-column footer-column-right">
-        <p class="footer-text">©Esther Hohmeister</p>
-        <a href="impressum.html" class="footer-link">Impressum</a>
-      </div>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <p class="footer-label">Kontakt</p>
+
+      <a class="footer-link footer-link--cta"
+         href="mailto:esther&#64;hohmeister&#46;ch">
+        E-Mail an Esther Hohmeister
+      </a>
     </div>
-  </footer>
+
+    <div class="footer-col footer-col--right">
+      <p class="footer-meta">© <span id="footer-year">2025</span> Esther Hohmeister</p>
+      <a class="footer-link" href="impressum.html">Impressum</a>
+    </div>
+  </div>
+</footer>
+
 
 <!-- JavaScript: rendert die Bookcards, html und rotator -->
   <script src="js/root.js" defer></script>

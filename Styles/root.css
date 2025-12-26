@@ -1,7 +1,6 @@
 /* -------------------------------------------- */
-/* Font & Base Reset                            */
+/* 1) Reset & Base                              */
 /* -------------------------------------------- */
-
 
 *,
 *::before,
@@ -14,38 +13,32 @@ html, body {
   padding: 0;
   width: 100%;
   max-width: 100%;
-/* Basis: 1rem = 16px (Standard) */
-  font-size: 16px;
-  
+  font-size: 16px; /* Basis: 1rem = 16px */
   overflow-x: clip;
-
 }
 
 body {
   overflow-x: hidden;
-}
-
-
-body {
   font-family: "poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: #f8f8f8;
   color: #111111;
 }
 
+
 /* -------------------------------------------- */
-/* Design Tokens (Variablen)                    */
+/* 2) Design Tokens                             */
 /* -------------------------------------------- */
 
 :root {
   /* Typografie */
   --font-family-main: "poppins", system-ui, sans-serif;
 
-  --h1-size: 2.5rem;        
-  --h2-size: 2.1rem;    
-  --h3-size: 1.9rem;      
-  --h4-size: 1.4rem;      
-  --h5-size: 1rem;     
-  --h6-size: 0.8rem;    
+  --h1-size: 2.5rem;
+  --h2-size: 2.1rem;
+  --h3-size: 1.9rem;
+  --h4-size: 1.4rem;
+  --h5-size: 1rem;
+  --h6-size: 0.8rem;
 
   --line-height-tight: 1.1;
   --line-height-normal: 1.4;
@@ -59,48 +52,34 @@ body {
   --color-text-muted: #555555;
   --color-border: #dddddd;
   --color-header-bg: #a4a4a4;
-  --color-accent: #2f5a4a;      /* Dunkelgrün als Akzent */
+
+  --color-accent: #2f5a4a;
   --color-accent-soft: #d3d3d3;
-  --color-accented: #7a3a3a; /* Dunkles Rotbraun */
+  --color-accented: #7a3a3a;
 
   /* Abstände */
-  --space-xs: 0.5rem;   /* 8px */
-  --space-s: 0.75rem;   /* 12px */
-  --space-m: 1rem;      /* 16px */
-  --space-l: 1.5rem;    /* 24px */
-  --space-xl: 2rem;     /* 32px */
-  --space-xxl: 3rem;    /* 48px */
+  --space-xs: 0.5rem;
+  --space-s: 0.75rem;
+  --space-m: 1rem;
+  --space-l: 1.5rem;
+  --space-xl: 2rem;
+  --space-xxl: 3rem;
 
   /* Radius & Schatten */
   --radius-s: 4px;
   --radius-m: 8px;
-  --radius-l: 999px;    /* für Pills / runde Elemente */
+  --radius-l: 999px;
 
   --shadow-soft: 0 2px 6px rgba(0,0,0,0.06);
   --shadow-header: 0 1px 0 rgba(0,0,0,0.05);
 
-
-/*Karusell*/
---book-card-width: 360px; 
+  /* Karussell */
+  --book-card-width: 360px;
 }
 
-
-
-/* Responsive Typografie-Anpassung */
-@media (max-width: 768px) {
-  :root {
-    --h1-size: 2.5rem;
-    --h2-size: 2.1rem;
-    --h3-size: 1.7rem;
-
-/*Karusell*/
-  --book-card-width: 300px;
-
-  }
-}
 
 /* -------------------------------------------- */
-/* Headline-Defaults                            */
+/* 3) Typography                                */
 /* -------------------------------------------- */
 
 h1, h2, h3, h4, h5, h6 {
@@ -122,41 +101,27 @@ p {
   line-height: var(--line-height-relaxed);
   color: var(--color-text);
 }
+
+
 /* -------------------------------------------- */
-/* Ladeanimation Main-Bereich                                       */
+/* 4) Page Load Animation                       */
 /* -------------------------------------------- */
 
-/* Main startet leicht versetzt und transparent */
 .page-main {
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 320ms ease, transform 320ms ease;
 }
 
-/* Wenn ready → Main sichtbar */
 body.is-ready .page-main {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Falls JS nicht läuft, trotzdem sichtbar nach kurzer Zeit */
-@media (prefers-reduced-motion: reduce) {
-  .page-main {
-    transition: none;
-    opacity: 1;
-    transform: none;
-  }
-}
-
 
 /* -------------------------------------------- */
-/* Fertig                                      */
+/* 5) Components                                */
 /* -------------------------------------------- */
-
-/* -------------------------------------------- */
-/* Mail Arrow                                      */
-/* -------------------------------------------- */
-
 
 /* Mailto-Link als Einheit */
 .mailto-link--with-icon {
@@ -168,42 +133,32 @@ body.is-ready .page-main {
   font-weight: 500;
 }
 
-/* Text */
-.mailto-text {
-  font-size: 1rem;
-}
+.mailto-text { font-size: 1rem; }
 
-/* SVG Icon */
 .mailto-icon {
-  width: 1.4em;          /* skaliert mit Text */
+  width: 1.4em;
   height: 1.4em;
-  fill: currentColor;   /* übernimmt Textfarbe */
+  fill: currentColor;
   transition: transform 0.25s ease, color 0.25s ease;
 }
 
-/* Hover / Fokus */
 .mailto-link--with-icon:hover .mailto-icon,
 .mailto-link--with-icon:focus-visible .mailto-icon {
   transform: translateX(4px);
 }
 
-/* Optional: Akzentfarbe */
 .mailto-link--with-icon:hover {
   color: var(--color-accent);
 }
 
 
-/* ------------------------------ */
-/* Portrait – Basis               */
-/* ------------------------------ */
-
+/* Portrait */
 .portrait {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* Einheitliche Portrait-Größe */
 .portrait-wrapper {
   width: 260px;
   height: 260px;
@@ -221,9 +176,9 @@ body.is-ready .page-main {
   display: block;
 }
 
-/* Name unter Portrait (nur wo vorhanden) */
 .author-name {
-  margin-top: none;
+  /* "none" ist kein gültiger Wert -> 0 */
+  margin-top: 0;
   font-size: 0.95rem;
   font-weight: 500;
   opacity: 0.75;
@@ -231,62 +186,7 @@ body.is-ready .page-main {
 }
 
 
-
-/* -------------------------------------------- */
-/* Layout-Utilities                             */
-/* -------------------------------------------- */
-
-/* Seite zentrieren */
-.layout-page {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 var(--space-m);
-}
-
-/* Allgemeine Sektion */
-.section {
-  padding: var(--space-xxl) var(--space-m);
-}
-
-.section-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Zwei-Spalten-Layout */
-.two-column-layout {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-l);
-}
-
-.column {
-  flex: 1 1 300px;
-}
-
-/* Text-Helpers */
-.text-center {
-  text-align: center;
-}
-
-.text-left {
-  text-align: left;
-}
-
-.text-muted {
-  color: var(--color-text-muted);
-}
-
-/* Zentrierung mit Flex */
-.align-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* -------------------------------------------- */
-/* Buttons (global wiederverwendbar)           */
-/* -------------------------------------------- */
+/* Buttons */
 .button,
 .btn {
   display: inline-flex;
@@ -304,7 +204,6 @@ body.is-ready .page-main {
   transition: all 0.2s ease;
 }
 
-/* Primary-Button (z.B. im Shop „Bestellen“) */
 .button-primary,
 .btn-primary {
   background: var(--color-accent);
@@ -320,7 +219,6 @@ body.is-ready .page-main {
   box-shadow: 0 4px 10px rgba(0,0,0,0.12);
 }
 
-/* Secondary-Button (z.B. Startseite „Zum Buch“) */
 .button-secondary,
 .btn-secondary {
   background: transparent;
@@ -336,130 +234,290 @@ body.is-ready .page-main {
 }
 
 
-/* -------------------------------------------- */
-/* Karten / Container                            */
-/* -------------------------------------------- */
-
+/* Cards */
 .card {
   background: var(--color-surface);
   border-radius: var(--radius-m);
   box-shadow: var(--shadow-soft);
   padding: var(--space-m);
-
 }
+
 
 /* -------------------------------------------- */
-/* Globaler Header (dein vorhandener Code)      */
+/* 6) Layout Utilities                          */
 /* -------------------------------------------- */
 
-.site-header {
-  width: 100%;
-  position: sticky;
-  top: 0;
-  left: 0;
-  z-index: 999;
-  background: var(--color-header-bg);
-  padding: 18px 12px;
+.layout-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-m);
+}
+
+.section {
+  padding: var(--space-xxl) var(--space-m);
+}
+
+.section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.two-column-layout {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  box-shadow: var(--shadow-header);
-  box-sizing: border-box;
+  flex-wrap: wrap;
+  gap: var(--space-l);
 }
 
-/* Logo */
-.site-header img {
-  max-width: 220px;
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: contain;
-  padding-bottom: 1%;
+.column {
+  flex: 1 1 300px;
 }
 
-/* Nav */
-.site-nav {
-  width: 100%;
-}
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-muted { color: var(--color-text-muted); }
 
-.site-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.align-center {
   display: flex;
-  gap: 60px;
   align-items: center;
   justify-content: center;
 }
 
-.site-nav a {
-  color: #000;
-  text-decoration: none;
-  font-weight: 500;
-  padding: 6px 4px;
-}
-
-.site-nav a:hover {
-  text-decoration: underline;
-}
-
-/* Linie zwischen Logo und Navigation */
-.site-nav::before {
-  content: "";
-  display: block;
-  width: 30%;
-  border-top: 1px solid #000;
-  margin: 4px auto 12px;
-}
 
 /* -------------------------------------------- */
-/* Globaler Footer                              */
+/* 7) Header (Modern)                           */
 /* -------------------------------------------- */
 
-.site-footer {
-  background: var(--color-header-bg);
-  padding: var(--space-l) 0;
-  margin-top: var(--space-xl);
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+
+  background: color-mix(in srgb, var(--color-bg) 92%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
+
+  padding: 10px 0;
 }
 
-.footer-inner {
+.header-inner {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--space-m);
+
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: var(--space-xl);
+  gap: var(--space-m);
+
+  position: relative; /* fürs Dropdown */
 }
 
-.footer-column {
+.site-logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.site-logo img {
+  width: 200px;
+  max-width: 42vw;
+  height: auto;
+  display: block;
+}
+
+/* Nav Pills (Desktop default) */
+.site-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  background: color-mix(in srgb, var(--color-surface) 72%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
+  border-radius: 999px;
+  box-shadow: var(--shadow-soft);
+}
+
+.site-nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 14px;
+  border-radius: 999px;
+
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+
+  transition: background 0.18s ease, transform 0.18s ease, color 0.18s ease;
+}
+
+.site-nav a:hover {
+  background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+  color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+/* Active via aria-current */
+.site-nav a[aria-current="page"] {
+  background: color-mix(in srgb, var(--color-accent) 18%, white);
+  color: var(--color-accent);
+}
+
+/* Fokus ohne Webkit-blau */
+.site-nav a:focus { outline: none; }
+.site-nav a:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 55%, transparent);
+  outline-offset: 2px;
+  border-radius: 999px;
+}
+
+/* Hamburger Button */
+.nav-toggle{
+  display: none; /* Desktop: hidden, Mobile wird unten eingeschaltet */
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent);
+  background: color-mix(in srgb, var(--color-surface) 70%, transparent);
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  padding: 10px;
+
+  /* WICHTIG: Balken untereinander */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+.nav-toggle:focus { outline: none; }
+.nav-toggle:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 55%, transparent);
+  outline-offset: 2px;
+}
+
+/* Die Balken – robust sichtbar */
+.nav-toggle__bar{
+  width: 100%;
+  height: 2px;
+  background: var(--color-text);
+  border-radius: 999px;
+
+  /* WICHTIG: kein margin mehr (wir nutzen gap) */
+  margin: 0;
+
+  transition: transform 180ms ease, opacity 180ms ease;
+  transform-origin: center;
+}
+
+/* Hamburger -> X */
+.site-header.is-menu-open .nav-toggle__bar:nth-child(1){
+  transform: translateY(8px) rotate(45deg);
+}
+.site-header.is-menu-open .nav-toggle__bar:nth-child(2){
+  opacity: 0;
+}
+.site-header.is-menu-open .nav-toggle__bar:nth-child(3){
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+
+/* -------------------------------------------- */
+/* Footer modern                                */
+/* -------------------------------------------- */
+
+.site-footer{
+  margin-top: var(--space-xxl);
+  padding: var(--space-xl) 0;
+
+  background: color-mix(in srgb, var(--color-bg) 92%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
+}
+
+.footer-inner{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-m);
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-l);
+
+  background: color-mix(in srgb, var(--color-surface) 70%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
+  border-radius: 18px;
+  box-shadow: var(--shadow-soft);
+
+  padding: var(--space-l);
+}
+
+.footer-col{
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 
-.footer-heading {
-  font-weight: 700;
-  margin: 0 0 var(--space-xs) 0;
-  color: #000;
+.footer-col--right{
+  text-align: right;
+  align-items: flex-end;
 }
 
-.footer-link {
-  color: #000;
-  font-weight: 500;
+.footer-label{
+  margin: 0;
+  font-weight: 600;
+  color: var(--color-text);
+  opacity: 0.9;
+}
+
+.footer-meta{
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+.footer-link{
+  color: var(--color-text);
   text-decoration: none;
-  margin-bottom: var(--space-xs);
+  font-weight: 500;
+
+  padding: 10px 14px;
+  border-radius: 999px;
+
+  background: rgba(0,0,0,0.04);
+  transition: background 180ms ease, transform 180ms ease, color 180ms ease;
 }
 
-.footer-link:hover {
-  text-decoration: underline;
+.footer-link:hover{
+  background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+  color: var(--color-accent);
+  transform: translateY(-1px);
 }
 
-.footer-text {
-  margin: 0 0 var(--space-xs) 0;
-  color: #000;
-  font-size: 0.9rem;
+.footer-link:focus{ outline: none; }
+.footer-link:focus-visible{
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 55%, transparent);
+  outline-offset: 2px;
 }
+
+/* etwas „wichtiger“ (Kontakt-Link) */
+.footer-link--cta{
+  background: color-mix(in srgb, var(--color-accent) 12%, white);
+  color: var(--color-accent);
+}
+
+
+/* -------------------------------------------- */
+/* 9) Lightbox                                  */
+/* -------------------------------------------- */
 
 .image-lightbox {
   position: fixed;
@@ -486,63 +544,132 @@ body.is-ready .page-main {
   box-shadow: 0 8px 24px rgba(0,0,0,0.4);
 }
 
-
-/*Pill button für Bildansicht schließen*/
 .image-lightbox__close-btn {
   position: absolute;
-  bottom: 20%;             /* Untere Mitte des Bildschirms */
+  bottom: 20%;
   left: 50%;
   transform: translateX(-50%);
-  
+
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(4px);
   color: #000;
-  
+
   font-size: 2rem;
   line-height: 1;
   border: none;
   padding: 8px 20px;
-  border-radius: 999px;     /* macht die „Pill-Form“ */
+  border-radius: 999px;
 
   cursor: pointer;
   transition: background 0.2s ease, transform 0.2s ease;
 }
 
 
+/* -------------------------------------------- */
+/* 10) Media Queries (ganz unten)               */
+/* -------------------------------------------- */
 
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .page-main {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
 
+/* iPad / Tablet */
+@media (max-width: 768px) {
+  :root {
+    --h1-size: 2.5rem;
+    --h2-size: 2.1rem;
+    --h3-size: 1.7rem;
+    --book-card-width: 300px;
+  }
+}
 
-/* Mobile-Optimierung Header */
+/* Mobile */
 @media (max-width: 640px) {
-  .site-header {
-    padding: 8px 8px;        /* weniger Höhe */
-    gap: 8px;                /* weniger Abstand zwischen Logo & Nav */
-  }
-
-  .site-header img {
-    max-width: 140px;        /* Logo kleiner */
-    padding-bottom: 0;
-  }
-
-  .site-nav::before {
-    width: 40%;              /* Linie etwas kürzer und kompakter */
-    margin: 2px auto 6px;
-  }
-
-  .site-nav ul {
-    flex-wrap: wrap;         /* erlaubt mehrere Zeilen */
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
-    gap: 4px 12px;           /* vertikal / horizontal */
   }
 
-  .site-nav li {
-    flex: 1 1 45%;           /* ungefähr 2 Elemente pro Reihe */
-    text-align: center;
+  /* Nav wird Dropdown */
+  .site-nav {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: var(--space-m);
+    width: min(92vw, 360px);
+
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0,0,0,0.10);
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+
+    padding: 10px;
+    z-index: 2000;
+ 
+    /* ANIMATION SETUP */
+    transform-origin: top right;
+    transform: translateY(-6px) scaleY(0.96);
+    opacity: 0;
+    pointer-events: none;
+
+    transition: transform 220ms ease, opacity 220ms ease;
+
+  }
+
+   /* Wenn offen */
+  .site-header.is-menu-open .site-nav{
+    transform: translateY(0) scaleY(1);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Desktop-Pill-Container deaktivieren -> Liste als Spalte */
+  .site-nav ul {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
   }
 
   .site-nav a {
-    font-size: 0.9rem;       /* etwas kleinere Schrift */
-    padding: 4px 0;
+    width: 100%;
+    justify-content: center;
+    background: rgba(0,0,0,0.04);
+  }
+
+  .site-nav a[aria-current="page"] {
+    background: var(--color-accent);
+    color: #fff;
+  }
+  
+/* -------------------------------------------- */
+/* ---------------Footer Mobile---------------- */
+/* -------------------------------------------- */
+  .footer-inner{
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .footer-col--right{
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .footer-link{
+    width: 100%;
+    justify-content: center;
+    text-align: center;
   }
 
 }
+

@@ -1,16 +1,17 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Shop</title>
+  <title>Startseite</title>
 
   <link rel="stylesheet" href="Styles/root.css">
+  <link rel="stylesheet" href="Styles/startseite.css">
   <link rel="stylesheet" href="Styles/book.css">
 
 </head>
 <body>
- <header class="site-header">
+<header class="site-header">
   <div class="header-inner">
     <a class="site-logo" href="index.html">
       <img src="logo/Platzhalter_Logo_EH.svg" alt="Platzhalter Logo">
@@ -33,18 +34,12 @@
   </div>
 </header>
 
+
+
+
   <main class="page-main">
-  <section class="section section-shop">
-    <div class="section-inner">
 
-      <!-- Hier rendert JS die Buchkacheln -->
-      <div id="shop-book-grid" class="book-grid book-list book-list--shop"></div>
-
-    </div>
-  </section>
-</main>
-
-  <!-- Footer global (wie besprochen) -->
+  <!-- Footer aus root.css-Styles -->
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-column footer-column-left">
@@ -54,15 +49,15 @@
         </a>
       </div>
       <div class="footer-column footer-column-right">
-        <p class="footer-text">© Esther Hohmeister</p>
+        <p class="footer-text">©Esther Hohmeister</p>
         <a href="impressum.html" class="footer-link">Impressum</a>
       </div>
     </div>
   </footer>
 
-
-
-  <script src="js/books.js" defer></script>
+<!-- JavaScript: rendert die Bookcards, html und rotator -->
   <script src="js/root.js" defer></script>
+  <script src="js/rotator.js" defer></script>
+  <script src="js/books.js" defer></script>
 </body>
 </html>

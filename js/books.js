@@ -125,7 +125,7 @@ function openLightbox(src, alt) {
 function createBookCard(book, context) {
   const article = document.createElement("article");
   article.className = "book-card";
-  article.id = book.id;
+  article.dataset.bookId = book.id;
 
   // Bildbereich
   const imageWrapper = document.createElement("div");
@@ -306,7 +306,7 @@ function createPlaceholderCard() {
       Stöbern,<br>
       finden,<br>
       verbinden!
-      <p class="placeholder-subtitle">Entedecken Sie die Werke von Esther Hohmeister – für sich.</p>
+      <p class="placeholder-subtitle">Entedecken Sie die Werke von Esther Hohmeister – für sich oder für andere.</p>
     </h1>
   `;
 
@@ -321,41 +321,61 @@ function renderBooks(targetId, context) {
   const container = document.getElementById(targetId);
   if (!container) return;
 
-  // Im Shop zuerst die Placeholder-Kachel
+  // Shop: Placeholder zuerst
   if (context === "shop") {
     const placeholder = createPlaceholderCard();
     placeholder.style.setProperty("--i", 0);
     container.appendChild(placeholder);
+
+    BOOKS.forEach((book, index) => {
+      const card = createBookCard(book, context);
+      card.style.setProperty("--i", index + 1);
+      container.appendChild(card);
+    });
+
+    return;
   }
 
-  // Für Karussell: Infinite Loop mit Klonen
+  // Home: 3x rendern (vorher / echt / nachher) -> „unsichtbares“ Infinite
   if (context === "home") {
-    // Klone der letzten 2 Karten am Anfang
-    for (let i = BOOKS.length - 2; i < BOOKS.length; i++) {
-      const card = createBookCard(BOOKS[i], context);
-      card.classList.add("is-clone");
-      card.style.setProperty("--i", i - BOOKS.length + 2);
-      container.appendChild(card);
-    }
-  }
+    const sets = 3; // 3 identische Sets
+    for (let s = 0; s < sets; s++) {
+      BOOKS.forEach((book, index) => {
+        const card = createBookCard(book, context);
 
-  // alle Bände rendern
-  BOOKS.forEach((book, index) => {
-    const card = createBookCard(book, context);
-    card.style.setProperty("--i", index + 1);
-    container.appendChild(card);
-  });
+        // keine doppelten IDs im DOM!
+        // statt article.id = book.id besser: data attribute verwenden
+        card.removeAttribute("id");
+        card.dataset.bookId = book.id;
 
-  // Für Karussell: Klone der ersten 2 Karten am Ende
-  if (context === "home") {
-    for (let i = 0; i < 2; i++) {
-      const card = createBookCard(BOOKS[i], context);
-      card.classList.add("is-clone");
-      card.style.setProperty("--i", BOOKS.length + i + 1);
-      container.appendChild(card);
+        // optional: für Debug
+        card.dataset.set = String(s);
+
+        container.appendChild(card);
+      });
     }
   }
 }
+
+// Hilfsfunktion: Alle Karten in einem Karussell zurücksetzen
+function resetCarouselCards(carouselEl) {
+  if (!carouselEl) return;
+
+  carouselEl.querySelectorAll(".book-card").forEach((card) => {
+    card.classList.remove("is-expanded");
+
+    const desc = card.querySelector(".book-card__description");
+    const btn = card.querySelector(".book-card__toggle");
+
+    if (desc) {
+      desc.style.height = "";     // wichtig: inline height entfernen
+    }
+    if (btn) {
+      btn.textContent = "Mehr lesen";
+    }
+  });
+}
+
 
 // --------------------------------------
 // 5) Beim Laden der Seite ausführen
@@ -375,103 +395,63 @@ document.addEventListener("DOMContentLoaded", () => {
   const right = document.querySelector(".arrow-right");
 
   if (carousel && left && right) {
-    // Korrekte Scroll-Breite: --book-card-width + gap
-    const getScrollAmount = () => {
-      const style = getComputedStyle(document.documentElement);
-      const cardWidth = parseInt(style.getPropertyValue('--book-card-width'));
-      const gap = 16; // var(--space-m) = 1rem = 16px
-      return cardWidth + gap;
-    };
+  const getScrollAmount = () => {
+    const style = getComputedStyle(document.documentElement);
+    const cardWidth = parseInt(style.getPropertyValue("--book-card-width"));
+    const gap = 16; // falls var(--space-m) = 1rem
+    return cardWidth + gap;
+  };
 
-    const totalCards = BOOKS.length;
-    let autoScrollInterval = null;
-    let isScrolling = false;
+  // Wir haben 3 Sets gerendert -> mittleres Set ist „safe zone“
+  const setWidth = BOOKS.length * getScrollAmount();
 
-    // Setze initiale Position ohne smooth scroll
-    // Starte bei der ersten echten Karte (Index 0 der echten Karten = nach 2 Klonen)
-    const scrollAmount = getScrollAmount();
-    carousel.style.scrollBehavior = 'auto';
-    carousel.scrollLeft = scrollAmount * 2;
-    
-    // Nach kurzem Delay smooth scroll aktivieren
-    setTimeout(() => {
-      carousel.style.scrollBehavior = 'smooth';
-    }, 50);
+  // Start: mittleres Set
+  carousel.style.scrollBehavior = "auto";
+  carousel.scrollLeft = setWidth;
+  requestAnimationFrame(() => {
+    carousel.style.scrollBehavior = "smooth";
+  });
 
-    // Infinite Loop Check
-    const checkInfiniteLoop = () => {
-      if (isScrolling) return;
+  // Loop: wenn zu weit links/rechts, um genau 1 SetWidth korrigieren
+  let isAdjusting = false;
+  const keepInMiddle = () => {
+    if (isAdjusting) return;
 
-      const scrollAmount = getScrollAmount();
-      const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-      const currentScroll = carousel.scrollLeft;
+    const x = carousel.scrollLeft;
 
-      // Am Ende: Wenn wir am physischen Ende sind
-      if (currentScroll >= maxScroll - 5) {
-        isScrolling = true;
-        carousel.style.scrollBehavior = 'auto';
-        // Springe zurück zur ersten echten Karte (nach 2 Klonen)
-        carousel.scrollLeft = scrollAmount * 2;
-        setTimeout(() => {
-          carousel.style.scrollBehavior = 'smooth';
-          isScrolling = false;
-        }, 50);
-      }
-      // Am Anfang: bei den ersten beiden Klonen
-      else if (currentScroll <= 5) {
-        isScrolling = true;
-        carousel.style.scrollBehavior = 'auto';
-        // Springe zur letzten echten Karte
-        carousel.scrollLeft = scrollAmount * (totalCards + 1);
-        setTimeout(() => {
-          carousel.style.scrollBehavior = 'smooth';
-          isScrolling = false;
-        }, 50);
-      }
-    };
+    // Wenn im linken Set unterwegs -> +1 Set
+    if (x < setWidth * 0.25) {
+      isAdjusting = true;
+      carousel.style.scrollBehavior = "auto";
+      carousel.scrollLeft = x + setWidth;
+      requestAnimationFrame(() => {
+        carousel.style.scrollBehavior = "smooth";
+        isAdjusting = false;
+      });
+    }
 
-    // Auto-Scroll nach 4 Sekunden
-    const startAutoScroll = () => {
-      stopAutoScroll();
-      autoScrollInterval = setInterval(() => {
-        const scrollAmount = getScrollAmount();
-        carousel.scrollBy({ left: scrollAmount, behavior: "smooth" });
-      }, 5000); // nach 4s scrollen
-    };
+    // Wenn im rechten Set unterwegs -> -1 Set
+    if (x > setWidth * 1.75) {
+      isAdjusting = true;
+      carousel.style.scrollBehavior = "auto";
+      carousel.scrollLeft = x - setWidth;
+      requestAnimationFrame(() => {
+        carousel.style.scrollBehavior = "smooth";
+        isAdjusting = false;
+      });
+    }
+  };
 
-    const stopAutoScroll = () => {
-      if (autoScrollInterval) {
-        clearInterval(autoScrollInterval);
-        autoScrollInterval = null;
-      }
-    };
+  carousel.addEventListener("scroll", keepInMiddle, { passive: true });
 
-    // Überwache Scroll-Position für Infinite Loop
-    carousel.addEventListener("scroll", checkInfiniteLoop);
+  // Pfeile: nur manuell scrollen
+  left.addEventListener("click", () => {
+    carousel.scrollBy({ left: -getScrollAmount(), behavior: "smooth" });
+  });
 
-    // Pfeile-Navigation
-    left.addEventListener("click", () => {
-      const scrollAmount = getScrollAmount();
-      carousel.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-      stopAutoScroll();
-      setTimeout(startAutoScroll, 5000); // nach 2s wieder starten
-    });
+  right.addEventListener("click", () => {
+    carousel.scrollBy({ left: getScrollAmount(), behavior: "smooth" });
+  });
+}
 
-    right.addEventListener("click", () => {
-      const scrollAmount = getScrollAmount();
-      carousel.scrollBy({ left: scrollAmount, behavior: "smooth" });
-      stopAutoScroll();
-      setTimeout(startAutoScroll, 5000); // nach 2s wieder starten
-    });
-
-    // Auto-Scroll pausieren bei Hover/Touch
-    carousel.addEventListener("mouseenter", stopAutoScroll);
-    carousel.addEventListener("mouseleave", startAutoScroll);
-    carousel.addEventListener("touchstart", stopAutoScroll);
-
-    // Auto-Scroll starten nach kurzem Delay (damit initiale Position korrekt ist)
-    setTimeout(() => {
-      startAutoScroll();
-    }, 500);
-  }
 });

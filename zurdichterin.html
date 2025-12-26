@@ -10,9 +10,19 @@
 
 </head>
 <body>
-  <header class="site-header">
-    <img src="logo/Platzhalter_Logo_EH.svg" alt="Logo Esther Hohmeister">
-    <nav class="site-nav">
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-logo" href="index.html">
+      <img src="logo/Platzhalter_Logo_EH.svg" alt="Platzhalter Logo">
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Menü öffnen">
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+
+    <nav class="site-nav" id="primary-nav" aria-label="Hauptnavigation">
       <ul>
         <li><a href="index.html">Startseite</a></li>
         <li><a href="zurdichterin.html">Zur Dichterin</a></li>
@@ -20,7 +30,8 @@
         <li><a href="shop.html">Shop</a></li>
       </ul>
     </nav>
-  </header>
+  </div>
+</header>
 
   <main class="page-main">
 
