@@ -267,6 +267,17 @@
     min-height: 65vh;
   }
 
+/* --------------Titel Karusell-------------------- */
+  .heading-section {
+    max-width: 22ch;              /* typografisch sauber */
+    margin-bottom: var(--space-l);
+
+
+    overflow-wrap: break-word;
+    word-break: normal;
+}
+  
+
 
 
 /* ---------------------Wortslide Startseite---------------------- */
