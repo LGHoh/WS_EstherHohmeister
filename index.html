@@ -42,14 +42,11 @@
 </header>
 
 
-
-
-
-
   <main class="page-main">
 
    <!-- 1. Sektion: Intro mit Portrait und H1 -->
-    <section class="section section-hero">
+    <section class="section section-hero has-parallax parallax-center">
+      <div class="parallax-bg" aria-hidden="true"></div>
       <div class="section-inner two-column-layout">
 
         <!-- Linke Hälfte: H1-Text -->
@@ -66,7 +63,6 @@
   </span>
   <span class="sr-only">Zwischen Alltag und Augenblick finde ich meine Worte</span>
 </h1>
-<!--<img src="images/BG_Hand_Feder_2021.png" alt="" class="background-image-decorative"> -->
 
 
         </div>
@@ -103,14 +99,23 @@
 
           <!-- Pfeile zur Navigation -->
           <div class="carousel-controls">
-            <button class="carousel-arrow arrow-left" type="button">‹</button>
-            <button class="carousel-arrow arrow-right" type="button">›</button>
+         <button class="carousel-arrow arrow-left" type="button" aria-label="Zurück">
+          <svg class="carousel-arrow__icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+
+        <button class="carousel-arrow arrow-right" type="button" aria-label="Weiter">
+          <svg class="carousel-arrow__icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M9 6l6 6-6 6" />
+          </svg>
+        </button>
           </div>
         </div>
-
       </div>
     </section>
     <!-- 3. Sektion: Kontakt / Stichwort teilen -->
+   
     <section class="section section-contact">
       <div class="section-inner two-column-layout">
 
@@ -120,14 +125,19 @@
             Ein Stichwort teilen,<br>
             oder im Gespräch verweilen
           </h1>
+          <p class="contact-explanation">
+          Ihre Inspirationen erhält Esther Hohmeister auch aus ihrer Leserschaft.
+          Teilen Sie ein Stichwort, eine Beobachtung oder eine kleine Geschichte – vielleicht
+          entsteht daraus ein neues Gedicht. 
+            </p>
         </div>
 
         <!-- Rechte Hälfte: Kontakt-Infos -->
         <div class="column column-right contact-info-block">
 
           <!-- Adresse -->
-          <div class="contact-card">
-            <h5 style="font-weight: 500;">Briefadresse</h5>
+            <div class="contact-card">
+            <h5>Briefadresse</h5>
             <p class="text-contact">
               Esther Hohmeister<br>
               Grossfeldstrasse 10<br>
@@ -136,24 +146,11 @@
           </div>
 
           <!-- Mailto -->
-        <div class="contact-card contact-card-mail">
-          <a
-            href="mailto:esther&#64;hohmeister&#46;ch?subject=Website:Stichwort%20für%20ein%20Gedicht"
-            class="mailto-link mailto-link--with-icon"
-          >
-            <span class="mailto-text">E-Mail schreiben</span>
-
-            <!-- SVG Pfeil -->
-            <svg
-              class="mailto-icon"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <use href="/svgs/arrow_right.svg#icon"></use>
-            </svg>
-          </a>
-        </div>
-
+          <div class="contact-card contact-card-mail">
+            <p class="text-contact">E-Mail schreiben</p>
+            <a href="mailto:esther&#64;hohmeister&#46;ch?subject=Website:Stichwort%20für%20ein%20Gedicht" class="mailto-link">
+            </a>
+          </div>
 
         </div>
 
@@ -186,5 +183,6 @@
   <script src="js/root.js" defer></script>
   <script src="js/rotator.js" defer></script>
   <script src="js/books.js" defer></script>
+    <script src="js/HG_parallax.js" defer></script>
 </body>
 </html>

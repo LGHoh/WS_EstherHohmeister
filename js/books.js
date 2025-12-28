@@ -256,8 +256,8 @@ toggleBtn.addEventListener("click", () => {
     // Startseite: Link zur Blättern-Seite zum passenden Buch
     actionElement = document.createElement("a");
     actionElement.className = "button button-secondary book-card__button";
-    actionElement.textContent = "Zum Buch";
-    actionElement.href = `blaettern.html#${book.id}`;
+    actionElement.textContent = "Zum Shop";
+    actionElement.href = `shop.html#${book.id}`;
   }
 
 

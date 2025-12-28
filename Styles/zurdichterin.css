@@ -2,7 +2,9 @@
 /* Zur Dichterin – spezifische Styles */
 /* ---------------------------------- */
 
+
 /* Sektion 1: Autorin-Portrait + Text */
+
 
 .section-author {
   min-height: 70vh;
@@ -15,7 +17,6 @@
   flex-direction: column;
   align-items: center;
 }
-
 
 
 .portrait-image {
@@ -90,10 +91,85 @@
   max-width: 460px;  /* angenehm schmal, wie deine Textspalten */
 }
 
-.mailto-arrow {
-  font-size: 1.4rem;
-  display: inline-block;
-  transform: translateY(2px);
+/* ---------------------------------- */
+/* Parallax Background System         */
+/* ---------------------------------- */
+
+.has-parallax{
+  position: relative;
+  overflow: hidden;
+}
+
+.has-parallax .parallax-bg{
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  background-repeat: no-repeat;
+  background-size: var(--parallax-size, min(560px, 60vw));
+  background-position: var(--parallax-pos, left 6% center);
+  opacity: var(--parallax-opacity, 0.14);
+
+  will-change: transform;
+  transform: translate3d(0,0,0);
+  filter: saturate(0.95) contrast(1.05);
+}
+
+.has-parallax .section-inner{
+  position: relative;
+  z-index: 1;
+}
+
+/* Links / Rechts Umschalter */
+.parallax-left{  --parallax-pos: left 7% center; }
+.parallax-right{ --parallax-pos: right 8% center; }
+
+/* ---------------------------------- */
+/* Konkretes Bild: Zur Dichterin      */
+/* ---------------------------------- */
+
+.section-author{
+  --parallax-image: url("../images/BG_Hand_Feder_2021.png");
+  --parallax-opacity: 0.9;
+  --parallax-size: min(560px,20vw);
+  --parallax-strength: 55; /* Bewegung (px), subtil */
+}
+
+.section-author .parallax-bg{
+  background-image: var(--parallax-image);
+}
+
+/* ---------------------------------- */
+/* Tablet / Mobile Anpassung          */
+/* ---------------------------------- */
+
+@media (max-width: 1024px){
+  .has-parallax .parallax-bg{
+    background-size: min(520px, 78vw);
+    background-position: center top 5%;
+    opacity: 0.9;
+
+  }
+
+  .column.author-column-right {
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+
+    padding: var(--space-xl);
+    border-radius: var(--radius-m);
+
+    box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+}
+
+@media (max-width: 640px){
+  .has-parallax .parallax-bg{
+    background-size: min(460px, 92vw);
+    background-position: center top 5%;
+    opacity: 0.40;
+  }
+}
 }
 
 /* ---------------------------------- */

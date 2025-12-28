@@ -1,4 +1,4 @@
-/* ---------------------------------- */
+/*---------------------------------- */
 /* Startseite – spezifische Styles    */
 /* ---------------------------------- */
 
@@ -7,6 +7,7 @@
 .section-hero {
   /* etwas Luft nach dem Sticky-Header */
   padding-top: var(--space-xl);
+  min-height: 60vh;
 }
 .section {
   min-height: 60vh; /* Jede Sektion nimmt Bildschirmhöhe ein */
@@ -70,6 +71,69 @@
 }
 
 /* ---------------------------------- */
+/* Parallax Background – Startseite   */
+/* ---------------------------------- */
+
+.has-parallax{
+  position: relative;
+  overflow: hidden;
+}
+
+.has-parallax .parallax-bg{
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  background-image: var(--parallax-image);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 120vw auto;
+
+  opacity: var(--parallax-opacity, 0.25);
+  will-change: transform;
+  transform: translate3d(0,0,0);
+}
+
+/* Inhalt über dem Hintergrund */
+.has-parallax .section-inner{
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------------------------------- */
+/* Startseite: Tintenschriftzug        */
+/* ---------------------------------- */
+
+.section-hero{
+  --parallax-image: url("../images/backgrounds/BG_Tinte_1.png");
+  --parallax-opacity: 0.7;
+}
+
+@media (max-width: 1024px){
+  .section-hero{
+    --parallax-opacity: 0.3;
+
+  }
+}
+
+@media (max-width: 640px){
+  .section-hero .parallax-bg{
+    background-size: auto 140vh;
+    background-position: center top;
+
+    transform:
+      rotate(90deg)
+      translateY(-25%);
+    
+    transform-origin: center center;
+    opacity: 0.4;
+  }
+}
+
+
+
+/* ---------------------------------- */
 /* 2. Sektion: Gedichte & Gedichtbände */
 /* ---------------------------------- */
 
@@ -130,6 +194,7 @@
 .book-list--home .book-card {
   display: flex;
   flex-direction: column;
+  
 }
 
 .book-list--home .book-card__actions {
@@ -143,12 +208,14 @@
     -webkit-line-clamp: 4;       /* <- Zeilenanzahl nach Wunsch */
     -webkit-box-orient: vertical;
     overflow: hidden;
+
   }
 
   /* Wenn aufgeklappt: volle Länge */
   .book-list--home .book-card.is-expanded .book-card__description {
     display: block;
     overflow: visible;
+  
   }
 }
 
@@ -169,17 +236,16 @@
 /* ---------------------------------- */
 /* 3. Sektion: Kontakt                */
 /* ---------------------------------- */
-
 .section-contact {
   background-color: #f5f5f5;
 }
 
 .contact-text-block {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;   /* oder center, falls mittig gewünscht */
 }
 
-/* H1 hier bekommt ebenfalls globale H1-Größe; nur bei Bedarf extra Tweaks */
 .heading-contact {
   margin: 0;
 }
@@ -196,13 +262,8 @@
   border-radius: var(--radius-m);
   padding: var(--space-m);
   box-shadow: var(--shadow-soft);
+}
 
-}
-.content-card h5 {
-  margin: 0 0 var(--space-s) 0;
-  font-size: 1.1rem;
-  font-weight: 800;
-}
 .text-contact {
   margin: 0;
   font-size: 0.98rem;
@@ -219,12 +280,16 @@
   text-decoration: none;
 }
 
-.mailto-arrow {
-  font-size: 1.4rem;
-  display: inline-block;
-  transform: translateY(4px);
-  color: var(--color-accent);
+.contact-explanation {
+  margin-top: var(--space-m);
+  font-size: 1rem;
+  line-height: var(--line-height-relaxed);
+  max-width: 460px;  /* angenehm schmal, wie deine Textspalten */
 }
+
+
+
+
 
 /* ---------------------------------- */
 /* Responsive Anpassungen             */
@@ -263,9 +328,7 @@
   }
 }
 
-  .section {
-    min-height: 65vh;
-  }
+ 
 
 /* --------------Titel Karusell-------------------- */
   .heading-section {
