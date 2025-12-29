@@ -177,7 +177,6 @@ body.is-ready .page-main {
 }
 
 .author-name {
-  /* "none" ist kein gültiger Wert -> 0 */
   margin-top: 0;
   font-size: 0.95rem;
   font-weight: 500;
@@ -185,6 +184,12 @@ body.is-ready .page-main {
   text-align: center;
 }
 
+.contact-card h5{
+  font-weight: 550;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
 
 /* Buttons */
 .button,

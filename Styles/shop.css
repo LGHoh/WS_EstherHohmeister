@@ -1,0 +1,87 @@
+/* ---------------------------------- */
+/* Shop – Parallax Background (Desktop) */
+/* ---------------------------------- */
+
+/* Wrapper */
+.has-parallax{
+  position: relative;
+  overflow: hidden;
+}
+
+/* JS bewegt dieses Element per transform (translateY) */
+.has-parallax .parallax-bg{
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  will-change: transform;
+  transform: translate3d(0,0,0);
+}
+
+/* Bild liegt in ::before -> Rotation/Skalierung kollidiert nicht mit JS */
+.has-parallax .parallax-bg::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image: var(--parallax-image, none);
+  background-repeat: no-repeat;
+  background-position: var(--parallax-pos, left center);
+  background-size: var(--parallax-size, auto 120vh);
+
+  opacity: var(--parallax-opacity, 0.18);
+
+
+  transform: var(--parallax-transform, none);
+  transform-origin: center;
+
+ 
+  filter: saturate(0.95) contrast(1.05);
+}
+
+/* Content über dem BG */
+.has-parallax > *:not(.parallax-bg){
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------------------------------- */
+/* Shop: konkrete Settings            */
+/* ---------------------------------- */
+
+.parallax-shop{
+
+  --parallax-image: url("../images/backgrounds/BG_Tinte_3.png");
+
+  /* wie stark JS bewegt (px) */
+  --parallax-strength: 150;
+}
+
+/* linke Seite */
+.parallax-shop .parallax-bg--left::before{
+  --parallax-pos:  center center;
+  --parallax-size: auto 160vh;
+  --parallax-opacity: 1;
+
+  /* optional: leicht drehen/skalieren (auskommentiert) */
+  /* --parallax-transform: rotate(0deg) scale(1); */
+}
+
+/* rechte Seite: gespiegelt, damit symmetrisch */
+.parallax-shop .parallax-bg--right::before{
+  --parallax-pos: center  center;
+  --parallax-size: auto 100vh;
+  --parallax-opacity: 0.6;
+
+  --parallax-transform: scaleX(-1);
+}
+
+/* ---------------------------------- */
+/* Nur Desktop anzeigen               */
+/* ---------------------------------- */
+@media (max-width: 1024px){
+  .parallax-shop .parallax-bg{
+    display: none;
+  }
+}

@@ -10,6 +10,7 @@
   min-height: 70vh;
   display: flex;
   align-items: center;
+ 
 }
 
 .author-column-left {
@@ -38,57 +39,76 @@
   margin-bottom: 0.75rem;
 }
 
-/* Sektion 2: Kontakt (CSS kann identisch zur Startseite sein) */
 
-.section-contact {
+
+/* ---------------------------------- */
+/* Sektion 2: Kontakt (wie Startseite) */
+/* ---------------------------------- */
+
+.section-contact{
   background-color: #f5f5f5;
+
+  /* statt height -> flexibel, wie auf Startseite */
+  min-height: 50vh;
+
+  /* vertikal mittig auf Section-Ebene (wie Startseite) */
+  display: flex;
+  align-items: center;
+
+  /* verhindert „gequetscht“, wenn Inhalt mehr Platz braucht */
+  padding: var(--space-xxl) var(--space-m);
 }
 
-.contact-text-block {
+/* Nutzt dein Standard-Layout aus root.css */
+.section-contact .section-inner{
+  width: 100%;
+}
+
+/* Linke Spalte: Textblock schön mittig */
+.section-contact .contact-text-block{
   display: flex;
   flex-direction: column;
-  align-items: flex-start;   /* oder center, falls mittig gewünscht */
-}
-
-.heading-contact {
-  margin: 0;
-}
-
-.contact-info-block {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-m);
   justify-content: center;
+  align-items: flex-start;
 }
 
-.contact-card {
+/* Rechte Spalte: Cards mittig ausrichten */
+.section-contact .contact-info-block{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-m);
+}
+
+/* Cards */
+.section-contact .contact-card{
   background: var(--color-surface);
   border-radius: var(--radius-m);
   padding: var(--space-m);
   box-shadow: var(--shadow-soft);
 }
 
-.text-contact {
+.section-contact .text-contact{
   margin: 0;
   font-size: 0.98rem;
 }
 
-/* E-Mail Container */
-.contact-card-mail {
+/* Mail Card Layout */
+.section-contact .contact-card-mail{
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.mailto-link {
+.section-contact .mailto-link{
   text-decoration: none;
 }
 
-.contact-explanation {
+.section-contact .contact-explanation{
   margin-top: var(--space-m);
   font-size: 1rem;
   line-height: var(--line-height-relaxed);
-  max-width: 460px;  /* angenehm schmal, wie deine Textspalten */
+  max-width: 460px;
 }
 
 /* ---------------------------------- */
@@ -131,7 +151,7 @@
 
 .section-author{
   --parallax-image: url("../images/BG_Hand_Feder_2021.png");
-  --parallax-opacity: 0.9;
+  --parallax-opacity: 0.5;
   --parallax-size: min(560px,20vw);
   --parallax-strength: 55; /* Bewegung (px), subtil */
 }
@@ -144,11 +164,13 @@
 /* Tablet / Mobile Anpassung          */
 /* ---------------------------------- */
 
+
+
 @media (max-width: 1024px){
   .has-parallax .parallax-bg{
     background-size: min(520px, 78vw);
-    background-position: center top 5%;
-    opacity: 0.9;
+    background-position: center top;
+    opacity: 0.8;
 
   }
 
@@ -157,9 +179,8 @@
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
 
-    padding: var(--space-xl);
+    padding: var(--space-m);
     border-radius: var(--radius-m);
-
     box-shadow: 0 12px 32px rgba(0,0,0,0.08);
 }
 
@@ -193,5 +214,11 @@
 
    .contact-explanation {
     font-size: 0.95rem;
+  }
+
+  .section-contact{
+    min-height: auto;
+    padding: var(--space-xxl) var(--space-m);
+    align-items: stretch; /* natürlicher Flow auf Mobile */
   }
 }

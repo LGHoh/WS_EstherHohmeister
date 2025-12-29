@@ -446,14 +446,11 @@
 }
 
 
-
-
 /* ---------------------------------- */
 /* Responsive                         */
 /* ---------------------------------- */
 
-/* Tablet: 2 Spalten (2x3) */
-/* Tablet: 2 Spalten (2x3) */
+
 /* ---------------------------------- */
 /* Responsive: Shop-Grid & Karussell  */
 /* ---------------------------------- */
@@ -482,7 +479,7 @@
   line-height: 1.2;
   letter-spacing: -0.01em;
   margin: 0;
-  max-width: 10ch;                   /* kurze, „poetische“ Zeilen */
+  max-width: 10ch;                  
 }
 
 /* Shop-spezifische Tweaks: kleinere, kompaktere Karten */

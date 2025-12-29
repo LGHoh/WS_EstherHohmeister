@@ -9,7 +9,7 @@ const BOOKS = [
     descriptionHome:
       "In ihrem neuesten Gedichband lädt Esther Hohmeister mit einer Mischung aus Witz, Wortspiel und feiner Ironie zu einer heiteren Reise durch den Alltag ein. Belgeitet werden die Gedichte durch ebenso lebhaften Illustrationen der Grafikerin Rebkka Good.",
     descriptionShop:
-      "In ihrem neuesten Gedichband lädt Esther Hohmeister mit einer Mischung aus Witz, Wortspiel und feiner Ironie zu einer heiteren Reise durch den Alltag ein.",
+      "In ihrem neuesten Gedichband lädt Esther Hohmeister mit einer Mischung aus Witz, Wortspiel und feiner Ironie zu einer heiteren Reise durch den Alltag ein. Belgeitet werden die Gedichte durch ebenso lebhaften Illustrationen der Grafikerin Rebkka Good.",
     price: "CHF 24.–",
     cover: "images/Gedichte2020-2023.jpg",
     alt: "Cover des mintfarbigen Gedichtbandes aus dem Jahr 2020-2023"

@@ -112,23 +112,28 @@
 
 @media (max-width: 1024px){
   .section-hero{
-    --parallax-opacity: 0.3;
-
+    --parallax-opacity: 0.7;
   }
-}
+  .section-hero .parallax-bg{
+    transform-origin: center center;
+    background-size: 300vw auto;
+    background-position: center center;
+    }
+  }
+
 
 @media (max-width: 640px){
   .section-hero .parallax-bg{
-    background-size: auto 140vh;
-    background-position: center top;
-
-    transform:
-      rotate(90deg)
-      translateY(-25%);
+    background-size: auto 150vh;
+    background-position: center center;
     
-    transform-origin: center center;
-    opacity: 0.4;
+    
+    transform-origin: center bottom;
+    opacity: 0.7;
   }
+
+
+
 }
 
 
@@ -287,6 +292,12 @@
   max-width: 460px;  /* angenehm schmal, wie deine Textspalten */
 }
 
+/* Startseite: Section-Inner soll im Flex-Section voll breit sein */
+.section-hero .section-inner,
+.section-poetry .section-inner,
+.section-contact .section-inner{
+  width: 100%;
+}
 
 
 

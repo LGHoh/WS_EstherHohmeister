@@ -12,6 +12,7 @@
 
   <link rel="stylesheet" href="Styles/root.css">
   <link rel="stylesheet" href="Styles/book.css">
+  <link rel="stylesheet" href="Styles/shop.css">
 
 </head>
 <body>
@@ -37,7 +38,11 @@
   </div>
 </header>
 
-  <main class="page-main">
+ <main class="page-main has-parallax parallax-dual parallax-shop">
+  
+  <div class="parallax-bg parallax-bg--left" aria-hidden="true"></div>
+  <div class="parallax-bg parallax-bg--right" aria-hidden="true"></div>
+
   <section class="section section-shop">
     <div class="section-inner">
 
@@ -68,5 +73,6 @@
 
   <script src="js/books.js" defer></script>
   <script src="js/root.js" defer></script>
+  <script src="js/HG_parallax.js" defer></script>
 </body>
 </html>
