@@ -112,6 +112,56 @@
 }
 
 /* ---------------------------------- */
+/* Konkretes Bild: Kontakt (Rucksack) */
+/* ---------------------------------- */
+
+.section-contact{
+  --parallax-image: url("../images/BG_Rucksack.png");
+  --parallax-opacity: 1;
+  --parallax-size: min(520px, 40vw);
+  --parallax-strength: 45;
+}
+
+/* Bild zuweisen */
+.section-contact .parallax-bg{
+  background-image: var(--parallax-image);
+}
+
+@media (max-width: 1024px){
+  .section-contact{
+    --parallax-size: min(620px, 85vw);
+    --parallax-opacity: 0.35;
+  }
+
+  .section-contact .contact-text-block{
+    background: rgba(255,255,255,0.72);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+
+    padding: var(--space-m);
+    border-radius: var(--radius-m);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+
+  }
+
+}
+
+@media (max-width: 640px){
+  .section-contact{
+    --parallax-size: min(520px, 92vw);
+    --parallax-opacity: 0.22;
+  }
+
+  .section-contact .contact-text-block{
+    background: rgba(255,255,255,0.82);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+}
+
+
+
+/* ---------------------------------- */
 /* Parallax Background System         */
 /* ---------------------------------- */
 
@@ -151,7 +201,7 @@
 
 .section-author{
   --parallax-image: url("../images/BG_Hand_Feder_2021.png");
-  --parallax-opacity: 0.5;
+  --parallax-opacity: 1;
   --parallax-size: min(560px,20vw);
   --parallax-strength: 55; /* Bewegung (px), subtil */
 }

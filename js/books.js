@@ -2,66 +2,67 @@
 
 // 1) Zentrale Datenquelle: alle Gedichtbände an einem Ort
 const BOOKS = [
-  {
-    id: "band1",
-    title: "Gedichte",
-    meta: "Gedichtband · 2020-2023",
-    descriptionHome:
-      "In ihrem neuesten Gedichband lädt Esther Hohmeister mit einer Mischung aus Witz, Wortspiel und feiner Ironie zu einer heiteren Reise durch den Alltag ein. Belgeitet werden die Gedichte durch ebenso lebhaften Illustrationen der Grafikerin Rebkka Good.",
-    descriptionShop:
-      "In ihrem neuesten Gedichband lädt Esther Hohmeister mit einer Mischung aus Witz, Wortspiel und feiner Ironie zu einer heiteren Reise durch den Alltag ein. Belgeitet werden die Gedichte durch ebenso lebhaften Illustrationen der Grafikerin Rebkka Good.",
-    price: "CHF 24.–",
-    cover: "images/Gedichte2020-2023.jpg",
-    alt: "Cover des mintfarbigen Gedichtbandes aus dem Jahr 2020-2023"
-  },
-  {
-    id: "band2",
-    title: "Gedichte",
-    meta: "Gedichtband · 2016-2019",
-    descriptionHome:
-      "In diesem Gedichtband versammelt Esther Hohmeister 53 Beobachtungen aus vier Jahren Bünder Woche – vom Calanda-Wolf bis zur Geburtstagsrunde, von Grossmüttern und Vergessenem bis zu einem Weihnachtsgeschenk. Heiter, nachdenklich und voller kleiner Alltagswunder.",
-    descriptionShop:
-      "53 Gedichte aus vier Jahren Bünder Woche – Geschichten von Klassenzusammenkünften, Waschküchen, Calanda-Wölfen und kleinen Alltagsmomenten. Heiter, berührend und mit liebevoller Beobachtung erzählt.",
-    price: "CHF 19.–",
-    cover: "images/Gedichte2.jpg",
-    alt: "Cover des Gedichtbandes Gedichte 2016-2019. Das Wort GEDICHTE auf einem grauen Hintergrund"
-  },
-  {
-    id: "band3",
-    title: "Gedichte",
-    meta: "Gedichtband · 2012-2015",
-    descriptionHome:
-      "Ein Gedichtband voller Jahreszeiten, Alltagsmomente und kleiner Wunder – von Kinderaugen bis Crocs-Schuhen, von Dankbarkeit bis zum ersten Schnee. Vier Jahre Bündner Woche, verdichtet zu heiteren, warmen und nachdenklichen Szenen.",
-    descriptionShop:
-      "53 Gedichte aus vier Jahren Bündner Woche – vom Schlankheitswahn bis zur Mutterliebe, von Aromat und Crocs-Schuhen bis zu Quartierfesten, Stressmomenten und leisen Wintertagen. Ein Band voller Alltagsbeobachtungen zwischen Humor, Wärme und Nachdenklichkeit.",
-    price: "CHF 19.–",
-    cover: "images/Gedichte1.jpg",
-    alt: "Cover des Gedichtbandes Gedichte 2012-2015. Das Wort GEDICHTE auf einem weissen Hintergrund"
-  },
-  {
-    id: "band4",
-    title: "Fore! Golfgedichte 2",
-    meta: "Gedichtband · 2013",
-    descriptionHome:
-      "Ein heiterer Blick auf die Welt der Golferinnen und Golfer – von Ausreden und Beichten bis zu verliebten Golfbällen und morgendlichen Gebeten. Humorvoll, augenzwinkernd und mit liebevoller Ironie erzählt.",
-    descriptionShop:
-      "Ein Band voller augenzwinkernder Golfgedichte – über Sucht und Handicap, Ausreden und seltsame Leut’, Beichten, Locker-Rituale und kleine Dramen zwischen Tee und Loch 19. Humorvoll, pointiert und ideal für alle, die den Golfsport lieben oder verstehen wollen.",
-    price: "CHF 14.–",
-    cover: "images/ForeGolfgedichte2.jpg",
-    alt: "Cover des Gedichtbandes Fore 2! Zwei gemalte Golfbälle liegen auf dem Green"
-  },
-  {
-    id: "band5",
-    title: "Fore! Golfgedichte",
-    meta: "Gedichtband · 2011",
-    descriptionHome:
-      "Der erste Gedichtband, mit dem alles begann – voller Begegnungen auf dem Golfplatz, kleinen Dramen, meckernden Weiberrunden, verständnisvollen Männern und Geschichten zwischen Entscheidung, Fairway und Pro-Shop.",
-    descriptionShop:
-      "Der Band, mit dem Esther Hohmeister ihr öffentliches Dichten begann: Geschichten von glücklichen Nichtgolfern, Fairway-Kriegen, Seniorenturnieren, herbstlichen Frauentagen und kleinen Momenten im Pro-Shop. Humorvoll, pointiert und voller Wiedererkennen für alle, die Golf lieben.",
-    price: "CHF 14.–",
-    cover: "images/ForeGolfgedichte1.jpg",
-    alt: "Cover des Gedichtbandes Fore! Ein gemalter Golfball liegt auf dem Green"
-  }
+{
+  id: "band1",
+  title: "Gedichte",
+  meta: "Gedichtband · 2020–2023",
+  descriptionHome:
+    "In ihrem neuesten Gedichtband lädt Esther Hohmeister mit einer Mischung aus Witz, feinem Wortspiel und leiser Ironie zu einer heiteren Reise durch den Alltag ein. Die Gedichte entstehen aus Beobachtungen, kleinen Begebenheiten und überraschenden Momenten. Begleitet werden die Texte von ebenso lebhaften Illustrationen der Grafikerin Rebekka Good.",
+  descriptionShop:
+    "Dieser Gedichtband vereint Texte aus den Jahren 2020 bis 2023. Mit Witz, Wortspiel und feiner Ironie erzählt Esther Hohmeister von Alltagsmomenten, Begegnungen und leisen Überraschungen. Die Gedichte werden durch lebhafte Illustrationen von Rebekka Good ergänzt und bilden zusammen ein leichtfüssiges, stimmiges Gesamtwerk.",
+  price: "CHF 24.–",
+  cover: "images/Gedichte2020-2023.jpg",
+  alt: "Cover des mintfarbigen Gedichtbandes aus den Jahren 2020–2023"
+},
+{
+  id: "band2",
+  title: "Gedichte",
+  meta: "Gedichtband · 2016–2019",
+  descriptionHome:
+    "In diesem Gedichtband versammelt Esther Hohmeister 53 Beobachtungen aus vier Jahren Bündner Woche. Die Texte reichen vom Calanda-Wolf bis zur Geburtstagsrunde, von Grossmüttern und Vergessenem bis zu kleinen Alltagswundern. Heiter, nachdenklich und mit liebevollem Blick erzählen die Gedichte vom Leben in all seinen Facetten.",
+  descriptionShop:
+    "53 Gedichte aus vier Jahren Bündner Woche: Geschichten von Klassenzusammenkünften, Waschküchen, Calanda-Wölfen und unscheinbaren Alltagsmomenten. Mit feinem Humor und genauer Beobachtung beschreibt Esther Hohmeister das Leben zwischen Vertrautem und Überraschendem – berührend, heiter und nah am Alltag.",
+  price: "CHF 19.–",
+  cover: "images/Gedichte2.jpg",
+  alt: "Cover des Gedichtbandes Gedichte 2016–2019 mit grauem Hintergrund"
+},
+{
+  id: "band3",
+  title: "Gedichte",
+  meta: "Gedichtband · 2012–2015",
+  descriptionHome:
+    "Ein Gedichtband voller Jahreszeiten, Alltagsmomente und kleiner Wunder. Die Texte reichen von Kinderaugen bis Crocs-Schuhen, von Dankbarkeit bis zum ersten Schnee. Vier Jahre Bündner Woche verdichten sich zu heiteren, warmen und nachdenklichen Szenen, die den Alltag mit feinem Gespür einfangen.",
+  descriptionShop:
+    "53 Gedichte aus vier Jahren Bündner Woche – vom Schlankheitswahn bis zur Mutterliebe, von Aromat und Crocs-Schuhen bis zu Quartierfesten und leisen Wintertagen. Esther Hohmeister beschreibt Alltagsbeobachtungen zwischen Humor, Wärme und Nachdenklichkeit und verleiht ihnen poetische Tiefe.",
+  price: "CHF 19.–",
+  cover: "images/Gedichte1.jpg",
+  alt: "Cover des Gedichtbandes Gedichte 2012–2015 mit hellem Hintergrund"
+},
+{
+  id: "band4",
+  title: "Fore! Golfgedichte 2",
+  meta: "Gedichtband · 2013",
+  descriptionHome:
+    "Ein heiterer Blick auf die Welt der Golferinnen und Golfer. Die Gedichte erzählen von Ausreden und Beichten, von verliebten Golfbällen und morgendlichen Ritualen. Humorvoll, augenzwinkernd und mit liebevoller Ironie nimmt dieser Band den Golfsport und seine Eigenheiten ins Visier.",
+  descriptionShop:
+    "Ein Band voller augenzwinkernder Golfgedichte: über Sucht und Handicap, Ausreden, Beichten und kleine Dramen zwischen Tee und Loch 19. Mit pointiertem Humor und genauer Beobachtung beschreibt Esther Hohmeister die Eigenheiten des Golfsports – ideal für alle, die ihn lieben oder schmunzelnd verstehen wollen.",
+  price: "CHF 14.–",
+  cover: "images/ForeGolfgedichte2.jpg",
+  alt: "Cover des Gedichtbandes Fore! Golfgedichte 2 mit zwei gemalten Golfbällen"
+},
+{
+  id: "band5",
+  title: "Fore! Golfgedichte",
+  meta: "Gedichtband · 2011",
+  descriptionHome:
+    "Der erste Gedichtband, mit dem alles begann. Die Gedichte erzählen von Begegnungen auf dem Golfplatz, kleinen Dramen, meckernden Weiberrunden und verständnisvollen Männern. Geschichten zwischen Entscheidung, Fairway und Pro-Shop – humorvoll, pointiert und voller Wiedererkennen.",
+  descriptionShop:
+    "Der Band, mit dem Esther Hohmeister ihr öffentliches Dichten begann. Geschichten von glücklichen Nichtgolfern, Fairway-Kriegen, Seniorenturnieren und herbstlichen Frauentagen. Mit Humor und feinem Blick erzählt dieser Gedichtband von kleinen Momenten im Pro-Shop und auf dem Golfplatz.",
+  price: "CHF 14.–",
+  cover: "images/ForeGolfgedichte1.jpg",
+  alt: "Cover des Gedichtbandes Fore! Golfgedichte mit gemaltem Golfball"
+}
+
 ];
 
 // Bestell-E-Mail-Adresse
