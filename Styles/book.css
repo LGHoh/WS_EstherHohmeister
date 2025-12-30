@@ -167,6 +167,72 @@
   display: block;                /* verhindert „Klebekante“ */
   border-radius: 10px;           /* Backup (falls Wrapper mal überschrieben wird) */
 }
+/* =========================================================
+   Shop: Jump-to-Card Highlight (rund + subtil)
+   ========================================================= */
+
+.book-card{
+  position: relative;
+  isolation: isolate;
+}
+
+/* Inhalt über dem Ring */
+.book-card > *{
+  position: relative;
+  z-index: 1;
+}
+
+/* animierbare angle */
+@property --ring-progress {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.book-card.is-highlight::before{
+  content: "";
+  position: absolute;
+  inset: -6px; /* Abstand ausserhalb der Card */
+  border-radius: calc(var(--radius-m) + 6px);
+  pointer-events: none;
+  z-index: 0;
+
+  /* Ring-Stärke */
+  padding: 3px;
+
+  /* conic ring */
+  background: conic-gradient(
+    from -90deg,
+    color-mix(in srgb, var(--color-accent) 55%, transparent) 0deg,
+    color-mix(in srgb, var(--color-accent) 55%, transparent) var(--ring-progress),
+    transparent 0deg
+  );
+
+  /* => macht aus dem Background einen echten "Ring" (Innenloch) */
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  opacity: 0.85;
+  filter: drop-shadow(0 10px 14px rgba(0,0,0,0.06));
+
+  animation:
+    card-ring-draw 1.8s ease-out forwards,
+    card-ring-fade 1.0s ease-in 2.6s forwards;
+}
+
+@keyframes card-ring-draw { to { --ring-progress: 360deg; } }
+@keyframes card-ring-fade { to { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce){
+  .book-card.is-highlight::before{
+    --ring-progress: 360deg;
+    animation: card-ring-fade 0.9s ease-in 1.2s forwards;
+  }
+}
+
 
 
 /* ------------------------------------------ */
@@ -450,10 +516,6 @@
 /* Responsive                         */
 /* ---------------------------------- */
 
-
-/* ---------------------------------- */
-/* Responsive: Shop-Grid & Karussell  */
-/* ---------------------------------- */
 
 /* Tablet: 2 Spalten (2x3) */
 @media (max-width: 1024px) {

@@ -1,74 +1,73 @@
 // js/books.js
 
-// 1) Zentrale Datenquelle: alle Gedichtbände an einem Ort
+// ==========================================================
+// 1) Zentrale Datenquelle
+// ==========================================================
 const BOOKS = [
-{
-  id: "band1",
-  title: "Gedichte",
-  meta: "Gedichtband · 2020–2023",
-  descriptionHome:
-    "In ihrem neuesten Gedichtband lädt Esther Hohmeister mit einer Mischung aus Witz, feinem Wortspiel und leiser Ironie zu einer heiteren Reise durch den Alltag ein. Die Gedichte entstehen aus Beobachtungen, kleinen Begebenheiten und überraschenden Momenten. Begleitet werden die Texte von ebenso lebhaften Illustrationen der Grafikerin Rebekka Good.",
-  descriptionShop:
-    "Dieser Gedichtband vereint Texte aus den Jahren 2020 bis 2023. Mit Witz, Wortspiel und feiner Ironie erzählt Esther Hohmeister von Alltagsmomenten, Begegnungen und leisen Überraschungen. Die Gedichte werden durch lebhafte Illustrationen von Rebekka Good ergänzt und bilden zusammen ein leichtfüssiges, stimmiges Gesamtwerk.",
-  price: "CHF 24.–",
-  cover: "images/Gedichte2020-2023.jpg",
-  alt: "Cover des mintfarbigen Gedichtbandes aus den Jahren 2020–2023"
-},
-{
-  id: "band2",
-  title: "Gedichte",
-  meta: "Gedichtband · 2016–2019",
-  descriptionHome:
-    "In diesem Gedichtband versammelt Esther Hohmeister 53 Beobachtungen aus vier Jahren Bündner Woche. Die Texte reichen vom Calanda-Wolf bis zur Geburtstagsrunde, von Grossmüttern und Vergessenem bis zu kleinen Alltagswundern. Heiter, nachdenklich und mit liebevollem Blick erzählen die Gedichte vom Leben in all seinen Facetten.",
-  descriptionShop:
-    "53 Gedichte aus vier Jahren Bündner Woche: Geschichten von Klassenzusammenkünften, Waschküchen, Calanda-Wölfen und unscheinbaren Alltagsmomenten. Mit feinem Humor und genauer Beobachtung beschreibt Esther Hohmeister das Leben zwischen Vertrautem und Überraschendem – berührend, heiter und nah am Alltag.",
-  price: "CHF 19.–",
-  cover: "images/Gedichte2.jpg",
-  alt: "Cover des Gedichtbandes Gedichte 2016–2019 mit grauem Hintergrund"
-},
-{
-  id: "band3",
-  title: "Gedichte",
-  meta: "Gedichtband · 2012–2015",
-  descriptionHome:
-    "Ein Gedichtband voller Jahreszeiten, Alltagsmomente und kleiner Wunder. Die Texte reichen von Kinderaugen bis Crocs-Schuhen, von Dankbarkeit bis zum ersten Schnee. Vier Jahre Bündner Woche verdichten sich zu heiteren, warmen und nachdenklichen Szenen, die den Alltag mit feinem Gespür einfangen.",
-  descriptionShop:
-    "53 Gedichte aus vier Jahren Bündner Woche – vom Schlankheitswahn bis zur Mutterliebe, von Aromat und Crocs-Schuhen bis zu Quartierfesten und leisen Wintertagen. Esther Hohmeister beschreibt Alltagsbeobachtungen zwischen Humor, Wärme und Nachdenklichkeit und verleiht ihnen poetische Tiefe.",
-  price: "CHF 19.–",
-  cover: "images/Gedichte1.jpg",
-  alt: "Cover des Gedichtbandes Gedichte 2012–2015 mit hellem Hintergrund"
-},
-{
-  id: "band4",
-  title: "Fore! Golfgedichte 2",
-  meta: "Gedichtband · 2013",
-  descriptionHome:
-    "Ein heiterer Blick auf die Welt der Golferinnen und Golfer. Die Gedichte erzählen von Ausreden und Beichten, von verliebten Golfbällen und morgendlichen Ritualen. Humorvoll, augenzwinkernd und mit liebevoller Ironie nimmt dieser Band den Golfsport und seine Eigenheiten ins Visier.",
-  descriptionShop:
-    "Ein Band voller augenzwinkernder Golfgedichte: über Sucht und Handicap, Ausreden, Beichten und kleine Dramen zwischen Tee und Loch 19. Mit pointiertem Humor und genauer Beobachtung beschreibt Esther Hohmeister die Eigenheiten des Golfsports – ideal für alle, die ihn lieben oder schmunzelnd verstehen wollen.",
-  price: "CHF 14.–",
-  cover: "images/ForeGolfgedichte2.jpg",
-  alt: "Cover des Gedichtbandes Fore! Golfgedichte 2 mit zwei gemalten Golfbällen"
-},
-{
-  id: "band5",
-  title: "Fore! Golfgedichte",
-  meta: "Gedichtband · 2011",
-  descriptionHome:
-    "Der erste Gedichtband, mit dem alles begann. Die Gedichte erzählen von Begegnungen auf dem Golfplatz, kleinen Dramen, meckernden Weiberrunden und verständnisvollen Männern. Geschichten zwischen Entscheidung, Fairway und Pro-Shop – humorvoll, pointiert und voller Wiedererkennen.",
-  descriptionShop:
-    "Der Band, mit dem Esther Hohmeister ihr öffentliches Dichten begann. Geschichten von glücklichen Nichtgolfern, Fairway-Kriegen, Seniorenturnieren und herbstlichen Frauentagen. Mit Humor und feinem Blick erzählt dieser Gedichtband von kleinen Momenten im Pro-Shop und auf dem Golfplatz.",
-  price: "CHF 14.–",
-  cover: "images/ForeGolfgedichte1.jpg",
-  alt: "Cover des Gedichtbandes Fore! Golfgedichte mit gemaltem Golfball"
-}
-
+  {
+    id: "band1",
+    title: "Gedichte",
+    meta: "Gedichtband · 2020–2023",
+    descriptionHome:
+      "In ihrem neuesten Gedichtband lädt Esther Hohmeister mit einer Mischung aus Witz, feinem Wortspiel und leiser Ironie zu einer heiteren Reise durch den Alltag ein. Die Gedichte entstehen aus Beobachtungen, kleinen Begebenheiten und überraschenden Momenten. Begleitet werden die Texte von ebenso lebhaften Illustrationen der Grafikerin Rebekka Good.",
+    descriptionShop:
+      "Dieser Gedichtband vereint Texte aus den Jahren 2020 bis 2023. Mit Witz, Wortspiel und feiner Ironie erzählt Esther Hohmeister von Alltagsmomenten, Begegnungen und leisen Überraschungen. Die Gedichte werden durch lebhafte Illustrationen von Rebekka Good ergänzt und bilden zusammen ein leichtfüssiges, stimmiges Gesamtwerk.",
+    price: "CHF 24.–",
+    cover: "images/Gedichte2020-2023.jpg",
+    alt: "Cover des mintfarbigen Gedichtbandes aus den Jahren 2020–2023",
+  },
+  {
+    id: "band2",
+    title: "Gedichte",
+    meta: "Gedichtband · 2016–2019",
+    descriptionHome:
+      "In diesem Gedichtband versammelt Esther Hohmeister 53 Beobachtungen aus vier Jahren Bündner Woche. Die Texte reichen vom Calanda-Wolf bis zur Geburtstagsrunde, von Grossmüttern und Vergessenem bis zu kleinen Alltagswundern. Heiter, nachdenklich und mit liebevollem Blick erzählen die Gedichte vom Leben in all seinen Facetten.",
+    descriptionShop:
+      "53 Gedichte aus vier Jahren Bündner Woche: Geschichten von Klassenzusammenkünften, Waschküchen, Calanda-Wölfen und unscheinbaren Alltagsmomenten. Mit feinem Humor und genauer Beobachtung beschreibt Esther Hohmeister das Leben zwischen Vertrautem und Überraschendem – berührend, heiter und nah am Alltag.",
+    price: "CHF 19.–",
+    cover: "images/Gedichte2.jpg",
+    alt: "Cover des Gedichtbandes Gedichte 2016–2019 mit grauem Hintergrund",
+  },
+  {
+    id: "band3",
+    title: "Gedichte",
+    meta: "Gedichtband · 2012–2015",
+    descriptionHome:
+      "Ein Gedichtband voller Jahreszeiten, Alltagsmomente und kleiner Wunder. Die Texte reichen von Kinderaugen bis Crocs-Schuhen, von Dankbarkeit bis zum ersten Schnee. Vier Jahre Bündner Woche verdichten sich zu heiteren, warmen und nachdenklichen Szenen, die den Alltag mit feinem Gespür einfangen.",
+    descriptionShop:
+      "53 Gedichte aus vier Jahren Bündner Woche – vom Schlankheitswahn bis zur Mutterliebe, von Aromat und Crocs-Schuhen bis zu Quartierfesten und leisen Wintertagen. Esther Hohmeister beschreibt Alltagsbeobachtungen zwischen Humor, Wärme und Nachdenklichkeit und verleiht ihnen poetische Tiefe.",
+    price: "CHF 19.–",
+    cover: "images/Gedichte1.jpg",
+    alt: "Cover des Gedichtbandes Gedichte 2012–2015 mit hellem Hintergrund",
+  },
+  {
+    id: "band4",
+    title: "Fore! Golfgedichte 2",
+    meta: "Gedichtband · 2013",
+    descriptionHome:
+      "Ein heiterer Blick auf die Welt der Golferinnen und Golfer. Die Gedichte erzählen von Ausreden und Beichten, von verliebten Golfbällen und morgendlichen Ritualen. Humorvoll, augenzwinkernd und mit liebevoller Ironie nimmt dieser Band den Golfsport und seine Eigenheiten ins Visier.",
+    descriptionShop:
+      "Ein Band voller augenzwinkernder Golfgedichte: über Sucht und Handicap, Ausreden, Beichten und kleine Dramen zwischen Tee und Loch 19. Mit pointiertem Humor und genauer Beobachtung beschreibt Esther Hohmeister die Eigenheiten des Golfsports – ideal für alle, die ihn lieben oder schmunzelnd verstehen wollen.",
+    price: "CHF 14.–",
+    cover: "images/ForeGolfgedichte2.jpg",
+    alt: "Cover des Gedichtbandes Fore! Golfgedichte 2 mit zwei gemalten Golfbällen",
+  },
+  {
+    id: "band5",
+    title: "Fore! Golfgedichte",
+    meta: "Gedichtband · 2011",
+    descriptionHome:
+      "Der erste Gedichtband, mit dem alles begann. Die Gedichte erzählen von Begegnungen auf dem Golfplatz, kleinen Dramen, meckernden Weiberrunden und verständnisvollen Männern. Geschichten zwischen Entscheidung, Fairway und Pro-Shop – humorvoll, pointiert und voller Wiedererkennen.",
+    descriptionShop:
+      "Der Band, mit dem Esther Hohmeister ihr öffentliches Dichten begann. Geschichten von glücklichen Nichtgolfern, Fairway-Kriegen, Seniorenturnieren und herbstlichen Frauentagen. Mit Humor und feinem Blick erzählt dieser Gedichtband von kleinen Momenten im Pro-Shop und auf dem Golfplatz.",
+    price: "CHF 14.–",
+    cover: "images/ForeGolfgedichte1.jpg",
+    alt: "Cover des Gedichtbandes Fore! Golfgedichte mit gemaltem Golfball",
+  },
 ];
 
-// Bestell-E-Mail-Adresse
 const ORDER_EMAIL = "esther@hohmeister.ch";
 
-// Datum für Betreff formatieren (CH-Format)
 function formatDateCH(date) {
   const d = date.getDate().toString().padStart(2, "0");
   const m = (date.getMonth() + 1).toString().padStart(2, "0");
@@ -76,9 +75,9 @@ function formatDateCH(date) {
   return `${d}.${m}.${y}`;
 }
 
-// --------------------------------------
-// Lightbox für vergrößerte Coveransicht
-// --------------------------------------
+// ==========================================================
+// 2) Lightbox
+// ==========================================================
 let lightboxEl = null;
 let lightboxImg = null;
 
@@ -93,9 +92,9 @@ function ensureLightbox() {
   lightboxEl.appendChild(img);
   lightboxImg = img;
 
-  // Schließen-Button (runde Pill) unten mittig
   const closeBtn = document.createElement("button");
   closeBtn.className = "image-lightbox__close-btn";
+  closeBtn.type = "button";
   closeBtn.textContent = "×";
 
   closeBtn.addEventListener("click", (e) => {
@@ -103,13 +102,11 @@ function ensureLightbox() {
     lightboxEl.classList.remove("image-lightbox--visible");
   });
 
-  lightboxEl.appendChild(closeBtn);
-
-  // Klick auf Overlay schliesst ebenfalls
   lightboxEl.addEventListener("click", () => {
     lightboxEl.classList.remove("image-lightbox--visible");
   });
 
+  lightboxEl.appendChild(closeBtn);
   document.body.appendChild(lightboxEl);
 }
 
@@ -120,15 +117,15 @@ function openLightbox(src, alt) {
   lightboxEl.classList.add("image-lightbox--visible");
 }
 
-// --------------------------------------
-// 2) Book-Card erstellen (Home & Shop)
-// --------------------------------------
+// ==========================================================
+// 3) Book-Card erstellen (Home & Shop)
+// ==========================================================
 function createBookCard(book, context) {
   const article = document.createElement("article");
   article.className = "book-card";
   article.dataset.bookId = book.id;
 
-  // Bildbereich
+  // Cover
   const imageWrapper = document.createElement("div");
   imageWrapper.className = "book-card__image-wrapper";
 
@@ -136,16 +133,12 @@ function createBookCard(book, context) {
   img.src = book.cover;
   img.alt = book.alt;
   img.className = "book-card__image";
+  img.style.cursor = "zoom-in";
+  img.addEventListener("click", () => openLightbox(book.cover, book.alt));
 
   imageWrapper.appendChild(img);
 
-  // Bild klickbar machen: Lightbox
-  img.style.cursor = "zoom-in";
-  img.addEventListener("click", () => {
-    openLightbox(book.cover, book.alt);
-  });
-
-  // Titel + Meta
+  // Title + Meta
   const title = document.createElement("h3");
   title.className = "book-card__title";
   title.innerHTML = `
@@ -153,98 +146,79 @@ function createBookCard(book, context) {
     <span class="book-card__meta">${book.meta}</span>
   `;
 
-  // Beschreibung – je nach Kontext unterschiedliche Texte
+  // Description
   const desc = document.createElement("p");
   desc.className = "book-card__description";
-  desc.textContent = context === "home"
-    ? book.descriptionHome
-    : book.descriptionShop;
+  desc.textContent = context === "home" ? book.descriptionHome : book.descriptionShop;
 
-    
-// "Mehr lesen"/"Weniger lesen" Button hinzufügen
-const toggleBtn = document.createElement("button");
-toggleBtn.className = "book-card__toggle";
-toggleBtn.textContent = "Mehr lesen";
+  // Toggle
+  const toggleBtn = document.createElement("button");
+  toggleBtn.className = "book-card__toggle";
+  toggleBtn.type = "button";
+  toggleBtn.textContent = "Mehr lesen";
 
-toggleBtn.addEventListener("click", () => {
-  const container = article.closest(".book-list") || article.parentElement;
+  toggleBtn.addEventListener("click", () => {
+    const container = article.closest(".book-list") || article.parentElement;
+    const collapsedHeight = 5.4 * parseFloat(getComputedStyle(desc).fontSize);
 
-  const collapsedHeight =
-    5.4 * parseFloat(getComputedStyle(desc).fontSize); // muss zu CSS height: 5.4em passen
+    const collapseCard = (cardEl) => {
+      const d = cardEl.querySelector(".book-card__description");
+      const t = cardEl.querySelector(".book-card__toggle");
+      if (!d || !t) return;
+      if (!cardEl.classList.contains("is-expanded")) return;
 
-  const collapseCard = (cardEl) => {
-    const d = cardEl.querySelector(".book-card__description");
-    const t = cardEl.querySelector(".book-card__toggle");
-    if (!d || !t) return;
+      const startH = d.getBoundingClientRect().height;
+      d.style.height = `${startH}px`;
+      d.offsetHeight; // reflow
+      d.style.height = `${collapsedHeight}px`;
 
-    // Nur wenn wirklich offen
-    if (!cardEl.classList.contains("is-expanded")) return;
-
-    // Von aktueller Höhe smooth zurück zur collapsed Höhe
-    const startH = d.getBoundingClientRect().height;
-    d.style.height = `${startH}px`;
-    d.offsetHeight; // reflow
-    d.style.height = `${collapsedHeight}px`;
-
-    cardEl.classList.remove("is-expanded");
-    t.textContent = "Mehr lesen";
-  };
-
-  const expandCard = (cardEl) => {
-    const d = cardEl.querySelector(".book-card__description");
-    const t = cardEl.querySelector(".book-card__toggle");
-    if (!d || !t) return;
-
-    const startH = d.getBoundingClientRect().height;
-
-    cardEl.classList.add("is-expanded");
-
-    // Zielhöhe messen
-    d.style.height = "auto";
-    const targetH = d.scrollHeight;
-
-    // zurück auf Start, dann animieren
-    d.style.height = `${startH}px`;
-    d.offsetHeight; // reflow
-    d.style.height = `${targetH}px`;
-
-    t.textContent = "Weniger lesen";
-
-    const onEnd = () => {
-      d.removeEventListener("transitionend", onEnd);
-      // nach dem Expand: auto, damit responsive
-      if (cardEl.classList.contains("is-expanded")) {
-        d.style.height = "auto";
-      }
+      cardEl.classList.remove("is-expanded");
+      t.textContent = "Mehr lesen";
     };
-    d.addEventListener("transitionend", onEnd);
-  };
 
-  const isOpening = !article.classList.contains("is-expanded");
+    const expandCard = (cardEl) => {
+      const d = cardEl.querySelector(".book-card__description");
+      const t = cardEl.querySelector(".book-card__toggle");
+      if (!d || !t) return;
 
-  // 1) Wenn wir öffnen: alle anderen schließen (Akkordeon)
-  if (isOpening && container) {
-    container.querySelectorAll(".book-card.is-expanded").forEach((openCard) => {
-      if (openCard !== article) collapseCard(openCard);
-    });
-    expandCard(article);
-  } else {
-    // 2) Wenn wir schließen: nur diese Karte schließen
-    collapseCard(article);
-  }
-});
+      const startH = d.getBoundingClientRect().height;
+      cardEl.classList.add("is-expanded");
 
+      d.style.height = "auto";
+      const targetH = d.scrollHeight;
 
+      d.style.height = `${startH}px`;
+      d.offsetHeight; // reflow
+      d.style.height = `${targetH}px`;
 
-    
-  // Actions (Button + optional Preis/Versand)
+      t.textContent = "Weniger lesen";
+
+      const onEnd = () => {
+        d.removeEventListener("transitionend", onEnd);
+        if (cardEl.classList.contains("is-expanded")) d.style.height = "auto";
+      };
+      d.addEventListener("transitionend", onEnd);
+    };
+
+    const isOpening = !article.classList.contains("is-expanded");
+
+    // Akkordeon: wenn öffnen -> andere schliessen
+    if (isOpening && container) {
+      container.querySelectorAll(".book-card.is-expanded").forEach((openCard) => {
+        if (openCard !== article) collapseCard(openCard);
+      });
+      expandCard(article);
+    } else {
+      collapseCard(article);
+    }
+  });
+
+  // Actions
   const actions = document.createElement("div");
   actions.className = "book-card__actions";
 
   let actionElement;
-
   if (context === "shop") {
-    // Mailto-Link mit Buchtitel + Meta + HEUTIGEM Datum im Betreff
     const today = new Date();
     const dateStr = formatDateCH(today);
     const subject = `Bestellung: ${book.title} (${book.meta}), ${dateStr}`;
@@ -254,17 +228,13 @@ toggleBtn.addEventListener("click", () => {
     actionElement.href = `mailto:${ORDER_EMAIL}?subject=${encodeURIComponent(subject)}`;
     actionElement.textContent = "Bestellen";
   } else {
-    // Startseite: Link zur Blättern-Seite zum passenden Buch
     actionElement = document.createElement("a");
     actionElement.className = "button button-secondary book-card__button";
     actionElement.textContent = "Zum Shop";
     actionElement.href = `shop.html#${book.id}`;
   }
-
-
   actions.appendChild(actionElement);
 
-  // Preis + Versandhinweis nur im Shop
   if (context === "shop") {
     const priceWrap = document.createElement("div");
     priceWrap.className = "book-card__price-wrap";
@@ -282,26 +252,25 @@ toggleBtn.addEventListener("click", () => {
     actions.appendChild(priceWrap);
   }
 
-  // Card zusammenbauen
-article.appendChild(imageWrapper);
-article.appendChild(title);
-article.appendChild(desc);
-article.appendChild(toggleBtn);
-article.appendChild(actions);
+  // Assemble
+  article.appendChild(imageWrapper);
+  article.appendChild(title);
+  article.appendChild(desc);
+  article.appendChild(toggleBtn);
+  article.appendChild(actions);
 
-return article;
+  return article;
 }
 
-// --------------------------------------
-// 3) Spezielle Placeholder-Kachel (Shop)
-// --------------------------------------
+// ==========================================================
+// 4) Placeholder (Shop)
+// ==========================================================
 function createPlaceholderCard() {
   const article = document.createElement("article");
   article.className = "book-card book-card--placeholder";
 
   const inner = document.createElement("div");
   inner.className = "book-card__placeholder-inner";
-
   inner.innerHTML = `
     <h1 class="placeholder-title">
       Stöbern,<br>
@@ -315,14 +284,13 @@ function createPlaceholderCard() {
   return article;
 }
 
-// --------------------------------------
-// 4) Render-Funktion: Container befüllen
-// --------------------------------------
+// ==========================================================
+// 5) Render
+// ==========================================================
 function renderBooks(targetId, context) {
   const container = document.getElementById(targetId);
   if (!container) return;
 
-  // Shop: Placeholder zuerst
   if (context === "shop") {
     const placeholder = createPlaceholderCard();
     placeholder.style.setProperty("--i", 0);
@@ -333,126 +301,176 @@ function renderBooks(targetId, context) {
       card.style.setProperty("--i", index + 1);
       container.appendChild(card);
     });
-
     return;
   }
 
-  // Home: 3x rendern (vorher / echt / nachher) -> „unsichtbares“ Infinite
   if (context === "home") {
-    const sets = 3; // 3 identische Sets
+    const sets = 3;
     for (let s = 0; s < sets; s++) {
-      BOOKS.forEach((book, index) => {
+      BOOKS.forEach((book) => {
         const card = createBookCard(book, context);
-
-        // keine doppelten IDs im DOM!
-        // statt article.id = book.id besser: data attribute verwenden
         card.removeAttribute("id");
         card.dataset.bookId = book.id;
-
-        // optional: für Debug
         card.dataset.set = String(s);
-
         container.appendChild(card);
       });
     }
   }
 }
 
-// Hilfsfunktion: Alle Karten in einem Karussell zurücksetzen
-function resetCarouselCards(carouselEl) {
-  if (!carouselEl) return;
+// ==========================================================
+// 6) Shop: Hash -> sanft scrollen + subtil highlight
+// ==========================================================
+function prefersReducedMotion() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
 
-  carouselEl.querySelectorAll(".book-card").forEach((card) => {
-    card.classList.remove("is-expanded");
+function getHeaderOffset() {
+  const header = document.querySelector(".site-header");
+  return header ? header.offsetHeight || 0 : 0;
+}
 
-    const desc = card.querySelector(".book-card__description");
-    const btn = card.querySelector(".book-card__toggle");
+function easeInOutCubic(t) {
+  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+}
 
-    if (desc) {
-      desc.style.height = "";     // wichtig: inline height entfernen
+function smoothScrollTo(targetY, duration = 1000) {
+  if (prefersReducedMotion()) {
+    window.scrollTo(0, targetY);
+    return Promise.resolve();
+  }
+
+  const startY = window.scrollY;
+  const delta = targetY - startY;
+  const start = performance.now();
+
+  return new Promise((resolve) => {
+    function tick(now) {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = easeInOutCubic(t);
+      window.scrollTo(0, startY + delta * eased);
+      if (t < 1) requestAnimationFrame(tick);
+      else resolve();
     }
-    if (btn) {
-      btn.textContent = "Mehr lesen";
-    }
+    requestAnimationFrame(tick);
   });
 }
 
+async function scrollToCardSoft(cardEl, extraOffset = 18) {
+  const headerOffset = getHeaderOffset() + extraOffset;
+  const target = cardEl.getBoundingClientRect().top + window.scrollY - headerOffset;
 
-// --------------------------------------
-// 5) Beim Laden der Seite ausführen
-// --------------------------------------
+  const current = window.scrollY;
+  const distance = Math.abs(target - current);
+
+  // „leiser Start“: minimal hochziehen wenn sehr weit weg
+  if (distance > 700) {
+    const preTarget = Math.max(0, current - 220);
+    await smoothScrollTo(preTarget, 260);
+  }
+
+  const duration = Math.min(1400, Math.max(800, distance * 0.75));
+  await smoothScrollTo(target, duration);
+}
+
+function highlightCard(cardEl) {
+  document.querySelectorAll(".book-card.is-highlight").forEach((el) => {
+    el.classList.remove("is-highlight");
+  });
+
+  // Reflow -> Animation startet sicher neu
+  cardEl.classList.remove("is-highlight");
+  void cardEl.offsetWidth;
+
+  cardEl.classList.add("is-highlight");
+  window.setTimeout(() => cardEl.classList.remove("is-highlight"), 3200);
+}
+
+async function handleShopHashJump() {
+  const grid = document.getElementById("shop-book-grid");
+  if (!grid) return;
+
+  const hash = window.location.hash;
+  if (!hash || hash.length < 2) return;
+
+  const id = decodeURIComponent(hash.slice(1));
+  const card = grid.querySelector(`.book-card[data-book-id="${CSS.escape(id)}"]`);
+  if (!card) return;
+
+  await scrollToCardSoft(card, 18);
+  highlightCard(card);
+}
+
+// ==========================================================
+// 7) Init
+// ==========================================================
 document.addEventListener("DOMContentLoaded", () => {
   ensureLightbox();
 
-  // Startseite: Karussell
+  // Render
   renderBooks("home-book-carousel", "home");
-
-  // Shop: Grid
   renderBooks("shop-book-grid", "shop");
 
-  // Karussell-Pfeile (Startseite)
+  // Shop Jump + Highlight
+  handleShopHashJump();
+  window.addEventListener("hashchange", handleShopHashJump);
+
+  // Home Carousel Controls
   const carousel = document.getElementById("home-book-carousel");
   const left = document.querySelector(".arrow-left");
   const right = document.querySelector(".arrow-right");
 
   if (carousel && left && right) {
-  const getScrollAmount = () => {
-    const style = getComputedStyle(document.documentElement);
-    const cardWidth = parseInt(style.getPropertyValue("--book-card-width"));
-    const gap = 16; // falls var(--space-m) = 1rem
-    return cardWidth + gap;
-  };
+    const getScrollAmount = () => {
+      const style = getComputedStyle(document.documentElement);
+      const cardWidth = parseInt(style.getPropertyValue("--book-card-width"));
+      const gap = 16;
+      return cardWidth + gap;
+    };
 
-  // Wir haben 3 Sets gerendert -> mittleres Set ist „safe zone“
-  const setWidth = BOOKS.length * getScrollAmount();
+    const setWidth = BOOKS.length * getScrollAmount();
 
-  // Start: mittleres Set
-  carousel.style.scrollBehavior = "auto";
-  carousel.scrollLeft = setWidth;
-  requestAnimationFrame(() => {
-    carousel.style.scrollBehavior = "smooth";
-  });
+    carousel.style.scrollBehavior = "auto";
+    carousel.scrollLeft = setWidth;
+    requestAnimationFrame(() => {
+      carousel.style.scrollBehavior = "smooth";
+    });
 
-  // Loop: wenn zu weit links/rechts, um genau 1 SetWidth korrigieren
-  let isAdjusting = false;
-  const keepInMiddle = () => {
-    if (isAdjusting) return;
+    let isAdjusting = false;
+    const keepInMiddle = () => {
+      if (isAdjusting) return;
 
-    const x = carousel.scrollLeft;
+      const x = carousel.scrollLeft;
 
-    // Wenn im linken Set unterwegs -> +1 Set
-    if (x < setWidth * 0.25) {
-      isAdjusting = true;
-      carousel.style.scrollBehavior = "auto";
-      carousel.scrollLeft = x + setWidth;
-      requestAnimationFrame(() => {
-        carousel.style.scrollBehavior = "smooth";
-        isAdjusting = false;
-      });
-    }
+      if (x < setWidth * 0.25) {
+        isAdjusting = true;
+        carousel.style.scrollBehavior = "auto";
+        carousel.scrollLeft = x + setWidth;
+        requestAnimationFrame(() => {
+          carousel.style.scrollBehavior = "smooth";
+          isAdjusting = false;
+        });
+      }
 
-    // Wenn im rechten Set unterwegs -> -1 Set
-    if (x > setWidth * 1.75) {
-      isAdjusting = true;
-      carousel.style.scrollBehavior = "auto";
-      carousel.scrollLeft = x - setWidth;
-      requestAnimationFrame(() => {
-        carousel.style.scrollBehavior = "smooth";
-        isAdjusting = false;
-      });
-    }
-  };
+      if (x > setWidth * 1.75) {
+        isAdjusting = true;
+        carousel.style.scrollBehavior = "auto";
+        carousel.scrollLeft = x - setWidth;
+        requestAnimationFrame(() => {
+          carousel.style.scrollBehavior = "smooth";
+          isAdjusting = false;
+        });
+      }
+    };
 
-  carousel.addEventListener("scroll", keepInMiddle, { passive: true });
+    carousel.addEventListener("scroll", keepInMiddle, { passive: true });
 
-  // Pfeile: nur manuell scrollen
-  left.addEventListener("click", () => {
-    carousel.scrollBy({ left: -getScrollAmount(), behavior: "smooth" });
-  });
+    left.addEventListener("click", () => {
+      carousel.scrollBy({ left: -getScrollAmount(), behavior: "smooth" });
+    });
 
-  right.addEventListener("click", () => {
-    carousel.scrollBy({ left: getScrollAmount(), behavior: "smooth" });
-  });
-}
-
+    right.addEventListener("click", () => {
+      carousel.scrollBy({ left: getScrollAmount(), behavior: "smooth" });
+    });
+  }
 });
