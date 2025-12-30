@@ -1,5 +1,8 @@
 /* ---------------------------------- */
-/* Shop – Parallax Background (Desktop) */
+/* Shop – Parallax Background          */
+/* Desktop: wie bisher                 */
+/* Tablet: 2 Bilder senkrecht, voll     */
+/* Mobile: 1 Bild senkrecht, voll       */
 /* ---------------------------------- */
 
 /* Wrapper */
@@ -28,15 +31,16 @@
   background-image: var(--parallax-image, none);
   background-repeat: no-repeat;
   background-position: var(--parallax-pos, left center);
-  background-size: var(--parallax-size, auto 120vh);
+
+  /* WICHTIG: eigene Variable, damit "cover" möglich ist */
+  background-size: var(--parallax-bg-size, auto 120vh);
 
   opacity: var(--parallax-opacity, 0.18);
 
-
+  /* Rotation/Spiegelung über Variable (kollidiert nicht mit JS) */
   transform: var(--parallax-transform, none);
   transform-origin: center;
 
- 
   filter: saturate(0.95) contrast(1.05);
 }
 
@@ -47,41 +51,83 @@
 }
 
 /* ---------------------------------- */
-/* Shop: konkrete Settings            */
+/* Shop: konkrete Settings (Desktop)   */
 /* ---------------------------------- */
 
 .parallax-shop{
-
   --parallax-image: url("../images/backgrounds/BG_Tinte_3.png");
-
-  /* wie stark JS bewegt (px) */
   --parallax-strength: 150;
 }
 
 /* linke Seite */
 .parallax-shop .parallax-bg--left::before{
-  --parallax-pos:  center center;
-  --parallax-size: auto 160vh;
+  --parallax-pos: center center;
+  --parallax-bg-size: auto 160vh;
   --parallax-opacity: 1;
-
-  /* optional: leicht drehen/skalieren (auskommentiert) */
-  /* --parallax-transform: rotate(0deg) scale(1); */
+  --parallax-transform: none;
 }
 
-/* rechte Seite: gespiegelt, damit symmetrisch */
+/* rechte Seite (gespiegelt) */
 .parallax-shop .parallax-bg--right::before{
-  --parallax-pos: center  center;
-  --parallax-size: auto 100vh;
+  --parallax-pos: center center;
+  --parallax-bg-size: auto 100vh;
   --parallax-opacity: 0.6;
-
   --parallax-transform: scaleX(-1);
 }
 
 /* ---------------------------------- */
-/* Nur Desktop anzeigen               */
+/* Tablet: 2 Bilder, senkrecht + voll  */
 /* ---------------------------------- */
 @media (max-width: 1024px){
-  .parallax-shop .parallax-bg{
+  .parallax-shop{
+    --parallax-strength: 35;
+  }
+
+  /* Nach Rotation braucht es mehr Fläche -> größerer ::before Canvas */
+  .parallax-shop .parallax-bg--left::before,
+  .parallax-shop .parallax-bg--right::before{
+    inset: -300%;
+    --parallax-bg-size: 100vh /* vollflächig */
+    --parallax-opacity: 0.45;
+
+
+  }
+
+  .parallax-shop .parallax-bg--left::before{
+
+    --parallax-transform: rotate(90deg) translateZ(0);
+    --parallax-opacity: 1;
+    --parallax-bg-size: auto 100vh;
+
+
+  }
+
+  .parallax-shop .parallax-bg--right::before{
+    --parallax-transform: rotate(90deg) scaleX(-1) translateZ(0);
+    --parallax-opacity: 0.6;
+    --parallax-bg-size: auto 100vh;
+  }
+}
+
+/* ---------------------------------- */
+/* Mobile: 1 Bild (rechts), senkrecht  */
+/* ---------------------------------- */
+@media (max-width: 640px){
+  .parallax-shop{
+    --parallax-strength: 22;
+  }
+
+  /* nur eine Seite zeigen */
+  .parallax-shop .parallax-bg--left{
     display: none;
+  }
+
+  .parallax-shop .parallax-bg--right::before{
+    inset: -500%;
+    --parallax-bg-size: 400vh auto;
+    --parallax-opacity: 0.7;
+    --parallax-pos: center center;
+    --parallax-transform: rotate(90deg) scaleX(1) translateZ(0);
+    --parallax-bg-size: auto 165vh;
   }
 }

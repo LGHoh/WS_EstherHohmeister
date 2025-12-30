@@ -219,7 +219,7 @@
 @media (max-width: 1024px){
   .has-parallax .parallax-bg{
     background-size: min(520px, 78vw);
-    background-position: center top;
+    background-position: center center;
     opacity: 0.8;
 
   }

@@ -70,71 +70,6 @@
   opacity: 0.45; /* sehr dezent */
 }
 
-/* ---------------------------------- */
-/* Parallax Background – Startseite   */
-/* ---------------------------------- */
-
-.has-parallax{
-  position: relative;
-  overflow: hidden;
-}
-
-.has-parallax .parallax-bg{
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-
-  background-image: var(--parallax-image);
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 120vw auto;
-
-  opacity: var(--parallax-opacity, 0.25);
-  will-change: transform;
-  transform: translate3d(0,0,0);
-}
-
-/* Inhalt über dem Hintergrund */
-.has-parallax .section-inner{
-  position: relative;
-  z-index: 1;
-}
-
-/* ---------------------------------- */
-/* Startseite: Tintenschriftzug        */
-/* ---------------------------------- */
-
-.section-hero{
-  --parallax-image: url("../images/backgrounds/BG_Tinte_1.png");
-  --parallax-opacity: 0.7;
-}
-
-@media (max-width: 1024px){
-  .section-hero{
-    --parallax-opacity: 0.7;
-  }
-  .section-hero .parallax-bg{
-    transform-origin: center center;
-    background-size: 300vw auto;
-    background-position: center center;
-    }
-  }
-
-
-@media (max-width: 640px){
-  .section-hero .parallax-bg{
-    background-size: auto 150vh;
-    background-position: center center;
-    
-    
-    transform-origin: center bottom;
-    opacity: 0.7;
-  }
-
-
-
-}
 
 
 
@@ -301,6 +236,112 @@
 
 
 
+/* ---------------------------------- */
+/* Parallax Background – System (einmalig) */
+/* ---------------------------------- */
+
+.has-parallax{
+  position: relative;
+  overflow: hidden;
+}
+
+.has-parallax .parallax-bg{
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  background-image: var(--parallax-image, none);
+  background-repeat: no-repeat;
+  background-size: var(--parallax-size, cover);
+  background-position: var(--parallax-pos, center);
+
+  opacity: var(--parallax-opacity, 0.25);
+
+  will-change: transform;
+  transform: translate3d(0,0,0);
+}
+
+.has-parallax .section-inner{
+  position: relative;
+  z-index: 1;
+}
+
+/* Position helper */
+.parallax-left{   --parallax-pos: left 7% center; }
+.parallax-right{  --parallax-pos: right 7% center; }
+.parallax-center{ --parallax-pos: center center; }
+
+
+.section-hero{
+  --parallax-image: url("../images/backgrounds/BG_Tinte_1.png");
+  --parallax-opacity: 0.7;
+
+  /* volle Breite */
+  --parallax-size: 120vw auto;
+  --parallax-pos: center center;
+}
+
+@media (max-width: 1024px){
+  .section-hero{
+    --parallax-size: 300vw auto;
+    --parallax-opacity: 0.7;
+  }
+}
+
+@media (max-width: 640px){
+  .section-hero{
+    --parallax-size: auto 150vh;
+    --parallax-pos: center center;
+    --parallax-opacity: 0.7;
+  }
+
+}
+
+ /* –––––––––––––––––––––––––––––––––––*/
+/* –––––––Sektion 2 – Rucksack––––––––––– */
+/* –––––––––––––––––––––––––––––––––*/
+
+.section-contact{
+  --parallax-image: url("../images/BG_Rucksack.png");
+  --parallax-opacity: 0.9;
+  --parallax-size: min(520px, 28vw);
+
+  /* rechts platzieren */
+  --parallax-pos: right 8% center;
+}
+
+@media (max-width: 1024px){
+  .section-contact{
+    --parallax-size: min(620px, 100vw);
+    --parallax-opacity: 0.5;
+    --parallax-pos: center center;
+  }
+
+  .section-contact .contact-text-block{
+    background: rgba(255,255,255,0.72);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    padding: var(--space-m);
+    border-radius: var(--radius-m);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+  }
+}
+
+@media (max-width: 640px){
+  .section-contact{
+    --parallax-size: min(520px, 120vw);
+    --parallax-opacity: 0.22;
+    --parallax-pos: center bottom;
+  }
+
+  .section-contact .contact-text-block{
+    background: rgba(255,255,255,0.82);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+}
+
 
 
 
@@ -388,7 +429,7 @@
   margin-left: 0.1em;
 }
 
-/* Optional: feine Zitatlinie links */
+
 .quote::before {
   content: "";
   position: absolute;
