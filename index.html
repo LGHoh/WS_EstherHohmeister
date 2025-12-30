@@ -1,71 +1,74 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8"/>
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Stöbern Sie in den Gedichten von Esther Hohmeister, oder teilen Sie ein Stichwort für neue Inspirationen.">
-  <title>Startseite</title>
+  <meta name="description" content="Stöbern Sie in den Gedichten von Esther Hohmeister, oder teilen Sie ein Stichwort für neue Inspirationen." />
+  <title>Esther Hohmeister – Gedichte & Gedichtbände</title>
 
   <link rel="icon" type="image/png" href="/logo/favicon/favicon-32.png?v=3" sizes="32x32" />
-  <link rel="icon" type="image/png" href="/logo/favicon/favicon-48.png?v2" sizes="48x48" />
+  <link rel="icon" type="image/png" href="/logo/favicon/favicon-48.png?v=2" sizes="48x48" />
   <link rel="icon" type="image/png" href="/logo/favicon/favicon-192.png?v=3" sizes="192x192" />
   <link rel="apple-touch-icon" type="image/png" href="/logo/favicon/favicon-180.png?v=3" sizes="180x180" />
 
-
-  <link rel="stylesheet" href="Styles/root.css">
-  <link rel="stylesheet" href="Styles/startseite.css">
-  <link rel="stylesheet" href="Styles/book.css">
-
-
+  <link rel="stylesheet" href="Styles/root.css" />
+  <link rel="stylesheet" href="Styles/startseite.css" />
+  <link rel="stylesheet" href="Styles/book.css" />
 </head>
+
 <body>
-<header class="site-header">
-  <div class="header-inner">
-    <a class="site-logo" href="index.html">
-      <img src="logo/Platzhalter_Logo_EH.svg" alt="Platzhalter Logo">
-    </a>
+  <a class="skip-link" href="#content">Zum Inhalt springen</a>
 
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Menü öffnen">
-      <span class="nav-toggle__bar"></span>
-      <span class="nav-toggle__bar"></span>
-      <span class="nav-toggle__bar"></span>
-    </button>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-logo" href="index.html">
+        <img src="logo/Platzhalter_Logo_EH.svg" alt="Platzhalter Logo" />
+      </a>
 
-    <nav class="site-nav" id="primary-nav" aria-label="Hauptnavigation">
-      <ul>
-        <li><a href="index.html">Startseite</a></li>
-        <li><a href="zurdichterin.html">Zur Dichterin</a></li>
-        <li><a href="shop.html">Shop</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-nav"
+        aria-label="Menü öffnen"
+      >
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+      </button>
 
+      <nav class="site-nav" id="primary-nav" aria-label="Hauptnavigation">
+        <ul>
+          <li><a href="index.html" aria-current="page">Startseite</a></li>
+          <li><a href="zurdichterin.html">Zur Dichterin</a></li>
+          <li><a href="shop.html">Shop</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-  <main class="page-main">
+  <main class="page-main" id="content">
 
-   <!-- 1. Sektion: Intro mit Portrait und H1 -->
-    <section class="section section-hero has-parallax parallax-center">
+    <!-- 1. Sektion: Intro mit Portrait und H1 -->
+    <section class="section section-hero has-parallax parallax-center" aria-label="Intro">
       <div class="parallax-bg" aria-hidden="true"></div>
-      <div class="section-inner two-column-layout">
 
+      <div class="section-inner two-column-layout">
         <!-- Linke Hälfte: H1-Text -->
         <div class="column column-left hero-text-block">
-     <h1 class="heading-main quote">
+          <h1 class="heading-main quote">
+            Zwischen Alltag und Augenblick finde ich meine
+            <span class="word-rotator" aria-hidden="true">
+              <span class="word-rotator__viewport">
+                <span class="word-rotator__track">
+                  <span class="word-rotator__item">Worte</span>
+                </span>
+              </span>
+            </span>
+            <span class="sr-only">Zwischen Alltag und Augenblick finde ich meine Worte</span>
+          </h1>
+        </div>
 
-  Zwischen Alltag und Augenblick finde ich meine
-  <span class="word-rotator" aria-hidden="true">
-    <span class="word-rotator__viewport">
-      <span class="word-rotator__track">
-        <span class="word-rotator__item">Worte</span>
-      </span>
-    </span>
-  </span>
-  <span class="sr-only">Zwischen Alltag und Augenblick finde ich meine Worte</span>
-</h1>
-
-
-      </div>
         <!-- Rechte Hälfte: Portrait -->
         <div class="column hero-portrait-block">
           <div class="portrait portrait--hero">
@@ -74,22 +77,17 @@
                 src="images/Portrait_Esther_Hohmeister.png"
                 alt="Portrait von Esther Hohmeister"
                 class="portrait-image"
-              >
-       </div>
+              />
+            </div>
             <p class="author-name">Esther Hohmeister</p>
           </div>
         </div>
       </div>
-
-
-      </div>
-      
     </section>
 
-      <!-- 2. Sektion: Gedichte & Gedichtbände mit Karussell -->
-    <section class="section section-poetry">
+    <!-- 2. Sektion: Gedichte & Gedichtbände mit Karussell -->
+    <section class="section section-poetry" aria-label="Gedichte und Gedichtbände">
       <div class="section-inner">
-
         <h2 class="heading-section">Gedichte und Gedichtbände</h2>
 
         <div class="carousel-wrapper">
@@ -97,93 +95,91 @@
           <div id="home-book-carousel" class="book-carousel book-list book-list--home"></div>
 
           <!-- Pfeile zur Navigation -->
-          <div class="carousel-controls">
-         <button class="carousel-arrow arrow-left" type="button" aria-label="Zurück">
-          <svg class="carousel-arrow__icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M15 18l-6-6 6-6" />
-          </svg>
-        </button>
+          <div class="carousel-controls" aria-label="Karussell Navigation">
+            <button class="carousel-arrow arrow-left" type="button" aria-label="Zurück">
+              <svg class="carousel-arrow__icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
 
-        <button class="carousel-arrow arrow-right" type="button" aria-label="Weiter">
-          <svg class="carousel-arrow__icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M9 6l6 6-6 6" />
-          </svg>
-        </button>
+            <button class="carousel-arrow arrow-right" type="button" aria-label="Weiter">
+              <svg class="carousel-arrow__icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9 6l6 6-6 6" />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
     </section>
+
     <!-- 3. Sektion: Kontakt / Stichwort teilen -->
-   <section class="section section-contact has-parallax parallax-right">
-    <div class="parallax-bg" aria-hidden="true"></div>
+    <section class="section section-contact has-parallax parallax-right" aria-label="Kontakt">
+      <div class="parallax-bg" aria-hidden="true"></div>
 
       <div class="section-inner two-column-layout">
-
-        <!-- Linke Hälfte: Claim / H1 -->
+        <!-- Linke Hälfte -->
         <div class="column column-left contact-text-block">
-          <h1 class="heading-main heading-contact">
-            Ein Stichwort teilen,<br>
+          <!-- Semantik: pro Seite nur ein H1 -> hier H2 -->
+          <h2 class="heading-main heading-contact">
+            Ein Stichwort teilen,<br />
             oder im Gespräch verweilen
-          </h1>
+          </h2>
+
           <p class="contact-explanation">
-          Ihre Inspirationen erhält Esther Hohmeister auch aus der Leserschaft.
-          Teilen Sie ein Stichwort, eine Beobachtung oder eine kleine Geschichte – vielleicht
-          entsteht daraus ein neues Gedicht. 
-            </p>
+            Ihre Inspirationen erhält Esther Hohmeister auch aus der Leserschaft.
+            Teilen Sie ein Stichwort, eine Beobachtung oder eine kleine Geschichte – vielleicht
+            entsteht daraus ein neues Gedicht.
+          </p>
         </div>
 
-        <!-- Rechte Hälfte: Kontakt-Infos -->
+        <!-- Rechte Hälfte -->
         <div class="column column-right contact-info-block">
-
-          <!-- Adresse -->
-            <div class="contact-card">
+          <div class="contact-card">
             <h5>Briefadresse</h5>
             <p class="text-contact">
-              Esther Hohmeister<br>
-              Grossfeldstrasse 10<br>
+              Esther Hohmeister<br />
+              Grossfeldstrasse 10<br />
               7310 Bad Ragaz
             </p>
           </div>
 
-          <!-- Mailto -->
-        <div class="contact-card contact-card-mail">
-  <a
-    href="mailto:esther&#64;hohmeister&#46;ch?subject=Stichwort%20für%20Gedichte"
-    class="mailto-link mailto-link--with-icon"
-  >
-    <span class="mailto-text">E-Mail schreiben</span>
-  </a>
-</div>
-
-
+          <div class="contact-card contact-card-mail">
+            <a
+              href="mailto:esther&#64;hohmeister&#46;ch?subject=Stichwort%20für%20Gedichte"
+              class="mailto-link mailto-link--with-icon"
+            >
+              <span class="mailto-text">E-Mail schreiben</span>
+              <svg class="mailto-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M13 5l7 7-7 7M20 12H4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+          </div>
         </div>
-
       </div>
     </section>
+
   </main>
 
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-column footer-column-left">
+        <p class="footer-heading">Kontakt</p>
+        <a href="mailto:esther&#64;hohmeister&#46;ch" class="footer-link footer-link--cta">
+          E-Mail an Esther Hohmeister
+        </a>
+      </div>
 
-  <!-- Footer aus root.css-Styles -->
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-column footer-column-left">
-      <p class="footer-heading">Kontakt</p>
-      <a href="mailto:esther&#64;hohmeister&#46;ch" class="footer-link">
-        E-Mail an Esther Hohmeister
-      </a>
+      <div class="footer-column footer-column-right">
+        <p class="footer-text">© Esther Hohmeister</p>
+        <a href="impressum.html" class="footer-link">Impressum</a>
+      </div>
     </div>
-    <div class="footer-column footer-column-right">
-      <p class="footer-text">© Esther Hohmeister</p>
-      <a href="impressum.html" class="footer-link">Impressum</a>
-    </div>
-  </div>
-</footer>
+  </footer>
 
-
-<!-- JavaScript: rendert die Bookcards, html und rotator -->
+  <!-- JavaScript -->
   <script src="js/root.js" defer></script>
   <script src="js/rotator.js" defer></script>
   <script src="js/books.js" defer></script>
-    <script src="js/HG_parallax.js" defer></script>
+  <script src="js/HG_parallax.js" defer></script>
 </body>
 </html>
