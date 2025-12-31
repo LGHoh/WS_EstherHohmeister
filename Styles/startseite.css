@@ -130,7 +130,7 @@
 }
 
 /* Mobile/Tablet: Text kürzen für gleich hohe Karten */
-@media (max-width: 1024px) {
+@media (max-width: 1024px) and (hover: hover) {
   .book-list--home .book-card__description {
     display: -webkit-box;
     -webkit-line-clamp: 4;
@@ -143,6 +143,7 @@
     overflow: visible;
   }
 }
+
 
 /* ------------------------------------------------ */
 /* 3. Sektion: Kontakt  (Mehrheit im Root)          */

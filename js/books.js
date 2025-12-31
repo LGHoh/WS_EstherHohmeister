@@ -76,6 +76,32 @@ function formatDateCH(date) {
 }
 
 // ==========================================================
+// 1.1) Read-more: CSS-Length → px (einheitlich, kein Magic Number)
+// ==========================================================
+function cssLengthToPx(value, el) {
+  const v = (value || "").trim();
+  if (!v) return 0;
+
+  const n = parseFloat(v);
+  if (Number.isNaN(n)) return 0;
+
+  if (v.endsWith("px")) return n;
+  if (v.endsWith("em")) return n * parseFloat(getComputedStyle(el).fontSize);
+  if (v.endsWith("rem")) return n * parseFloat(getComputedStyle(document.documentElement).fontSize);
+
+  // fallback: Zahl ohne Einheit wie px
+  return n;
+}
+
+function getCollapsedHeightPx(descEl) {
+  const raw = getComputedStyle(descEl).getPropertyValue("--desc-collapsed");
+  const px = cssLengthToPx(raw, descEl);
+
+  // fallback, falls Variable fehlt
+  return px || 8.2 * parseFloat(getComputedStyle(descEl).fontSize);
+}
+
+// ==========================================================
 // 2) Lightbox (mit ESC + Fokus-Restore)
 // ==========================================================
 let lightboxEl = null;
@@ -140,7 +166,6 @@ function openLightbox(src, alt) {
 
   lightboxEl.classList.add("image-lightbox--visible");
 
-  // Fokus auf Close-Button (Keyboard)
   requestAnimationFrame(() => {
     if (lightboxCloseBtn) lightboxCloseBtn.focus();
   });
@@ -164,7 +189,6 @@ function createBookCard(book, context) {
   img.className = "book-card__image";
   img.style.cursor = "zoom-in";
   img.addEventListener("click", () => openLightbox(book.cover, book.alt));
-
   imageWrapper.appendChild(img);
 
   // Title + Meta
@@ -188,7 +212,9 @@ function createBookCard(book, context) {
 
   toggleBtn.addEventListener("click", () => {
     const container = article.closest(".book-list") || article.parentElement;
-    const collapsedHeight = 5.4 * parseFloat(getComputedStyle(desc).fontSize);
+
+    // ✅ Einheitlich aus CSS-Variable lesen
+    const collapsedHeight = getCollapsedHeightPx(desc);
 
     const collapseCard = (cardEl) => {
       const d = cardEl.querySelector(".book-card__description");
@@ -311,8 +337,8 @@ function createPlaceholderCard() {
 
   inner.appendChild(title);
   inner.appendChild(sub);
-
   article.appendChild(inner);
+
   return article;
 }
 
@@ -409,7 +435,7 @@ function highlightCard(cardEl) {
   });
 
   cardEl.classList.remove("is-highlight");
-  void cardEl.offsetWidth;
+  void cardEl.offsetWidth; // reflow
 
   cardEl.classList.add("is-highlight");
   window.setTimeout(() => cardEl.classList.remove("is-highlight"), 3200);
@@ -436,20 +462,21 @@ async function handleShopHashJump() {
 document.addEventListener("DOMContentLoaded", () => {
   ensureLightbox();
 
+  // Render
   renderBooks("home-book-carousel", "home");
   renderBooks("shop-book-grid", "shop");
 
+  // Shop Jump + Highlight
   handleShopHashJump();
   window.addEventListener("hashchange", handleShopHashJump);
 
-  // Home Carousel Controls (lokal zum Wrapper, damit es auf anderen Seiten nicht kollidiert)
+  // Home Carousel Controls (lokal zum Wrapper)
   const carousel = document.getElementById("home-book-carousel");
   if (!carousel) return;
 
   const wrapper = carousel.closest(".carousel-wrapper") || document;
   const left = wrapper.querySelector(".arrow-left");
   const right = wrapper.querySelector(".arrow-right");
-
   if (!left || !right) return;
 
   const getScrollAmount = () => {

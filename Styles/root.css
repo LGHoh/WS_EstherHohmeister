@@ -42,6 +42,12 @@ body {
   border: 0;
 }
 
+/* iOS/Safari: blaues Tap-Highlight entfernen */
+a, button, input, label, textarea, select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+
 /* -------------------------------------------- */
 /* 2) Design Tokens                             */
 /* -------------------------------------------- */
