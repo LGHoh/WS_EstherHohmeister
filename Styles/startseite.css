@@ -49,8 +49,10 @@
 /* ------------------------------------------------ */
 
 .section-poetry {
-  background-color: var(--color-surface-soft);
+  background-color: #DEDEDE;
 }
+
+
 
 /* „Kapitel“-Look: gleiche H2 überall, mit Akzentlinie */
 .heading-section {
@@ -68,7 +70,6 @@
   height: 3px;
   border-radius: 999px;
   margin-top: var(--space-s);
-  background: color-mix(in srgb, var(--color-accent) 55%, transparent);
   opacity: 0.85;
 }
 
@@ -144,58 +145,22 @@
 }
 
 /* ------------------------------------------------ */
-/* 3. Sektion: Kontakt                               */
+/* 3. Sektion: Kontakt  (Mehrheit im Root)          */
 /* ------------------------------------------------ */
+
 
 .section-contact {
   background-color: #f5f5f5;
-}
-
-.contact-text-block {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
 }
 
 .heading-contact {
   margin: 0;
 }
 
-.contact-info-block {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-m);
-  justify-content: center;
-}
-
-.contact-card {
-  background: var(--color-surface);
-  border-radius: var(--radius-m);
-  padding: var(--space-m);
-  box-shadow: var(--shadow-soft);
-}
-
-.text-contact {
-  margin: 0;
-  font-size: 0.98rem;
-}
-
-.contact-card-mail {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .mailto-link {
   text-decoration: none;
 }
 
-.contact-explanation {
-  margin-top: var(--space-m);
-  font-size: 1rem;
-  line-height: var(--line-height-relaxed);
-  max-width: 460px;
-}
 
 /* ------------------------------------------------ */
 /* Wortslide Startseite                              */
@@ -257,43 +222,7 @@
     transition: none;
   }
 }
-
-/* ------------------------------------------------ */
-/* Parallax Background – System                      */
-/* ------------------------------------------------ */
-
-.has-parallax {
-  position: relative;
-  overflow: hidden;
-}
-
-.has-parallax .parallax-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-
-  background-image: var(--parallax-image, none);
-  background-repeat: no-repeat;
-  background-size: var(--parallax-size, cover);
-  background-position: var(--parallax-pos, center);
-
-  opacity: var(--parallax-opacity, 0.25);
-
-  will-change: transform;
-  transform: translate3d(0,0,0);
-}
-
-.has-parallax .section-inner {
-  position: relative;
-  z-index: 1;
-}
-
-/* Position helper */
-.parallax-left   { --parallax-pos: left 7% center; }
-.parallax-right  { --parallax-pos: right 7% center; }
-.parallax-center { --parallax-pos: center center; }
-
+/* Sektion 1 Konkretes Parallax-Bild  */
 .section-hero {
   --parallax-image: url("../images/backgrounds/BG_Tinte_1.png");
   --parallax-opacity: 0.7;
@@ -315,8 +244,10 @@
     --parallax-opacity: 0.7;
   }
 }
-
+/* ––––––––––––––––––––– */
 /* Sektion 3 – Rucksack */
+/* ––––––––––––––––––––– */
+
 .section-contact {
   --parallax-image: url("../images/BG_Rucksack.png");
   --parallax-opacity: 0.9;
@@ -381,18 +312,4 @@
   }
 }
 
-/* ---------------------------------- */
-/* Optional / aktuell ungenutzt        */
-/* ---------------------------------- */
-/*
-.background-image-decorative{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%;
-  height: 50%;
-  object-fit: none;
-  z-index: -1;
-  opacity: 0.45;
-}
-*/
+

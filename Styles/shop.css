@@ -1,18 +1,21 @@
 /* ---------------------------------- */
-/* Shop – Parallax Background          */
-/* Desktop: wie bisher                 */
-/* Tablet: 2 Bilder senkrecht, voll     */
-/* Mobile: 1 Bild senkrecht, voll       */
+/* Shop – Parallax Background         */
+/* Desktop: 2 Bilder (eins gespiegelt) */
+/* Tablet: 2 Bilder senkrecht, voll   */
+/* Mobile: 1 Bild senkrecht, voll     */
 /* ---------------------------------- */
 
-/* Wrapper */
-.has-parallax{
+/* Wichtig: Shop-Parallax nur im Shop scopen */
+.parallax-shop{
   position: relative;
   overflow: hidden;
+
+  --parallax-image: url("../images/backgrounds/BG_Tinte_3.png");
+  --parallax-strength: 150;
 }
 
 /* JS bewegt dieses Element per transform (translateY) */
-.has-parallax .parallax-bg{
+.parallax-shop .parallax-bg{
   position: absolute;
   inset: 0;
   z-index: 0;
@@ -20,10 +23,14 @@
 
   will-change: transform;
   transform: translate3d(0,0,0);
+
+  /* verhindert den zusätzlichen Layer aus root.css */
+  background-image: none;
+  opacity: 1;
 }
 
 /* Bild liegt in ::before -> Rotation/Skalierung kollidiert nicht mit JS */
-.has-parallax .parallax-bg::before{
+.parallax-shop .parallax-bg::before{
   content: "";
   position: absolute;
   inset: 0;
@@ -31,13 +38,10 @@
   background-image: var(--parallax-image, none);
   background-repeat: no-repeat;
   background-position: var(--parallax-pos, left center);
-
-  /* WICHTIG: eigene Variable, damit "cover" möglich ist */
   background-size: var(--parallax-bg-size, auto 120vh);
 
   opacity: var(--parallax-opacity, 0.18);
 
-  /* Rotation/Spiegelung über Variable (kollidiert nicht mit JS) */
   transform: var(--parallax-transform, none);
   transform-origin: center;
 
@@ -45,7 +49,7 @@
 }
 
 /* Content über dem BG */
-.has-parallax > *:not(.parallax-bg){
+.parallax-shop > *:not(.parallax-bg){
   position: relative;
   z-index: 1;
 }
@@ -54,13 +58,8 @@
 /* Shop: konkrete Settings (Desktop)   */
 /* ---------------------------------- */
 
-.parallax-shop{
-  --parallax-image: url("../images/backgrounds/BG_Tinte_3.png");
-  --parallax-strength: 150;
-}
-
 /* linke Seite */
-.parallax-shop .parallax-bg--left::before{
+.parallax-shop .parallax-bg--left{
   --parallax-pos: center center;
   --parallax-bg-size: auto 160vh;
   --parallax-opacity: 1;
@@ -68,7 +67,7 @@
 }
 
 /* rechte Seite (gespiegelt) */
-.parallax-shop .parallax-bg--right::before{
+.parallax-shop .parallax-bg--right{
   --parallax-pos: center center;
   --parallax-bg-size: auto 100vh;
   --parallax-opacity: 0.6;
@@ -87,22 +86,15 @@
   .parallax-shop .parallax-bg--left::before,
   .parallax-shop .parallax-bg--right::before{
     inset: -300%;
-    --parallax-bg-size: 100vh /* vollflächig */
-    --parallax-opacity: 0.45;
-
-
   }
 
-  .parallax-shop .parallax-bg--left::before{
-
+  .parallax-shop .parallax-bg--left{
     --parallax-transform: rotate(90deg) translateZ(0);
     --parallax-opacity: 1;
     --parallax-bg-size: auto 100vh;
-
-
   }
 
-  .parallax-shop .parallax-bg--right::before{
+  .parallax-shop .parallax-bg--right{
     --parallax-transform: rotate(90deg) scaleX(-1) translateZ(0);
     --parallax-opacity: 0.6;
     --parallax-bg-size: auto 100vh;
@@ -117,14 +109,15 @@
     --parallax-strength: 22;
   }
 
-  /* nur eine Seite zeigen */
   .parallax-shop .parallax-bg--left{
     display: none;
   }
 
   .parallax-shop .parallax-bg--right::before{
     inset: -500%;
-    --parallax-bg-size: 400vh auto;
+  }
+
+  .parallax-shop .parallax-bg--right{
     --parallax-opacity: 0.7;
     --parallax-pos: center center;
     --parallax-transform: rotate(90deg) scaleX(1) translateZ(0);

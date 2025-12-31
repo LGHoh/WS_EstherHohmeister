@@ -31,14 +31,14 @@
     <nav class="site-nav" id="primary-nav" aria-label="Hauptnavigation">
       <ul>
         <li><a href="index.html">Startseite</a></li>
-        <li><a href="zurdichterin.html">Zur Dichterin</a></li>
+        <li><a href="zurdichterin.html" aria-current="page">Zur Dichterin</a></li>
         <li><a href="shop.html">Shop</a></li>
       </ul>
     </nav>
   </div>
 </header>
 
-<main class="page-main">
+<main class="page-main" id="content">
 
   <!-- Sektion 1: Portrait + Text (mit Parallax BG) -->
   <section class="section section-author has-parallax parallax-left">
@@ -54,6 +54,8 @@
               src="images/Portrait_Esther_Hohmeister.png"
               alt="Portrait von Esther Hohmeister"
               class="portrait-image"
+              loading="lazy"
+              decoding="async"
             >
           </div>
           <p class="author-name">Esther Hohmeister</p>
@@ -82,10 +84,9 @@
 
   <!-- Sektion 2: Kontakt -->
   <section class="section section-contact has-parallax parallax-right">
-  
     <div class="parallax-bg" aria-hidden="true"></div>
-    <div class="section-inner two-column-layout">
 
+    <div class="section-inner two-column-layout">
       <div class="column column-left contact-text-block">
         <h1 class="heading-main heading-contact">
           Ein Stichwort teilen,<br>
@@ -99,7 +100,6 @@
       </div>
 
       <div class="column column-right contact-info-block">
-
         <div class="contact-card">
           <h5>Briefadresse</h5>
           <p class="text-contact">
@@ -109,16 +109,14 @@
           </p>
         </div>
 
-  <div class="contact-card contact-card-mail">
-    <a
-      href="mailto:esther&#64;hohmeister&#46;ch?subject=Stichwort%20für%20Gedichte"
-      class="mailto-link mailto-link--with-icon"
-    >
-      <span class="mailto-text">E-Mail schreiben</span>
-    </a>
-  </div>
-
-
+        <div class="contact-card contact-card-mail">
+          <a
+            href="mailto:esther&#64;hohmeister&#46;ch?subject=Stichwort%20für%20Gedichte"
+            class="mailto-link mailto-link--with-icon"
+          >
+            <span class="mailto-text">E-Mail schreiben</span>
+          </a>
+        </div>
       </div>
 
     </div>

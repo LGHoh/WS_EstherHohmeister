@@ -76,45 +76,74 @@ function formatDateCH(date) {
 }
 
 // ==========================================================
-// 2) Lightbox
+// 2) Lightbox (mit ESC + Fokus-Restore)
 // ==========================================================
 let lightboxEl = null;
 let lightboxImg = null;
+let lightboxCloseBtn = null;
+let lastActiveEl = null;
+
+function closeLightbox() {
+  if (!lightboxEl) return;
+  lightboxEl.classList.remove("image-lightbox--visible");
+
+  if (lastActiveEl && typeof lastActiveEl.focus === "function") {
+    lastActiveEl.focus();
+  }
+}
 
 function ensureLightbox() {
   if (lightboxEl) return;
 
-  lightboxEl = document.createElement("div");
-  lightboxEl.className = "image-lightbox";
+  const el = document.createElement("div");
+  el.className = "image-lightbox";
+  el.setAttribute("role", "dialog");
+  el.setAttribute("aria-modal", "true");
+  el.setAttribute("aria-label", "Bildvorschau");
 
   const img = document.createElement("img");
   img.className = "image-lightbox__img";
-  lightboxEl.appendChild(img);
-  lightboxImg = img;
+  el.appendChild(img);
 
   const closeBtn = document.createElement("button");
   closeBtn.className = "image-lightbox__close-btn";
   closeBtn.type = "button";
+  closeBtn.setAttribute("aria-label", "Schliessen");
   closeBtn.textContent = "×";
 
   closeBtn.addEventListener("click", (e) => {
     e.stopPropagation();
-    lightboxEl.classList.remove("image-lightbox--visible");
+    closeLightbox();
   });
 
-  lightboxEl.addEventListener("click", () => {
-    lightboxEl.classList.remove("image-lightbox--visible");
+  el.addEventListener("click", () => closeLightbox());
+
+  el.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeLightbox();
   });
 
-  lightboxEl.appendChild(closeBtn);
-  document.body.appendChild(lightboxEl);
+  el.appendChild(closeBtn);
+  document.body.appendChild(el);
+
+  lightboxEl = el;
+  lightboxImg = img;
+  lightboxCloseBtn = closeBtn;
 }
 
 function openLightbox(src, alt) {
   ensureLightbox();
+
+  lastActiveEl = document.activeElement;
+
   lightboxImg.src = src;
   lightboxImg.alt = alt || "";
+
   lightboxEl.classList.add("image-lightbox--visible");
+
+  // Fokus auf Close-Button (Keyboard)
+  requestAnimationFrame(() => {
+    if (lightboxCloseBtn) lightboxCloseBtn.focus();
+  });
 }
 
 // ==========================================================
@@ -263,7 +292,7 @@ function createBookCard(book, context) {
 }
 
 // ==========================================================
-// 4) Placeholder (Shop)
+// 4) Placeholder (Shop) – valid HTML
 // ==========================================================
 function createPlaceholderCard() {
   const article = document.createElement("article");
@@ -271,14 +300,17 @@ function createPlaceholderCard() {
 
   const inner = document.createElement("div");
   inner.className = "book-card__placeholder-inner";
-  inner.innerHTML = `
-    <h1 class="placeholder-title">
-      Stöbern,<br>
-      finden,<br>
-      verbinden!
-      <p class="placeholder-subtitle">Entedecken Sie die Werke von Esther Hohmeister – für sich oder für andere.</p>
-    </h1>
-  `;
+
+  const title = document.createElement("h2");
+  title.className = "placeholder-title";
+  title.innerHTML = `Stöbern,<br>finden,<br>verbinden!`;
+
+  const sub = document.createElement("p");
+  sub.className = "placeholder-subtitle";
+  sub.textContent = "Entdecken Sie die Werke von Esther Hohmeister – für sich oder für andere.";
+
+  inner.appendChild(title);
+  inner.appendChild(sub);
 
   article.appendChild(inner);
   return article;
@@ -309,7 +341,6 @@ function renderBooks(targetId, context) {
     for (let s = 0; s < sets; s++) {
       BOOKS.forEach((book) => {
         const card = createBookCard(book, context);
-        card.removeAttribute("id");
         card.dataset.bookId = book.id;
         card.dataset.set = String(s);
         container.appendChild(card);
@@ -363,7 +394,6 @@ async function scrollToCardSoft(cardEl, extraOffset = 18) {
   const current = window.scrollY;
   const distance = Math.abs(target - current);
 
-  // „leiser Start“: minimal hochziehen wenn sehr weit weg
   if (distance > 700) {
     const preTarget = Math.max(0, current - 220);
     await smoothScrollTo(preTarget, 260);
@@ -378,7 +408,6 @@ function highlightCard(cardEl) {
     el.classList.remove("is-highlight");
   });
 
-  // Reflow -> Animation startet sicher neu
   cardEl.classList.remove("is-highlight");
   void cardEl.offsetWidth;
 
@@ -407,70 +436,76 @@ async function handleShopHashJump() {
 document.addEventListener("DOMContentLoaded", () => {
   ensureLightbox();
 
-  // Render
   renderBooks("home-book-carousel", "home");
   renderBooks("shop-book-grid", "shop");
 
-  // Shop Jump + Highlight
   handleShopHashJump();
   window.addEventListener("hashchange", handleShopHashJump);
 
-  // Home Carousel Controls
+  // Home Carousel Controls (lokal zum Wrapper, damit es auf anderen Seiten nicht kollidiert)
   const carousel = document.getElementById("home-book-carousel");
-  const left = document.querySelector(".arrow-left");
-  const right = document.querySelector(".arrow-right");
+  if (!carousel) return;
 
-  if (carousel && left && right) {
-    const getScrollAmount = () => {
-      const style = getComputedStyle(document.documentElement);
-      const cardWidth = parseInt(style.getPropertyValue("--book-card-width"));
-      const gap = 16;
-      return cardWidth + gap;
-    };
+  const wrapper = carousel.closest(".carousel-wrapper") || document;
+  const left = wrapper.querySelector(".arrow-left");
+  const right = wrapper.querySelector(".arrow-right");
 
-    const setWidth = BOOKS.length * getScrollAmount();
+  if (!left || !right) return;
 
-    carousel.style.scrollBehavior = "auto";
-    carousel.scrollLeft = setWidth;
-    requestAnimationFrame(() => {
-      carousel.style.scrollBehavior = "smooth";
-    });
+  const getScrollAmount = () => {
+    const firstCard = carousel.querySelector(".book-card");
+    if (!firstCard) return 0;
 
-    let isAdjusting = false;
-    const keepInMiddle = () => {
-      if (isAdjusting) return;
+    const cardW = firstCard.getBoundingClientRect().width;
+    const gap = parseFloat(getComputedStyle(carousel).gap) || 0;
 
-      const x = carousel.scrollLeft;
+    return cardW + gap;
+  };
 
-      if (x < setWidth * 0.25) {
-        isAdjusting = true;
-        carousel.style.scrollBehavior = "auto";
-        carousel.scrollLeft = x + setWidth;
-        requestAnimationFrame(() => {
-          carousel.style.scrollBehavior = "smooth";
-          isAdjusting = false;
-        });
-      }
+  // Breite von einem Set (BOOKS.length)
+  const setWidth = BOOKS.length * getScrollAmount();
 
-      if (x > setWidth * 1.75) {
-        isAdjusting = true;
-        carousel.style.scrollBehavior = "auto";
-        carousel.scrollLeft = x - setWidth;
-        requestAnimationFrame(() => {
-          carousel.style.scrollBehavior = "smooth";
-          isAdjusting = false;
-        });
-      }
-    };
+  // Start in der Mitte (Set 2 von 3)
+  carousel.style.scrollBehavior = "auto";
+  carousel.scrollLeft = setWidth;
+  requestAnimationFrame(() => {
+    carousel.style.scrollBehavior = "smooth";
+  });
 
-    carousel.addEventListener("scroll", keepInMiddle, { passive: true });
+  let isAdjusting = false;
+  const keepInMiddle = () => {
+    if (isAdjusting) return;
 
-    left.addEventListener("click", () => {
-      carousel.scrollBy({ left: -getScrollAmount(), behavior: "smooth" });
-    });
+    const x = carousel.scrollLeft;
 
-    right.addEventListener("click", () => {
-      carousel.scrollBy({ left: getScrollAmount(), behavior: "smooth" });
-    });
-  }
+    if (x < setWidth * 0.35) {
+      isAdjusting = true;
+      carousel.style.scrollBehavior = "auto";
+      carousel.scrollLeft = x + setWidth;
+      requestAnimationFrame(() => {
+        carousel.style.scrollBehavior = "smooth";
+        isAdjusting = false;
+      });
+    }
+
+    if (x > setWidth * 1.65) {
+      isAdjusting = true;
+      carousel.style.scrollBehavior = "auto";
+      carousel.scrollLeft = x - setWidth;
+      requestAnimationFrame(() => {
+        carousel.style.scrollBehavior = "smooth";
+        isAdjusting = false;
+      });
+    }
+  };
+
+  carousel.addEventListener("scroll", keepInMiddle, { passive: true });
+
+  left.addEventListener("click", () => {
+    carousel.scrollBy({ left: -getScrollAmount(), behavior: "smooth" });
+  });
+
+  right.addEventListener("click", () => {
+    carousel.scrollBy({ left: getScrollAmount(), behavior: "smooth" });
+  });
 });

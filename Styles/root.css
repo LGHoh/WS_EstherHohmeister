@@ -1,3 +1,8 @@
+/* =========================================================
+   root.css – globales Gerüst (Reset + Tokens + Layout + UI)
+   Ziel: stabil, konsistent, ohne Abhängigkeit von JS
+   ========================================================= */
+
 /* -------------------------------------------- */
 /* 1) Reset & Base                              */
 /* -------------------------------------------- */
@@ -19,11 +24,23 @@ html, body {
 
 body {
   overflow-x: hidden;
-  font-family: "poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: #f8f8f8;
-  color: #111111;
+  font-family: var(--font-family-main);
+  background-color: var(--color-bg);
+  color: var(--color-text);
 }
 
+/* Utility: Screenreader-only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
 
 /* -------------------------------------------- */
 /* 2) Design Tokens                             */
@@ -31,7 +48,7 @@ body {
 
 :root {
   /* Typografie */
-  --font-family-main: "poppins", system-ui, sans-serif;
+  --font-family-main: "poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 
   --h1-size: 2.5rem;
   --h2-size: 2.1rem;
@@ -51,7 +68,6 @@ body {
   --color-text: #111111;
   --color-text-muted: #555555;
   --color-border: #dddddd;
-  --color-header-bg: #a4a4a4;
 
   --color-accent: #2f5a4a;
   --color-accent-soft: #d3d3d3;
@@ -77,7 +93,6 @@ body {
   --book-card-width: 360px;
 }
 
-
 /* -------------------------------------------- */
 /* 3) Typography                                */
 /* -------------------------------------------- */
@@ -102,28 +117,28 @@ p {
   color: var(--color-text);
 }
 
+/* -------------------------------------------- */
+/* 4) Page Load (robust, ohne JS-Abhängigkeit)   */
+/* -------------------------------------------- */
 
-/* -------------------------------------------- */
-/* 4) Page Load Animation                       */
-/* -------------------------------------------- */
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
 .page-main {
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 320ms ease, transform 320ms ease;
+  animation: pageFadeIn 320ms ease both;
 }
 
-body.is-ready .page-main {
-  opacity: 1;
-  transform: translateY(0);
+@media (prefers-reduced-motion: reduce) {
+  .page-main { animation: none; }
 }
 
-
 /* -------------------------------------------- */
-/* 5) Components                                */
+/* 5) Komponenten                               */
 /* -------------------------------------------- */
 
-/* Mailto-Link als Einheit */
+/* Mailto-Link */
 .mailto-link--with-icon {
   display: inline-flex;
   align-items: center;
@@ -138,7 +153,6 @@ body.is-ready .page-main {
 .mailto-icon {
   width: 1.4em;
   height: 1.4em;
-  fill: currentColor;
   transition: transform 0.25s ease, color 0.25s ease;
 }
 
@@ -150,7 +164,6 @@ body.is-ready .page-main {
 .mailto-link--with-icon:hover {
   color: var(--color-accent);
 }
-
 
 /* Portrait */
 .portrait {
@@ -184,7 +197,8 @@ body.is-ready .page-main {
   text-align: center;
 }
 
-.contact-card h5{
+/* Kontakt-Card Titel */
+.contact-card h5 {
   font-weight: 550;
   letter-spacing: 0.04em;
   margin-bottom: 0.5rem;
@@ -238,7 +252,6 @@ body.is-ready .page-main {
   box-shadow: 0 4px 10px rgba(0,0,0,0.12);
 }
 
-
 /* Cards */
 .card {
   background: var(--color-surface);
@@ -246,7 +259,6 @@ body.is-ready .page-main {
   box-shadow: var(--shadow-soft);
   padding: var(--space-m);
 }
-
 
 /* -------------------------------------------- */
 /* 6) Layout Utilities                          */
@@ -287,9 +299,89 @@ body.is-ready .page-main {
   justify-content: center;
 }
 
+/* ---------------------------------- */
+/* Parallax Background – global        */
+/* ---------------------------------- */
+.has-parallax{
+  position: relative;
+  overflow: hidden;
+}
+
+.has-parallax .parallax-bg{
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  background-image: var(--parallax-image, none);
+  background-repeat: no-repeat;
+  background-size: var(--parallax-size, cover);
+  background-position: var(--parallax-pos, center);
+  opacity: var(--parallax-opacity, 0.25);
+
+  /* optional pro Seite steuerbar */
+  filter: var(--parallax-filter, none);
+
+  will-change: transform;
+  transform: translate3d(0,0,0);
+}
+
+.has-parallax .section-inner{
+  position: relative;
+  z-index: 1;
+}
+
+/* Position helpers */
+.parallax-left{   --parallax-pos: left 7% center; }
+.parallax-right{  --parallax-pos: right 7% center; }
+.parallax-center{ --parallax-pos: center center; }
+
+
+/* ---------------------------------- */
+/* Kontakt – wiederverwendbarer Block  */
+/* ---------------------------------- */
+.contact-text-block{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.contact-info-block{
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+  justify-content: center;
+}
+
+.contact-card{
+  background: var(--color-surface);
+  border-radius: var(--radius-m);
+  padding: var(--space-m);
+  box-shadow: var(--shadow-soft);
+}
+
+.text-contact{
+  margin: 0;
+  font-size: 0.98rem;
+}
+
+.contact-card-mail{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.contact-explanation{
+  margin-top: var(--space-m);
+  font-size: 1rem;
+  line-height: var(--line-height-relaxed);
+  max-width: 460px;
+}
+
+
 
 /* -------------------------------------------- */
-/* 7) Header (Modern)                           */
+/* 7) Header $                          */
 /* -------------------------------------------- */
 
 .site-header {
@@ -330,7 +422,7 @@ body.is-ready .page-main {
   display: block;
 }
 
-/* Nav Pills (Desktop default) */
+/* Desktop Nav (Pills) */
 .site-nav ul {
   list-style: none;
   margin: 0;
@@ -368,13 +460,12 @@ body.is-ready .page-main {
   transform: translateY(-1px);
 }
 
-/* Active via aria-current */
 .site-nav a[aria-current="page"] {
   background: color-mix(in srgb, var(--color-accent) 18%, white);
   color: var(--color-accent);
 }
 
-/* Fokus ohne Webkit-blau */
+/* Focus */
 .site-nav a:focus { outline: none; }
 .site-nav a:focus-visible {
   outline: 3px solid color-mix(in srgb, var(--color-accent) 55%, transparent);
@@ -383,8 +474,8 @@ body.is-ready .page-main {
 }
 
 /* Hamburger Button */
-.nav-toggle{
-  display: none; /* Desktop: hidden, Mobile wird unten eingeschaltet */
+.nav-toggle {
+  display: none; /* Desktop hidden */
   width: 44px;
   height: 44px;
   border-radius: 999px;
@@ -394,7 +485,6 @@ body.is-ready .page-main {
   cursor: pointer;
   padding: 10px;
 
-  /* WICHTIG: Balken untereinander */
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -409,14 +499,11 @@ body.is-ready .page-main {
   outline-offset: 2px;
 }
 
-/* Die Balken – robust sichtbar */
-.nav-toggle__bar{
+.nav-toggle__bar {
   width: 100%;
   height: 2px;
   background: var(--color-text);
   border-radius: 999px;
-
-  /* WICHTIG: kein margin mehr (wir nutzen gap) */
   margin: 0;
 
   transition: transform 180ms ease, opacity 180ms ease;
@@ -424,22 +511,21 @@ body.is-ready .page-main {
 }
 
 /* Hamburger -> X */
-.site-header.is-menu-open .nav-toggle__bar:nth-child(1){
+.site-header.is-menu-open .nav-toggle__bar:nth-child(1) {
   transform: translateY(8px) rotate(45deg);
 }
-.site-header.is-menu-open .nav-toggle__bar:nth-child(2){
+.site-header.is-menu-open .nav-toggle__bar:nth-child(2) {
   opacity: 0;
 }
-.site-header.is-menu-open .nav-toggle__bar:nth-child(3){
+.site-header.is-menu-open .nav-toggle__bar:nth-child(3) {
   transform: translateY(-8px) rotate(-45deg);
 }
 
-
 /* -------------------------------------------- */
-/* Footer modern                                */
+/* 8) Footer (kompatibel: alt + neu)             */
 /* -------------------------------------------- */
 
-.site-footer{
+.site-footer {
   margin-top: var(--space-xxl);
   padding: var(--space-xl) 0;
 
@@ -447,7 +533,7 @@ body.is-ready .page-main {
   border-top: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
 }
 
-.footer-inner{
+.footer-inner {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--space-m);
@@ -465,31 +551,51 @@ body.is-ready .page-main {
   padding: var(--space-l);
 }
 
-.footer-col{
+/* „Neue“ Klassen (falls du sie irgendwann nutzt) */
+.footer-col {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-
-.footer-col--right{
+.footer-col--right {
   text-align: right;
   align-items: flex-end;
 }
-
-.footer-label{
+.footer-label {
   margin: 0;
   font-weight: 600;
   color: var(--color-text);
   opacity: 0.9;
 }
-
-.footer-meta{
+.footer-meta {
   margin: 0;
   color: var(--color-text-muted);
   font-size: 0.95rem;
 }
 
-.footer-link{
+/* Deine bestehenden HTML-Klassen */
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer-column-right {
+  text-align: right;
+  align-items: flex-end;
+}
+.footer-heading {
+  margin: 0;
+  font-weight: 600;
+  color: var(--color-text);
+  opacity: 0.9;
+}
+.footer-text {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+.footer-link {
   color: var(--color-text);
   text-decoration: none;
   font-weight: 500;
@@ -501,24 +607,22 @@ body.is-ready .page-main {
   transition: background 180ms ease, transform 180ms ease, color 180ms ease;
 }
 
-.footer-link:hover{
+.footer-link:hover {
   background: color-mix(in srgb, var(--color-accent) 10%, transparent);
   color: var(--color-accent);
   transform: translateY(-1px);
 }
 
-.footer-link:focus{ outline: none; }
-.footer-link:focus-visible{
+.footer-link:focus { outline: none; }
+.footer-link:focus-visible {
   outline: 3px solid color-mix(in srgb, var(--color-accent) 55%, transparent);
   outline-offset: 2px;
 }
 
-/* etwas „wichtiger“ (Kontakt-Link) */
-.footer-link--cta{
+.footer-link--cta {
   background: color-mix(in srgb, var(--color-accent) 12%, white);
   color: var(--color-accent);
 }
-
 
 /* -------------------------------------------- */
 /* 9) Lightbox                                  */
@@ -528,12 +632,15 @@ body.is-ready .page-main {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.7);
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease;
+
   z-index: 2000;
 }
 
@@ -567,27 +674,24 @@ body.is-ready .page-main {
 
   cursor: pointer;
   transition: background 0.2s ease, transform 0.2s ease;
-
 }
 
-
-
-
-
-/* -------------------------------------------- */
-/* 10) Media Queries (ganz unten)               */
-/* -------------------------------------------- */
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .page-main {
-    transition: none;
-    opacity: 1;
-    transform: none;
-  }
+.image-lightbox__close-btn:hover {
+  background: rgba(255, 255, 255, 0.95);
+  transform: translateX(-50%) translateY(-2px);
 }
 
-/* iPad / Tablet */
+.image-lightbox__close-btn:focus { outline: none; }
+.image-lightbox__close-btn:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 55%, transparent);
+  outline-offset: 2px;
+}
+
+/* -------------------------------------------- */
+/* 10) Media Queries                            */
+/* -------------------------------------------- */
+
+/* Tablet */
 @media (max-width: 768px) {
   :root {
     --h1-size: 2.5rem;
@@ -605,7 +709,7 @@ body.is-ready .page-main {
     justify-content: center;
   }
 
-  /* Nav wird Dropdown */
+  /* Nav als Dropdown */
   .site-nav {
     position: absolute;
     top: calc(100% + 10px);
@@ -620,25 +724,21 @@ body.is-ready .page-main {
 
     padding: 10px;
     z-index: 2000;
- 
-    /* ANIMATION SETUP */
+
     transform-origin: top right;
     transform: translateY(-6px) scaleY(0.96);
     opacity: 0;
     pointer-events: none;
 
     transition: transform 220ms ease, opacity 220ms ease;
-
   }
 
-   /* Wenn offen */
-  .site-header.is-menu-open .site-nav{
+  .site-header.is-menu-open .site-nav {
     transform: translateY(0) scaleY(1);
     opacity: 1;
     pointer-events: auto;
   }
 
-  /* Desktop-Pill-Container deaktivieren -> Liste als Spalte */
   .site-nav ul {
     background: transparent;
     border: none;
@@ -660,25 +760,22 @@ body.is-ready .page-main {
     background: var(--color-accent);
     color: #fff;
   }
-  
-/* -------------------------------------------- */
-/* ---------------Footer Mobile---------------- */
-/* -------------------------------------------- */
-  .footer-inner{
+
+  /* Footer Mobile */
+  .footer-inner {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .footer-col--right{
+  .footer-col--right,
+  .footer-column-right {
     text-align: left;
     align-items: flex-start;
   }
 
-  .footer-link{
+  .footer-link {
     width: 100%;
     justify-content: center;
     text-align: center;
   }
-
 }
-

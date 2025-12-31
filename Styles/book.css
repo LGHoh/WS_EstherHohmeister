@@ -1,8 +1,6 @@
-/* Gemeinsames Layout für Book-Listen */
-.book-list {
-  /* Platzhalterklasse, falls später JS gebraucht wird */
-}
-
+/* =========================================================
+   book.css – Book Cards (Home + Shop), Carousel, 
+   ========================================================= */
 
 /* ---------------------------------- */
 /* Shop: Grid-Layout                  */
@@ -15,7 +13,10 @@
   margin-top: var(--space-l);
 }
 
-/* Placeholder-Titel im Shop */
+/* ---------------------------------- */
+/* Placeholder-Titel im Shop          */
+/* ---------------------------------- */
+
 .placeholder-title {
   font-weight: 300;
   font-size: 2.6rem;
@@ -26,22 +27,37 @@
 }
 
 .placeholder-subtitle {
-  font-size: clamp(1.5rem, 2vw, 1.4rem);
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
   line-height: 1.5;
   color: var(--color-text-muted);
-  margin-top: 0.75rem;
-  max-width: 24ch;               /* angenehme Zeilenlänge */
+  margin: 0;          /* Abstand kommt über gap */
+  max-width: 32ch;
 }
-
 
 
 .book-card--placeholder .book-card__placeholder-inner {
   padding: 2.2rem 1.5rem;
-  display: flex;
-  align-items: center;
   height: 100%;
-  
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;     /* vertikal mittig */
+  gap: 0.75rem;
+
+  /* wichtig: linksbündig, aber als Block sauber platziert */
+  align-items: flex-start;     /* Inhalt links im Block */
+  text-align: left;
+
+  /* Block zentrieren */
+  margin-left: auto;
+  margin-right: auto;
+
+  /* Default-Breite (Desktop/Tablet) */
+  max-width: 80%;
 }
+
+
+
 
 /* ---------------------------------- */
 /* Book-Card Basis                    */
@@ -52,16 +68,39 @@
   border-radius: var(--radius-m);
   padding: var(--space-m);
   box-shadow: var(--shadow-soft);
+
   display: flex;
   flex-direction: column;
+
+  position: relative;
+  isolation: isolate;
 }
 
-/* Bildbereich – Standardgröße (Shop) */
+/* Inhalt über Effekten (Ring) */
+.book-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Cover-Wrapper – GLOBAL (Home + Shop) */
+.book-card__image-wrapper {
+  width: 100%;
+  max-width: 240px;
+  aspect-ratio: 4 / 5;
+  margin: 0 auto var(--space-m) auto;
+
+  overflow: hidden;
+  border-radius: 10px;
+  background: #fff;
+}
 
 .book-card__image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
+
+  border-radius: 10px; /* Backup */
 }
 
 /* Titel / Meta */
@@ -83,36 +122,36 @@
   margin: 0 0 var(--space-m) 0;
 }
 
+/* Toggle */
+.book-card__toggle {
+  display: none;
+  margin-top: 0.4rem;
+  margin-bottom: var(--space-s);
+  font-size: 0.9rem;
+
+  background: none;
+  border: none;
+  padding: 0;
+
+  color: var(--color-accent);
+  cursor: pointer;
+  text-align: left;
+}
+
 /* Actions (Button + Preis) */
 .book-card__actions {
-  margin-top: auto; /* schiebt Actions nach unten */
+  margin-top: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-s);
 }
 
-.book-card__toggle {
-  display: none;
-  margin-top: 0.4rem;
-  font-size: 0.9rem;
-  background: none;
-  border: none;
-  padding: 0;
-  color: var(--color-accent);
-  cursor: pointer;
-  text-align: left;
-}
-
-
 .book-card__price-wrap {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 2px;
-}
-.book-card__toggle { 
-  margin-bottom: var(--space-s);
 }
 
 .book-card__price {
@@ -122,65 +161,24 @@
 
 .book-card__shipping-note {
   font-size: 0.8rem;
-  color: #666; /* oder var(--color-text-muted) falls vorhanden */
+  color: var(--color-text-muted);
 }
 
-/* Placeholder-Kachel im Shop */
+/* Farbe Placeholder-Kachel im Shop */
 .book-card--placeholder {
-  background: #dedede;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: left;
+  background: color-mix(in srgb, var(--color-accent) 6%, var(--color-surface) 66%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .book-card__placeholder-inner {
   max-width: 80%;
 }
 
-.book-card--placeholder h2 {
-  font-size: 1.4rem;
-  margin: 0 0 var(--space-xs) 0;
-}
-
-.book-card--placeholder p {
-  margin: 0;
-  font-size: 0.95rem;
-}
-
-
-/* Cover-Wrapper (wichtig!) – GLOBAL, nicht nur im Mobile-Block */
-.book-card__image-wrapper {
-  width: 100%;
-  max-width: 240px;              /* Bildbreite in den Cards */
-  aspect-ratio: 4 / 5;           /* Buchformat */
-  margin: 0 auto var(--space-m) auto; /* Abstand zum Titel */
-  overflow: hidden;              /* damit Abrundung wirklich schneidet */
-  border-radius: 10px;           /* sichtbar rund */
-  background: #fff;
-}
-
-.book-card__image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;                /* verhindert „Klebekante“ */
-  border-radius: 10px;           /* Backup (falls Wrapper mal überschrieben wird) */
-}
-/* =========================================================
-   Shop: Jump-to-Card Highlight (rund + subtil)
-   ========================================================= */
-
-.book-card{
-  position: relative;
-  isolation: isolate;
-}
-
-/* Inhalt über dem Ring */
-.book-card > *{
-  position: relative;
-  z-index: 1;
-}
+/* ------------------------------------------ */
+/* Shop: Jump-to-Card Highlight (Ring)        */
+/* ------------------------------------------ */
 
 /* animierbare angle */
 @property --ring-progress {
@@ -192,15 +190,13 @@
 .book-card.is-highlight::before{
   content: "";
   position: absolute;
-  inset: -6px; /* Abstand ausserhalb der Card */
+  inset: -6px;
   border-radius: calc(var(--radius-m) + 6px);
   pointer-events: none;
   z-index: 0;
 
-  /* Ring-Stärke */
   padding: 3px;
 
-  /* conic ring */
   background: conic-gradient(
     from -90deg,
     color-mix(in srgb, var(--color-accent) 55%, transparent) 0deg,
@@ -208,7 +204,6 @@
     transparent 0deg
   );
 
-  /* => macht aus dem Background einen echten "Ring" (Innenloch) */
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
@@ -233,8 +228,6 @@
   }
 }
 
-
-
 /* ------------------------------------------ */
 /* Carousel Navigation (Startseite)           */
 /* ------------------------------------------ */
@@ -243,11 +236,10 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: stretch; /* Kinder dürfen volle Breite einnehmen */
+  align-items: stretch;
   gap: var(--space-s);
 }
 
-/* Pfeile explizit nach rechts schieben */
 .carousel-controls {
   display: flex;
   justify-content: flex-end;
@@ -286,12 +278,10 @@
   transform: translateY(-2px) scale(1.05);
 }
 
-
-
-
 /* ---------------------------------- */
 /* Lightbox (Cover-Vergrößerung)      */
 /* ---------------------------------- */
+/* Override (root.css hat Basis – hier ist die “schöne” Variante) */
 
 .image-lightbox{
   position: fixed;
@@ -302,7 +292,6 @@
   align-items: center;
   justify-content: center;
 
-  /* statt display:none animieren wir so: */
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -316,7 +305,6 @@
            max(16px, env(safe-area-inset-left));
 }
 
-/* sichtbar */
 .image-lightbox--visible{
   opacity: 1;
   visibility: visible;
@@ -326,7 +314,6 @@
   transition: opacity 220ms ease, background 220ms ease, visibility 0s;
 }
 
-/* Bild: leichtes Zoom-in beim Öffnen */
 .image-lightbox__img{
   max-width: min(92vw, 1100px);
   max-height: 82vh;
@@ -344,9 +331,10 @@
   opacity: 1;
 }
 
-/* Close Button: oben rechts, gut sichtbar, responsiv */
 .image-lightbox__close-btn{
   position: absolute;
+  top: max(16px, env(safe-area-inset-top));
+  right: max(16px, env(safe-area-inset-right));
 
   width: 44px;
   height: 44px;
@@ -373,7 +361,6 @@
   background: rgba(0,0,0,0.72);
   border-color: rgba(255,255,255,0.85);
   transform: scale(1.04);
- 
 }
 
 .image-lightbox__close-btn:active{
@@ -386,7 +373,6 @@
   outline-offset: 2px;
 }
 
-/* Wenn Motion reduziert: keine Animation */
 @media (prefers-reduced-motion: reduce){
   .image-lightbox,
   .image-lightbox__img{
@@ -398,20 +384,13 @@
   }
 }
 
-
 /* ---------------------------------- */
 /* Effekte (Shop-Kaskade)             */
 /* ---------------------------------- */
 
 @keyframes book-card-fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .book-list--shop .book-card {
@@ -421,47 +400,19 @@
   animation-delay: calc(var(--i) * 0.07s);
 }
 
-.book-list--shop .book-card:nth-child(2) {
-  animation-delay: 0.05s;
-}
-
-.book-list--shop .book-card:nth-child(3) {
-  animation-delay: 0.10s;
-}
-
-.book-list--shop .book-card:nth-child(4) {
-  animation-delay: 0.15s;
-}
-
-.book-list--shop .book-card:nth-child(5) {
-  animation-delay: 0.20s;
-}
-
-.book-list--shop .book-card:nth-child(6) {
-  animation-delay: 0.25s;
-
-}
-
 @keyframes placeholder-fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
+
 .placeholder-title {
   animation: placeholder-fade-up 0.5s ease-out forwards;
 }
 
 .placeholder-subtitle {
   animation: placeholder-fade-up 0.8s ease-out forwards;
-  animation-delay: 0.10s; /* leicht versetzt nach dem Titel */
+  animation-delay: 0.10s;
 }
-
-
 
 /* Hover-Zoom nur im Shop */
 @media (hover: hover) {
@@ -469,19 +420,17 @@
     transform: scale(1.04);
     transition: transform 0.35s ease;
   }
-}
 
-/* Auf der Startseite explizit KEIN Zoom */
-@media (hover: hover) {
+  /* Startseite: explizit kein Zoom */
   .book-list--home .book-card__image-wrapper:hover .book-card__image {
     transform: none;
   }
 }
 
-/* Touch-Geräte (iPhone/iPad, auch Querformat): clamp + Toggle */
+/* Touch-Geräte: clamp + Toggle */
 @media (hover: none) and (pointer: coarse) {
   .book-card__description {
-    height: 8.2em;              /* iPad: gerne etwas mehr */
+    height: 8.2em;
     overflow: hidden;
     position: relative;
     transition: height 260ms ease;
@@ -491,7 +440,6 @@
     display: inline-block;
   }
 
-  /* Fade */
   .book-card__description::after {
     content: "";
     position: absolute;
@@ -511,122 +459,75 @@
   }
 }
 
-
 /* ---------------------------------- */
 /* Responsive                         */
 /* ---------------------------------- */
 
-
-/* Tablet: 2 Spalten (2x3) */
 @media (max-width: 1024px) {
   .book-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
-
 }
 
-/* ---------------------------------- */
-
-
-/* Mobile: alles untereinander (1x6) */
 @media (max-width: 768px) {
-  
   .book-grid {
     grid-template-columns: 1fr !important;
   }
 
-  /* Titel in der grauen Kachel: kleiner als auf der Startseite */
-.book-card--placeholder .placeholder-title {
-  font-size: 1.8rem;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  margin: 0;
-  max-width: 10ch;                  
-}
+  /* Shop-Karten kompakter */
+  .book-list--shop .book-card {
+    padding: 0.9rem 1rem;
+  }
 
-/* Shop-spezifische Tweaks: kleinere, kompaktere Karten */
-.book-list--shop .book-card {
-  padding: 0.9rem 1rem;              /* etwas weniger Innenabstand */
-}
+  .book-list--shop .book-card__image-wrapper {
+    max-width: 200px;
+    margin-bottom: var(--space-s);
+  }
 
-/* Bild im Shop leicht verkleinern */
-.book-list--shop .book-card__image-wrapper {
-  max-width: 200px;                  /* statt 240px */
-  margin-bottom: var(--space-s);
-}
+  .book-list--shop .book-card__description {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: var(--space-s);
+  }
 
-.book-card__image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
+  .book-list--shop .book-card__actions {
+    margin-top: var(--space-s);
+  }
 
-
-/* Actions */
-.book-card__actions {
-  margin-top: auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-s);
-}
-
-/* Beschreibung im Shop kompakter */
-.book-list--shop .book-card__description {
-  font-size: 0.9rem;
-  line-height: 1.4;
-  margin-bottom: var(--space-s);
-}
-
-/* Aktionen näher am Text – weniger „Stretch“ nach unten */
-.book-list--shop .book-card__actions {
-  margin-top: var(--space-s);
-}
-
-/* Placeholder-Kachel im Shop dezenter und besser integriert */
-.book-card--placeholder {
-  background: var();               /* etwas heller als das bisherige Grau */
-  align-items: flex-start;           /* Inhalt nach oben, nicht mittig */
-  padding: 1.4rem 1.2rem;
-}
-
-  /* Platzhalter-Kachel: Text auf Mobil zentrieren */
+  /* Placeholder-Kachel (Layout + Lesbarkeit zusammengezogen) */
   .book-card--placeholder {
+    align-items: center;
+    padding: 1.4rem 1.2rem;
     text-align: left;
+
+    /* Lesbarkeit auf Mobile */
+    background: rgba(255,255,255,0.79);
+    border-color: rgba(0,0,0,0.10);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  /* Placeholder-Inhalt: als Block kompakt zentriert */
+  .book-card--placeholder .book-card__placeholder-inner {
+    max-width: 22ch;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .book-card--placeholder .placeholder-title {
-    max-width: 12ch;          /* kurze, poetische Zeilen */
-    margin-left: auto;
-    margin-right: auto;
+    font-size: 1.8rem;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    max-width: 12ch; /* zusammengeführt */
   }
 
   .book-card--placeholder .placeholder-subtitle {
     max-width: 26ch;
-    margin-left: auto;
-    margin-right: auto;
+    font-size: 0.9
   }
-  /* Karussell-Pfeile auf Mobile sichtbar aber kleiner */
-  .carousel-arrow {
-    width: 36px;
-    height: 36px;
-    font-size: 1.3rem;
-  }
-
-  /* Karussell-Karten auf Mobile schmaler */
-  .book-carousel .book-card {
-    flex: 0 0 var(--book-card-width);
-    
-  }
-
-  
-
 }
-
-
 @media (max-width: 640px) and (hover: none) and (pointer: coarse) {
   .book-card__description {
-    height: 5.4em; /* Handy: kürzer */
+    height: 5.4em;
   }
 }
