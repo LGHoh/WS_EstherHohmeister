@@ -318,7 +318,7 @@ function createBookCard(book, context) {
 }
 
 // ==========================================================
-// 4) Placeholder (Shop) – valid HTML
+// 4) Placeholder im Shopgrid
 // ==========================================================
 function createPlaceholderCard() {
   const article = document.createElement("article");
